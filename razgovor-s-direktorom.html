@@ -6,40 +6,146 @@
 <title>Разговор с директором</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   :root {
-    --bg: #F5F3EE; --card: #FFFFFF; --accent: #2D5BE3; --accent-dark: #1A3FA0;
-    --text: #1A1A2E; --text-light: #6B7280; --wrong: #C53030; --wrong-bg: #FFF5F5;
-    --right: #276749; --right-bg: #F0FFF4; --neutral-bg: #F9F8F5;
-    --border: #E5E2DA; --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    --bg: #F5F3EE;
+    --card: #FFFFFF;
+    --accent: #2D5BE3;
+    --accent-dark: #1A3FA0;
+    --text: #1A1A2E;
+    --text-light: #6B7280;
+    --wrong: #C53030;
+    --wrong-bg: #FFF5F5;
+    --right: #276749;
+    --right-bg: #F0FFF4;
+    --neutral-bg: #F9F8F5;
+    --border: #E5E2DA;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
   }
-  body { font-family: 'Georgia', serif; background: var(--bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
   .container { width: 100%; max-width: 700px; }
+
   .screen { display: none; animation: fadeIn 0.35s ease; }
   .screen.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeInPlace { from { opacity: 0; } to { opacity: 1; } }
 
-  /* CASE */
-  .case-card { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
-  .case-header { width: 100%; height: 200px; background: #1A1A2E; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; position: relative; overflow: hidden; }
-  .case-header img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInPlace {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .case-card,
+  .dialogue-card,
+  .final-card {
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .case-header {
+    width: 100%;
+    height: 200px;
+    background: #1A1A2E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
   .case-header-inner { position: relative; z-index: 2; }
-  .case-tag { display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 4px; margin-bottom: 12px; }
-  .case-header h2 { color: white; font-size: 20px; font-weight: normal; line-height: 1.4; }
+
+  .case-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  .case-header h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.4;
+  }
+
   .case-body { padding: 28px; }
-  .case-body p { font-size: 15px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
-  .case-question { font-style: italic; color: var(--text-light); border-left: 3px solid var(--accent); padding-left: 16px; margin-top: 18px; font-size: 15px; line-height: 1.7; }
-  .btn-start { display: block; width: 100%; margin-top: 24px; padding: 15px; background: var(--accent); color: white; border: none; border-radius: 10px; font-size: 16px; font-family: 'Georgia', serif; cursor: pointer; transition: background 0.2s; }
+
+  .case-body p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .case-question {
+    font-style: italic;
+    color: var(--text-light);
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+    margin-top: 18px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .btn-start {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 15px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
   .btn-start:hover { background: var(--accent-dark); }
 
-  /* DIALOGUE */
-  .dialogue-card { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
-  .step-row { display: flex; gap: 6px; padding: 14px 20px 0; }
-  .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
+  .step-row {
+    display: flex;
+    gap: 6px;
+    padding: 14px 20px 0;
+  }
+
+  .step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
   .step-dot.active { background: var(--accent); }
   .step-dot.done { background: var(--right); }
 
-  /* Scene */
   .scene-wrap {
     position: relative;
     width: 100%;
@@ -47,16 +153,14 @@
     background: #e8e4dc;
     overflow: hidden;
   }
-  .scene-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .scene-placeholder {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #d4cfc6 0%, #b8b2a8 100%);
-    display: flex; align-items: center; justify-content: center;
-    color: #888; font-size: 13px; font-family: 'Courier New', monospace;
-    letter-spacing: 0.05em;
+
+  .scene-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  /* Speech bubble — over the bookcase top shelf / wall chart area */
   .bubble-wrap {
     position: absolute;
     top: 8%;
@@ -66,22 +170,22 @@
 
   .bubble {
     background: white;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
     padding: 8px 12px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.22);
     position: relative;
   }
 
-  /* Tail pointing bottom-left toward the director */
   .bubble::after {
     content: '';
     position: absolute;
     bottom: -9px;
     left: 16px;
-    width: 0; height: 0;
+    width: 0;
+    height: 0;
     border-right: 9px solid transparent;
     border-top: 9px solid white;
-    border-left: 0px solid transparent;
+    border-left: 0 solid transparent;
   }
 
   .bubble .spk {
@@ -99,11 +203,11 @@
     color: var(--text);
   }
 
-  /* Feedback */
   .feedback-bar {
     display: none;
     position: absolute;
-    bottom: 12px; left: 50%;
+    bottom: 12px;
+    left: 50%;
     transform: translateX(-50%);
     width: 86%;
     border-radius: 10px;
@@ -115,45 +219,185 @@
     animation: fadeInPlace 0.25s ease;
     text-align: center;
   }
-  .feedback-bar.wrong { background: rgba(255,245,245,0.97); border: 1px solid #FC8181; color: #742A2A; }
-  .feedback-bar.right { background: rgba(240,255,244,0.97); border: 1px solid #68D391; color: #1C4532; }
 
-  /* Options */
+  .feedback-bar.wrong {
+    background: rgba(255,245,245,0.97);
+    border: 1px solid #FC8181;
+    color: #742A2A;
+  }
+
+  .feedback-bar.right {
+    background: rgba(240,255,244,0.97);
+    border: 1px solid #68D391;
+    color: #1C4532;
+  }
+
   .options-wrap { padding: 12px 20px 20px; }
-  .options-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 10px; font-family: 'Courier New', monospace; }
-  .option-btn { display: block; width: 100%; text-align: left; background: var(--neutral-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: 14px; line-height: 1.55; color: var(--text); cursor: pointer; margin-bottom: 7px; transition: all 0.2s; font-family: 'Georgia', serif; }
-  .option-btn:hover:not(:disabled) { border-color: var(--accent); background: #F0F4FF; }
+
+  .options-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .option-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--neutral-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+    cursor: pointer;
+    margin-bottom: 7px;
+    transition: all 0.2s;
+    font-family: 'Georgia', serif;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #F0F4FF;
+  }
+
   .option-btn:disabled { cursor: default; }
-  .option-btn.sel-wrong { background: var(--wrong-bg); border-color: #FC8181; color: var(--wrong); }
-  .option-btn.sel-right { background: var(--right-bg); border-color: #68D391; color: var(--right); }
-  .action-btns { display: flex; gap: 8px; margin-top: 4px; }
-  .retry-btn, .next-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; font-family: 'Georgia', serif; cursor: pointer; transition: all 0.2s; display: none; }
-  .retry-btn { background: #FFF5F5; color: var(--wrong); border: 1px solid #FEB2B2; }
+
+  .option-btn.sel-wrong {
+    background: var(--wrong-bg);
+    border-color: #FC8181;
+    color: var(--wrong);
+  }
+
+  .option-btn.sel-right {
+    background: var(--right-bg);
+    border-color: #68D391;
+    color: var(--right);
+  }
+
+  .action-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .retry-btn,
+  .next-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+  }
+
+  .retry-btn {
+    background: #FFF5F5;
+    color: var(--wrong);
+    border: 1px solid #FEB2B2;
+  }
+
   .retry-btn:hover { background: #FED7D7; }
-  .next-btn { background: var(--accent); color: white; }
+
+  .next-btn {
+    background: var(--accent);
+    color: white;
+  }
+
   .next-btn:hover { background: var(--accent-dark); }
 
-  /* FINAL */
-  .final-card { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
-  .final-scene { position: relative; width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg,#1A1A2E 0%,#2D5BE3 100%); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .final-scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .final-body { padding: 28px; text-align: center; }
-  .final-badge { display: inline-block; background: var(--right-bg); color: var(--right); border: 1px solid #9AE6B4; border-radius: 20px; padding: 5px 16px; font-size: 12px; margin-bottom: 16px; font-family: 'Courier New', monospace; letter-spacing: 0.05em; }
-  .final-title { font-size: 19px; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
-  .final-text { font-size: 14px; color: var(--text-light); line-height: 1.75; margin-bottom: 18px; }
-  .final-highlight { background: var(--neutral-bg); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 14px 18px; text-align: left; font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 22px; }
-  .btn-restart { padding: 12px 28px; background: var(--bg); color: var(--text-light); border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'Georgia', serif; cursor: pointer; transition: all 0.2s; }
-  .btn-restart:hover { background: var(--border); color: var(--text); }
+  .final-scene {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg,#1A1A2E 0%,#2D5BE3 100%);
+    overflow: hidden;
+  }
+
+  .final-scene img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .final-body {
+    padding: 28px;
+    text-align: center;
+  }
+
+  .final-badge {
+    display: inline-block;
+    background: var(--right-bg);
+    color: var(--right);
+    border: 1px solid #9AE6B4;
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    margin-bottom: 16px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .final-title {
+    font-size: 19px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .final-text {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+
+  .final-highlight {
+    background: var(--neutral-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+
+  .btn-restart {
+    padding: 12px 28px;
+    background: var(--bg);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-restart:hover {
+    background: var(--border);
+    color: var(--text);
+  }
 </style>
 </head>
+
 <body>
 <div class="container">
 
-  <!-- CASE -->
   <div class="screen active" id="screen-case">
     <div class="case-card">
       <div class="case-header">
-        <!-- <img src="case-bg.png" alt=""> -->
         <div class="case-header-inner">
           <div class="case-tag">Кейс · Урок 2</div>
           <h2>Разговор с директором</h2>
@@ -168,31 +412,34 @@
     </div>
   </div>
 
-  <!-- STEP 1 -->
   <div class="screen" id="screen-1">
     <div class="dialogue-card">
       <div class="step-row">
         <div class="step-dot active"></div>
         <div class="step-dot"></div>
       </div>
+
       <div class="scene-wrap">
-        <img id="scene1-neutral"  src="director-neutral.png"     alt="" style="display:block">
-        <img id="scene1-angry"    src="director-angry.png"       alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <img id="scene1-happy"    src="director-interested.png"  alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <div id="scene1-ph" class="scene-placeholder" style="position:absolute;inset:0">Картинка: директор входит в бухгалтерию</div>
+        <img id="scene1-neutral" src="director-neutral.png" alt="" style="display:block">
+        <img id="scene1-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <img id="scene1-happy" src="director-interested.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
             <div class="btext" id="bubble1-text">Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?</div>
           </div>
         </div>
+
         <div id="fb-1" class="feedback-bar"></div>
       </div>
+
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
         <button class="option-btn" id="o1a" onclick="pick(1,'A')">Выручка выросла на 18%, но расходы росли медленнее — налоговая база стала больше.</button>
         <button class="option-btn" id="o1b" onclick="pick(1,'B')">За счет резерва по сомнительным долгам мы уменьшили налоговую базу и снизили налог к уплате на 960 тысяч.</button>
         <button class="option-btn" id="o1c" onclick="pick(1,'C')">Мы проверили расчет налога и сверили его с обороткой. Ошибок нет, сумма подтверждается документами.</button>
+
         <div class="action-btns">
           <button class="retry-btn" id="r1" onclick="reset(1)">↩ Попробовать еще раз</button>
           <button class="next-btn" id="n1" onclick="go('screen-2')">Продолжить →</button>
@@ -201,31 +448,34 @@
     </div>
   </div>
 
-  <!-- STEP 2 -->
   <div class="screen" id="screen-2">
     <div class="dialogue-card">
       <div class="step-row">
         <div class="step-dot done"></div>
         <div class="step-dot active"></div>
       </div>
+
       <div class="scene-wrap">
         <img id="scene2-interested" src="director-interested.png" alt="" style="display:block">
-        <img id="scene2-angry"      src="director-angry.png"      alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <img id="scene2-happy"      src="director-happy.png"      alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <div id="scene2-ph" class="scene-placeholder" style="position:absolute;inset:0">Картинка: директор заинтересован</div>
+        <img id="scene2-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <img id="scene2-happy" src="director-happy.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
             <div class="btext" id="bubble2-text">А что это значит?</div>
           </div>
         </div>
+
         <div id="fb-2" class="feedback-bar"></div>
       </div>
+
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
         <button class="option-btn" id="o2a" onclick="pick(2,'A')">Есть пять клиентов, которые не платят больше трех месяцев. Их долг — 4,8 млн. Мы создали по нему резерв: закон разрешает учесть это в расходах и снизить налог.</button>
         <button class="option-btn" id="o2b" onclick="pick(2,'B')">После анализа дебиторской задолженности мы применили инструмент, который разрешен Налоговым кодексом.</button>
-        <button class="option-btn" id="o2c" onclick="pick(2,'C')">Мы сэкономили около миллиона рублей — без этого налог был бы около 5,2 млн. </button>
+        <button class="option-btn" id="o2c" onclick="pick(2,'C')">Мы сэкономили около миллиона рублей — без этого налог был бы около 5,2 млн.</button>
+
         <div class="action-btns">
           <button class="retry-btn" id="r2" onclick="reset(2)">↩ Попробовать еще раз</button>
           <button class="next-btn" id="n2" onclick="go('screen-final')">Завершить →</button>
@@ -234,16 +484,16 @@
     </div>
   </div>
 
-  <!-- FINAL -->
   <div class="screen" id="screen-final">
     <div class="final-card">
       <div class="final-scene">
-        <!-- <img src="handshake.png" alt=""> -->
+        <img src="handshake.png" alt="">
       </div>
+
       <div class="final-body">
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
         <h2 class="final-title">Марина продемонстрировала ценность работы бухгалтерии</h2>
-        <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу. </p>
+        <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу.</p>
         <div class="final-highlight">Именно так работает язык цифр — через конкретные суммы и понятные объяснения.</div>
         <button class="btn-restart" onclick="restart()">↩ Попробовать еще раз</button>
       </div>
@@ -251,56 +501,96 @@
   </div>
 
 </div>
+
 <script>
 const D = {
   1: {
-    A: { ok:false, reply:'Ну, понятно.', note:'Директор услышал объяснение, но ценность работы бухгалтерии осталась неочевидной.' },
-    B: { ok:true,  reply:'А что это значит?', note:null },
-    C: { ok:false, reply:'Понял, спасибо.', note:'Директор ничего не понял, но не стал переспрашивать.' }
+    A: {
+      ok: false,
+      reply: 'Ну, понятно.',
+      note: 'Директор услышал объяснение, но ценность работы бухгалтерии осталась неочевидной.'
+    },
+    B: {
+      ok: true,
+      reply: 'А что это значит?',
+      note: null
+    },
+    C: {
+      ok: false,
+      reply: 'Понял, спасибо.',
+      note: 'Директор ничего не понял, но не стал переспрашивать.'
+    }
   },
   2: {
-    A: { ok:false, reply:'Ладно, понял.', note:'Технически верно, но ценность работы бухгалтерии осталась неочевидной.' },
-    B: { ok:false, reply:'А, ну понятно.', note:'Формально верно, но он не узнал ничего конкретного.' },
-    C: { ok:true,  reply:'Понял. Спасибо за хорошую работу.', note:null }
+    A: {
+      ok: false,
+      reply: 'Ладно, понял.',
+      note: 'Технически верно, но ценность работы бухгалтерии осталась неочевидной.'
+    },
+    B: {
+      ok: false,
+      reply: 'А, ну понятно.',
+      note: 'Формально верно, но он не узнал ничего конкретного.'
+    },
+    C: {
+      ok: true,
+      reply: 'Понял. Спасибо за хорошую работу.',
+      note: null
+    }
   }
 };
-const map = { 1:{A:'o1a',B:'o1b',C:'o1c'}, 2:{A:'o2a',B:'o2b',C:'o2c'} };
+
+const map = {
+  1: { A: 'o1a', B: 'o1b', C: 'o1c' },
+  2: { A: 'o2a', B: 'o2b', C: 'o2c' }
+};
 
 function setScene(step, mood) {
   const prefix = step === 1 ? 'scene1' : 'scene2';
+
   const moodMap = step === 1
-    ? { neutral:'neutral', angry:'angry', interested:'happy' }
-    : { interested:'interested', angry:'angry', happy:'happy' };
+    ? { neutral: 'neutral', angry: 'angry', interested: 'happy' }
+    : { interested: 'interested', angry: 'angry', happy: 'happy' };
+
   const imgs = step === 1
-    ? ['scene1-neutral','scene1-angry','scene1-happy']
-    : ['scene2-interested','scene2-angry','scene2-happy'];
+    ? ['scene1-neutral', 'scene1-angry', 'scene1-happy']
+    : ['scene2-interested', 'scene2-angry', 'scene2-happy'];
+
   imgs.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
   });
+
   const target = document.getElementById(`${prefix}-${moodMap[mood] || mood}`);
   if (target) target.style.display = 'block';
 }
 
 function pick(step, opt) {
   const d = D[step][opt];
-  Object.values(map[step]).forEach(id => { document.getElementById(id).disabled = true; });
+
+  Object.values(map[step]).forEach(id => {
+    document.getElementById(id).disabled = true;
+  });
+
   document.getElementById(map[step][opt]).classList.add(d.ok ? 'sel-right' : 'sel-wrong');
+
   const fb = document.getElementById(`fb-${step}`);
-  fb.style.display = 'block';
   const bubbleEl = document.getElementById(`bubble${step}-text`);
+
   if (bubbleEl) bubbleEl.textContent = d.reply;
 
   if (d.ok) {
     fb.className = 'feedback-bar right';
     fb.innerHTML = d.note || '';
     fb.style.display = d.note ? 'block' : 'none';
+
     document.getElementById(`n${step}`).style.display = 'block';
     setScene(step, step === 1 ? 'interested' : 'happy');
   } else {
     fb.className = 'feedback-bar wrong';
     fb.innerHTML = d.note || '';
     fb.style.display = 'block';
+
     document.getElementById(`r${step}`).style.display = 'block';
     setScene(step, 'angry');
   }
@@ -310,16 +600,20 @@ function reset(step) {
   Object.values(map[step]).forEach(id => {
     const b = document.getElementById(id);
     b.disabled = false;
-    b.classList.remove('sel-right','sel-wrong');
+    b.classList.remove('sel-right', 'sel-wrong');
   });
+
   document.getElementById(`fb-${step}`).style.display = 'none';
   document.getElementById(`r${step}`).style.display = 'none';
   document.getElementById(`n${step}`).style.display = 'none';
+
   setScene(step, step === 1 ? 'neutral' : 'interested');
+
   const origTexts = {
     1: 'Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?',
     2: 'А что это значит?'
   };
+
   const bEl = document.getElementById(`bubble${step}-text`);
   if (bEl) bEl.textContent = origTexts[step];
 }
@@ -327,10 +621,14 @@ function reset(step) {
 function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
-function restart() { reset(1); reset(2); go('screen-case'); }
+function restart() {
+  reset(1);
+  reset(2);
+  go('screen-case');
+}
 </script>
 </body>
 </html>
