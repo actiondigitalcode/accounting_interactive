@@ -80,6 +80,14 @@
     overflow: hidden;
   }
 
+  .case-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .case-header-inner {
     position: relative;
     z-index: 2;
@@ -427,6 +435,7 @@
   <div class="screen active" id="screen-case">
     <div class="case-card">
       <div class="case-header">
+        <img src="case-bg.png" alt="" class="case-bg">
         <div class="case-header-inner">
           <div class="case-tag">Кейс · Урок 2</div>
           <h2>Разговор с директором</h2>
