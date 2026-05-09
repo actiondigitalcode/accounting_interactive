@@ -26,14 +26,14 @@
   body {
     font-family: 'Georgia', serif;
     background: var(--bg);
-    padding: 12px;
-    overflow-x: hidden;
+    padding: 8px;
+    overflow: hidden;
+    width: 100%;
   }
 
   .container {
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 100%;
   }
 
   .screen { display: none; animation: fadeIn 0.35s ease; }
@@ -51,7 +51,7 @@
 
   .case-header {
     width: 100%;
-    height: 160px;
+    height: 130px;
     background: #1A1A2E;
     display: flex;
     align-items: center;
@@ -91,24 +91,24 @@
 
   .case-header h2 { color: var(--text); font-size: 22px; font-weight: normal; line-height: 1.4; }
 
-  .case-body { padding: 20px; }
-  .case-body p { font-size: 15px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+  .case-body { padding: 14px; }
+  .case-body p { font-size: 13px; line-height: 1.6; color: var(--text); margin-bottom: 8px; }
 
   .case-question {
     font-style: italic;
     color: var(--text-light);
     border-left: 3px solid var(--accent);
-    padding-left: 16px;
-    margin-top: 18px;
-    font-size: 15px;
-    line-height: 1.7;
+    padding-left: 12px;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.6;
   }
 
   .btn-start {
     display: block;
     width: 100%;
-    margin-top: 24px;
-    padding: 15px;
+    margin-top: 14px;
+    padding: 12px;
     background: var(--accent);
     color: white;
     border: none;
@@ -193,7 +193,7 @@
   .feedback-bar.wrong { background: rgba(255,245,245,0.97); border: 1px solid #FC8181; color: #742A2A; }
   .feedback-bar.right { background: rgba(240,255,244,0.97); border: 1px solid #68D391; color: #1C4532; }
 
-  .options-wrap { padding: 8px 16px 16px; }
+  .options-wrap { padding: 6px 14px 14px; }
 
   .options-label {
     font-size: 11px;
@@ -211,9 +211,9 @@
     background: var(--neutral-bg);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 14px;
-    line-height: 1.55;
+    padding: 9px 14px;
+    font-size: 13px;
+    line-height: 1.5;
     color: var(--text);
     cursor: pointer;
     margin-bottom: 7px;
@@ -255,7 +255,7 @@
 
   .final-scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  .final-body { padding: 20px; text-align: center; }
+  .final-body { padding: 14px; text-align: center; }
 
   .final-badge {
     display: inline-block;
@@ -270,8 +270,8 @@
     letter-spacing: 0.05em;
   }
 
-  .final-title { font-size: 19px; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
-  .final-text { font-size: 14px; color: var(--text-light); line-height: 1.75; margin-bottom: 18px; }
+  .final-title { font-size: 16px; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .final-text { font-size: 13px; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
 
   .final-highlight {
     background: var(--neutral-bg);
@@ -392,7 +392,7 @@
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
         <h2 class="final-title">Марине удалось продемонстрировать ценность работы бухгалтерии</h2>
         <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу.</p>
-        <div class="final-highlight">Именно так работает язык бизнеса — через конкретные суммы и понятную пользу.</div>
+        <div class="final-highlight">Именно так работает язык цифр — через конкретные суммы и понятные объяснения.</div>
         <button class="btn-restart" onclick="restart()">↩ Попробовать еще раз</button>
       </div>
     </div>
