@@ -31,23 +31,26 @@
 body {
   font-family: Georgia, serif;
   background: var(--bg);
-  padding: 16px;
+  padding: 24px 16px;
   overflow-x: hidden;
+  color: var(--text);
 }
 
 .container {
   width: 100%;
-  max-width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
 }
 
 /* SCREEN SYSTEM */
+
 .screen {
   display: none;
 }
 
 .screen.active {
   display: block;
-  animation: fadeIn 0.4s ease;
+  animation: fadeIn 0.35s ease;
 }
 
 @keyframes fadeIn {
@@ -62,40 +65,39 @@ body {
   }
 }
 
-/* SCREEN 1: CASE */
-.case-wrap {
-  position: relative;
+/* COMMON CARD */
+
+.card-window {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 14px;
-  overflow: hidden;
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--card);
+  border-radius: 18px;
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
-.case-wrap img {
+/* SCREEN 1: CASE */
+
+.case-window {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  min-height: 430px;
+}
+
+.case-image {
   width: 100%;
   height: 100%;
+  min-height: 430px;
   object-fit: cover;
   display: block;
 }
 
-.case-overlay {
-  position: absolute;
-  top: 2%;
-  right: 3%;
-  width: 64%;
-  height: 92%;
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.7);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  padding: 16px 18px;
+.case-content {
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  overflow: hidden;
+  gap: 12px;
 }
 
 .case-tag {
@@ -107,37 +109,35 @@ body {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  margin: 0 auto 10px;
+  margin-bottom: 6px;
   width: fit-content;
 }
 
-.case-overlay p {
-  font-size: 11px;
-  line-height: 1.6;
+.case-content p {
+  font-size: 14px;
+  line-height: 1.58;
   color: var(--text);
 }
 
 .case-question {
   font-style: italic;
   color: var(--text-light);
-  border-left: 2px solid var(--accent);
-  padding-left: 10px;
-  font-size: 11px;
-  line-height: 1.6;
-  margin-bottom: 0;
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  margin-top: 4px;
 }
 
 .btn-start {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background: var(--accent);
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 12px;
+  border-radius: 10px;
+  font-size: 14px;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: background 0.2s;
@@ -151,15 +151,25 @@ body {
 }
 
 /* SCREEN 2: RULES */
+
 .doc-wrap {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 18px;
   box-shadow: var(--shadow);
-  padding: 18px 8%;
+  padding: 24px 32px 28px;
+}
+
+.task-image {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+  margin-bottom: 20px;
 }
 
 .doc-title {
-  font-size: 13px;
+  font-size: 17px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
@@ -167,7 +177,7 @@ body {
 }
 
 .doc-subtitle {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-light);
   text-align: center;
   font-family: "Courier New", monospace;
@@ -179,20 +189,20 @@ body {
   background: #EEF2FF;
   border-left: 3px solid var(--accent);
   border-radius: 0 8px 8px 0;
-  padding: 8px 12px;
-  font-size: 11px;
+  padding: 10px 14px;
+  font-size: 13px;
   color: var(--accent-dark);
   margin-bottom: 18px;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .rule-row {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  margin-bottom: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
   border: 1.5px solid var(--border);
   background: var(--neutral);
   transition: all 0.25s;
@@ -211,9 +221,9 @@ body {
 
 .rule-num {
   font-family: "Courier New", monospace;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text-light);
-  min-width: 18px;
+  min-width: 22px;
   padding-top: 2px;
 }
 
@@ -222,8 +232,7 @@ body {
 }
 
 .rule-text {
-  flex: 1;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.55;
   color: var(--text);
 }
@@ -242,8 +251,8 @@ body {
 
 .btn-ok,
 .btn-no {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -291,12 +300,13 @@ body {
 }
 
 .vote-hint {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--wrong);
   margin-top: 6px;
 }
 
 /* REPLACE OPTIONS */
+
 .replace-panel {
   display: none;
   margin-top: 10px;
@@ -327,9 +337,9 @@ body {
   background: #fff;
   border: 1px solid #E5E2DA;
   border-radius: 7px;
-  padding: 7px 10px;
-  font-size: 11px;
-  line-height: 1.5;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.45;
   color: var(--text);
   cursor: pointer;
   margin-bottom: 6px;
@@ -360,7 +370,7 @@ body {
 
 .replace-hint {
   display: none;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--wrong);
   margin-top: 4px;
   padding-left: 2px;
@@ -371,9 +381,10 @@ body {
 }
 
 /* SUBMIT */
+
 .submit-wrap {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 .btn-submit {
@@ -400,11 +411,12 @@ body {
 }
 
 /* SCREEN 3: FINAL */
+
 .final-wrap {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 18px;
   box-shadow: var(--shadow);
-  padding: 28px 10%;
+  padding: 28px 32px 30px;
   position: relative;
   overflow: hidden;
 }
@@ -416,6 +428,15 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 10;
+}
+
+.success-image {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  display: block;
 }
 
 .final-badge {
@@ -432,14 +453,14 @@ body {
 }
 
 .final-title {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--text);
   margin-bottom: 20px;
   line-height: 1.5;
 }
 
 .final-doc-title {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
@@ -451,9 +472,9 @@ body {
 .final-rule {
   display: flex;
   gap: 10px;
-  padding: 8px 10px;
+  padding: 9px 10px;
   border-radius: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   background: var(--right-bg);
   border: 1px solid #9AE6B4;
 }
@@ -465,9 +486,9 @@ body {
 
 .final-rule-num {
   font-family: "Courier New", monospace;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--right);
-  min-width: 16px;
+  min-width: 18px;
   padding-top: 2px;
 }
 
@@ -476,8 +497,8 @@ body {
 }
 
 .final-rule-text {
-  font-size: 12px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.55;
   color: var(--text);
 }
 
@@ -491,7 +512,7 @@ body {
 
 .btn-restart {
   display: block;
-  margin: 20px auto 0;
+  margin: 22px auto 0;
   padding: 11px 28px;
   background: var(--bg);
   color: var(--text-light);
@@ -508,22 +529,42 @@ body {
   color: var(--text);
 }
 
+/* MOBILE */
+
 @media (max-width: 760px) {
   body {
-    padding: 10px;
+    padding: 12px;
   }
 
-  .case-wrap {
-    aspect-ratio: auto;
-    min-height: 620px;
+  .container {
+    max-width: 100%;
   }
 
-  .case-overlay {
-    top: 3%;
-    left: 3%;
-    right: 3%;
-    width: auto;
-    height: 94%;
+  .case-window {
+    display: block;
+  }
+
+  .case-image {
+    height: 220px;
+    min-height: 0;
+  }
+
+  .case-content {
+    padding: 20px;
+  }
+
+  .case-content p {
+    font-size: 13px;
+  }
+
+  .doc-wrap,
+  .final-wrap {
+    padding: 18px;
+  }
+
+  .task-image,
+  .success-image {
+    max-height: 180px;
   }
 
   .rule-row {
@@ -532,11 +573,6 @@ body {
 
   .rule-actions {
     flex-direction: column;
-  }
-
-  .doc-wrap,
-  .final-wrap {
-    padding: 16px;
   }
 }
 </style>
@@ -547,9 +583,10 @@ body {
 
   <!-- SCREEN 1: CASE -->
   <div class="screen active" id="s-case">
-    <div class="case-wrap">
-      <img src="comp_task.png" alt="">
-      <div class="case-overlay">
+    <div class="card-window case-window">
+      <img class="case-image" src="case-reglament.png" alt="Кейс по регламенту">
+
+      <div class="case-content">
         <div class="case-tag">Кейс</div>
 
         <p>В пятницу поставщик привез материалы на склад и вместе с грузом передал бумажную накладную снабженцу Леониду. Понедельник был выходным, поэтому Леонид решил, что можно не спешить, — и передал скан накладной в бухгалтерию в среду.</p>
@@ -568,6 +605,8 @@ body {
   <!-- SCREEN 2: RULES -->
   <div class="screen" id="s-rules">
     <div class="doc-wrap">
+      <img class="task-image" src="comp_task.png" alt="Задание">
+
       <div class="doc-title">Регламент передачи документов</div>
       <div class="doc-subtitle">Снабжение → Бухгалтерия</div>
 
@@ -698,7 +737,7 @@ body {
 
             <button class="replace-option" type="button" onclick="pickReplace(8,1)">При выявлении несоответствий бухгалтерия фиксирует замечания и направляет их снабжению. Снабжение принимает меры для получения корректных документов в согласованные сроки.</button>
 
-            <button class="replace-option" type="button" onclick="pickReplace(8,2)">Бухгалтерия сообщает снабжению что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</button>
+            <button class="replace-option" type="button" onclick="pickReplace(8,2)">Бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</button>
 
             <div class="replace-hint" id="rh-8">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
           </div>
@@ -722,7 +761,8 @@ body {
       <canvas class="confetti-canvas" id="confetti"></canvas>
 
       <div style="text-align:center; margin-bottom:14px;">
-        <img src="comp_success.png" alt="" style="width:100%;border-radius:10px;margin-bottom:14px;display:block;">
+        <img class="success-image" src="comp_success.png" alt="Успех">
+
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
         <div class="final-title">Вы нашли и исправили проблемные пункты регламента</div>
       </div>
