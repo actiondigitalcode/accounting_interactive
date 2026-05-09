@@ -88,7 +88,7 @@ body {
   height: 100%;
   min-height: 430px;
   object-fit: cover;
-  object-position: 55% center;
+  object-position: 60% center;
   display: block;
 }
 
@@ -702,13 +702,13 @@ body {
             <div class="replace-panel" id="rp-6">
               <div class="replace-label">Выберите рабочую формулировку</div>
 
-              <button class="replace-option" type="button" onclick="pickReplace(6,0)">Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</button>
+              <button class="replace-option" type="button" onclick="pickReplace(6,0)">Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена.</button>
 
               <button class="replace-option" type="button" onclick="pickReplace(6,1)">Документы должны содержать все необходимые реквизиты и быть пригодны для принятия к учету бухгалтерией.</button>
 
               <button class="replace-option" type="button" onclick="pickReplace(6,2)">Качество документов должно соответствовать стандартам документооборота, принятым в компании.</button>
 
-              <div class="replace-hint" id="rh-6">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+              <div class="replace-hint" id="rh-6">Необходимо уточнить формулировку. Попробуйте еще раз.</div>
             </div>
           </div>
 
@@ -756,7 +756,7 @@ body {
         </div>
 
         <div class="submit-wrap">
-          <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть эталонный регламент →</button>
+          <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть регламент →</button>
         </div>
       </div>
     </div>
@@ -773,11 +773,11 @@ body {
           <div class="final-title">Вы нашли и исправили проблемные пункты регламента</div>
         </div>
 
-        <div class="final-doc-title">Регламент передачи документов · Исправленная версия</div>
+        <div class="final-doc-title">Регламент передачи документов · Обновленная версия</div>
 
         <div class="final-rule">
           <div class="final-rule-num">1.</div>
-          <div class="final-rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
+          <div class="final-rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект: счет, спецификацию, накладную, счет-фактуру, транспортные документы.</div>
         </div>
 
         <div class="final-rule">
@@ -910,7 +910,7 @@ function showVoteHint(row) {
 
   const hint = document.createElement("div");
   hint.className = "vote-hint";
-  hint.textContent = "Попробуйте ещё раз";
+  hint.textContent = "Попробуйте еще раз";
   row.querySelector(".rule-content").appendChild(hint);
 }
 
