@@ -26,7 +26,7 @@
   body {
     font-family: 'Georgia', serif;
     background: var(--bg);
-    padding: 20px;
+    padding: 12px;
   }
 
   .container {
@@ -50,7 +50,7 @@
 
   .case-header {
     width: 100%;
-    height: 220px;
+    height: 160px;
     background: #1A1A2E;
     display: flex;
     align-items: center;
@@ -90,7 +90,7 @@
 
   .case-header h2 { color: var(--text); font-size: 22px; font-weight: normal; line-height: 1.4; }
 
-  .case-body { padding: 28px; }
+  .case-body { padding: 20px; }
   .case-body p { font-size: 15px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
 
   .case-question {
@@ -127,7 +127,7 @@
   .scene-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/7;
     background: #e8e4dc;
     overflow: hidden;
   }
@@ -192,7 +192,7 @@
   .feedback-bar.wrong { background: rgba(255,245,245,0.97); border: 1px solid #FC8181; color: #742A2A; }
   .feedback-bar.right { background: rgba(240,255,244,0.97); border: 1px solid #68D391; color: #1C4532; }
 
-  .options-wrap { padding: 12px 20px 20px; }
+  .options-wrap { padding: 8px 16px 16px; }
 
   .options-label {
     font-size: 11px;
@@ -247,14 +247,14 @@
   .final-scene {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/7;
     background: linear-gradient(135deg,#1A1A2E 0%,#2D5BE3 100%);
     overflow: hidden;
   }
 
   .final-scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  .final-body { padding: 28px; text-align: center; }
+  .final-body { padding: 20px; text-align: center; }
 
   .final-badge {
     display: inline-block;
@@ -391,7 +391,7 @@
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
         <h2 class="final-title">Марине удалось продемонстрировать ценность работы бухгалтерии</h2>
         <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу.</p>
-        <div class="final-highlight">Именно так работает язык цифр — через конкретные суммы и понятные для бизнеса объяснения.</div>
+        <div class="final-highlight">Именно так работает язык цифр — через конкретные суммы и понятные объяснения.</div>
         <button class="btn-restart" onclick="restart()">↩ Попробовать еще раз</button>
       </div>
     </div>
@@ -490,6 +490,23 @@ function go(id) {
 function restart() { reset(1); reset(2); go('screen-case'); }
 </script>
 
+<script>
+function sendHeight() {
+  const h = document.body.scrollHeight;
+  window.parent.postMessage({ type: 'setHeight', height: h }, '*');
+  // Also try iFrameResizer format
+  window.parent.postMessage('[iFrameSizer]' + document.body.scrollHeight + ':0:0:bodyOffset', '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+// Send repeatedly for first 3 seconds in case platform loads slowly
+let count = 0;
+const interval = setInterval(() => {
+  sendHeight();
+  count++;
+  if (count > 10) clearInterval(interval);
+}, 300);
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.9/iframeResizer.contentWindow.min.js"></script>
 </body>
 </html>
