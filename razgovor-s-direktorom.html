@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" style="overflow-x:hidden;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,11 +27,12 @@
     font-family: 'Georgia', serif;
     background: var(--bg);
     padding: 12px;
+    overflow-x: hidden;
   }
 
   .container {
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
@@ -127,12 +128,12 @@
   .scene-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/7;
+    aspect-ratio: 16/6;
     background: #e8e4dc;
     overflow: hidden;
   }
 
-  .scene-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .scene-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
 
   .bubble-wrap {
     position: absolute;
@@ -247,7 +248,7 @@
   .final-scene {
     position: relative;
     width: 100%;
-    aspect-ratio: 16/7;
+    aspect-ratio: 16/6;
     background: linear-gradient(135deg,#1A1A2E 0%,#2D5BE3 100%);
     overflow: hidden;
   }
@@ -328,8 +329,8 @@
       </div>
       <div class="scene-wrap">
         <img id="scene1-neutral" src="director-neutral.png" alt="" style="display:block">
-        <img id="scene1-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <img id="scene1-happy" src="director-interested.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <img id="scene1-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
+        <img id="scene1-happy" src="director-interested.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
@@ -359,8 +360,8 @@
       </div>
       <div class="scene-wrap">
         <img id="scene2-interested" src="director-interested.png" alt="" style="display:block">
-        <img id="scene2-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <img id="scene2-happy" src="director-happy.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <img id="scene2-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
+        <img id="scene2-happy" src="director-happy.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
@@ -391,7 +392,7 @@
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
         <h2 class="final-title">Марине удалось продемонстрировать ценность работы бухгалтерии</h2>
         <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу.</p>
-        <div class="final-highlight">Именно так работает язык цифр — через конкретные суммы и понятные объяснения.</div>
+        <div class="final-highlight">Именно так работает язык бизнеса — через конкретные суммы и понятную пользу.</div>
         <button class="btn-restart" onclick="restart()">↩ Попробовать еще раз</button>
       </div>
     </div>
