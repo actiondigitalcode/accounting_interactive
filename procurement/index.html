@@ -28,17 +28,23 @@
   --shadow: 0 12px 36px rgba(0,0,0,0.10);
 }
 
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
 body {
   font-family: Georgia, serif;
   background: var(--bg);
-  padding: 24px 16px;
+  padding: 14px;
   overflow-x: hidden;
   color: var(--text);
 }
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -50,13 +56,13 @@ body {
 
 .screen.active {
   display: block;
-  animation: fadeIn 0.35s ease;
+  animation: fadeIn 0.25s ease;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
 
   to {
@@ -69,7 +75,7 @@ body {
 
 .card-window {
   width: 100%;
-  max-width: 860px;
+  max-width: 820px;
   margin: 0 auto;
   background: var(--card);
   border-radius: 18px;
@@ -80,23 +86,31 @@ body {
 .case-window {
   display: grid;
   grid-template-columns: 42% 58%;
-  min-height: 430px;
+  min-height: 410px;
+}
+
+.case-image-wrap {
+  width: 100%;
+  min-height: 410px;
+  overflow: hidden;
+  background: #fff;
 }
 
 .case-image {
-  width: 100%;
+  width: 115%;
   height: 100%;
-  min-height: 430px;
+  min-height: 410px;
   object-fit: cover;
-  object-position: 0% center;
+  object-position: center center;
+  transform: translateX(8%);
   display: block;
 }
 
 .case-content {
-  padding: 28px 32px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .case-tag {
@@ -110,13 +124,13 @@ body {
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: 999px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   width: fit-content;
 }
 
 .case-content p {
-  font-size: 14px;
-  line-height: 1.58;
+  font-size: 13px;
+  line-height: 1.52;
   color: var(--text);
 }
 
@@ -125,18 +139,18 @@ body {
   color: var(--text-light);
   border-left: 3px solid var(--accent);
   padding-left: 12px;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .btn-start {
   display: block;
   width: 100%;
-  padding: 12px;
+  padding: 11px;
   background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: background 0.2s;
@@ -153,7 +167,9 @@ body {
 
 .editor-wrap {
   width: 100%;
-  min-height: 620px;
+  max-width: 900px;
+  min-height: 520px;
+  margin: 0 auto;
   background-image: url("comp_task.png");
   background-size: cover;
   background-position: center center;
@@ -161,55 +177,56 @@ body {
   border-radius: 18px;
   box-shadow: var(--shadow);
   overflow: hidden;
-  padding: 74px 88px 58px;
+  padding: 52px 76px 34px;
+  position: relative;
 }
 
 .editor-content {
-  width: 78%;
-  max-width: 720px;
+  width: 76%;
+  max-width: 650px;
   margin: 0 auto;
 }
 
 /* SCREEN 2: RULES */
 
 .doc-title {
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .doc-subtitle {
-  font-size: 10px;
+  font-size: 8.5px;
   color: var(--text-light);
   text-align: center;
   font-family: "Courier New", monospace;
   letter-spacing: 0.05em;
-  margin-bottom: 14px;
+  margin-bottom: 9px;
 }
 
 .doc-instruction {
   background: rgba(238,242,255,0.84);
   border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  padding: 8px 11px;
-  font-size: 10.5px;
+  border-radius: 0 7px 7px 0;
+  padding: 6px 9px;
+  font-size: 8.8px;
   color: var(--accent-dark);
-  margin-bottom: 12px;
-  line-height: 1.45;
+  margin-bottom: 8px;
+  line-height: 1.35;
 }
 
 .rule-row {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  margin-bottom: 5px;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 7px;
+  margin-bottom: 4px;
   border: 1px solid rgba(229,226,218,0.9);
   background: rgba(255,255,255,0.82);
-  transition: all 0.25s;
+  transition: all 0.2s;
   cursor: default;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
@@ -227,10 +244,10 @@ body {
 
 .rule-num {
   font-family: "Courier New", monospace;
-  font-size: 9.5px;
+  font-size: 8.5px;
   color: var(--text-light);
-  min-width: 17px;
-  padding-top: 2px;
+  min-width: 15px;
+  padding-top: 1px;
 }
 
 .rule-content {
@@ -238,8 +255,8 @@ body {
 }
 
 .rule-text {
-  font-size: 10.5px;
-  line-height: 1.42;
+  font-size: 8.9px;
+  line-height: 1.32;
   color: var(--text);
 }
 
@@ -250,25 +267,25 @@ body {
 
 .rule-actions {
   display: flex;
-  gap: 4px;
+  gap: 3px;
   flex-shrink: 0;
   padding-top: 0;
 }
 
 .btn-ok,
 .btn-no {
-  width: 25px;
-  height: 25px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.10);
 }
 
 .btn-ok:disabled,
@@ -306,21 +323,21 @@ body {
 }
 
 .vote-hint {
-  font-size: 10px;
+  font-size: 8.5px;
   color: var(--wrong);
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 /* REPLACE OPTIONS */
 
 .replace-panel {
   display: none;
-  margin-top: 7px;
-  padding: 8px;
-  background: rgba(255,249,240,0.94);
+  margin-top: 5px;
+  padding: 6px;
+  background: rgba(255,249,240,0.96);
   border: 1px solid #F6AD55;
-  border-radius: 8px;
-  animation: fadeIn 0.3s ease;
+  border-radius: 7px;
+  animation: fadeIn 0.25s ease;
 }
 
 .replace-panel.active {
@@ -328,12 +345,12 @@ body {
 }
 
 .replace-label {
-  font-size: 9px;
+  font-size: 7.8px;
   color: #744210;
   font-family: "Courier New", monospace;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .replace-option {
@@ -342,13 +359,13 @@ body {
   text-align: left;
   background: #fff;
   border: 1px solid #E5E2DA;
-  border-radius: 6px;
-  padding: 6px 8px;
-  font-size: 10px;
-  line-height: 1.35;
+  border-radius: 5px;
+  padding: 4px 6px;
+  font-size: 8.5px;
+  line-height: 1.25;
   color: var(--text);
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   transition: all 0.2s;
   font-family: Georgia, serif;
 }
@@ -376,9 +393,9 @@ body {
 
 .replace-hint {
   display: none;
-  font-size: 10px;
+  font-size: 8.5px;
   color: var(--wrong);
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .replace-hint.show {
@@ -389,16 +406,16 @@ body {
 
 .submit-wrap {
   text-align: center;
-  margin-top: 13px;
+  margin-top: 8px;
 }
 
 .btn-submit {
-  padding: 9px 28px;
+  padding: 7px 22px;
   background: var(--accent);
   color: #fff;
   border: none;
-  border-radius: 9px;
-  font-size: 12px;
+  border-radius: 8px;
+  font-size: 10.5px;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: background 0.2s;
@@ -418,12 +435,12 @@ body {
 /* SCREEN 3: FINAL */
 
 .final-content {
-  padding-top: 6px;
+  padding-top: 0;
 }
 
 .final-top {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .confetti-canvas {
@@ -441,36 +458,36 @@ body {
   color: var(--right);
   border: 1px solid #9AE6B4;
   border-radius: 20px;
-  padding: 4px 13px;
-  font-size: 10px;
-  margin-bottom: 8px;
+  padding: 3px 11px;
+  font-size: 8.8px;
+  margin-bottom: 5px;
   font-family: "Courier New", monospace;
   letter-spacing: 0.05em;
 }
 
 .final-title {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text);
-  margin-bottom: 12px;
-  line-height: 1.4;
+  margin-bottom: 8px;
+  line-height: 1.3;
 }
 
 .final-doc-title {
-  font-size: 13px;
+  font-size: 11.5px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
-  margin-bottom: 10px;
-  padding-bottom: 7px;
+  margin-bottom: 7px;
+  padding-bottom: 5px;
   border-bottom: 1px solid var(--border);
 }
 
 .final-rule {
   display: flex;
-  gap: 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  margin-bottom: 5px;
+  gap: 6px;
+  padding: 4px 6px;
+  border-radius: 7px;
+  margin-bottom: 4px;
   background: rgba(240,255,244,0.88);
   border: 1px solid #9AE6B4;
   backdrop-filter: blur(2px);
@@ -484,10 +501,10 @@ body {
 
 .final-rule-num {
   font-family: "Courier New", monospace;
-  font-size: 9.5px;
+  font-size: 8.5px;
   color: var(--right);
-  min-width: 16px;
-  padding-top: 2px;
+  min-width: 14px;
+  padding-top: 1px;
 }
 
 .final-rule.highlight .final-rule-num {
@@ -495,8 +512,8 @@ body {
 }
 
 .final-rule-text {
-  font-size: 10.5px;
-  line-height: 1.42;
+  font-size: 8.9px;
+  line-height: 1.32;
   color: var(--text);
 }
 
@@ -510,13 +527,13 @@ body {
 
 .btn-restart {
   display: block;
-  margin: 14px auto 0;
-  padding: 9px 24px;
+  margin: 9px auto 0;
+  padding: 7px 20px;
   background: rgba(255,255,255,0.86);
   color: var(--text-light);
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: 11px;
+  font-size: 9.5px;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: all 0.2s;
@@ -527,38 +544,84 @@ body {
   color: var(--text);
 }
 
-/* MOBILE */
+/* COMPACT IFRAME / PLATFORM */
 
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   body {
-    padding: 12px;
+    padding: 10px;
   }
 
   .container {
     max-width: 100%;
   }
 
-  .case-window {
-    display: block;
+  .card-window {
+    max-width: 100%;
   }
 
+  .case-window {
+    grid-template-columns: 39% 61%;
+    min-height: 390px;
+  }
+
+  .case-image-wrap,
   .case-image {
-    height: 220px;
-    min-height: 0;
-    object-position: 0% center;
+    min-height: 390px;
   }
 
   .case-content {
-    padding: 20px;
+    padding: 20px 22px;
+    gap: 8px;
   }
 
   .case-content p {
-    font-size: 13px;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .editor-wrap {
+    min-height: 500px;
+    padding: 48px 54px 30px;
+  }
+
+  .editor-content {
+    width: 80%;
+  }
+}
+
+/* ONLY VERY SMALL MOBILE */
+
+@media (max-width: 560px) {
+  .case-window {
+    display: block;
+    min-height: auto;
+  }
+
+  .case-image-wrap {
+    height: 190px;
+    min-height: 0;
+  }
+
+  .case-image {
+    width: 115%;
+    height: 190px;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center center;
+    transform: translateX(8%);
+  }
+
+  .case-content {
+    padding: 18px;
+  }
+
+  .case-content p {
+    font-size: 12px;
   }
 
   .editor-wrap {
     min-height: auto;
-    padding: 62px 16px 32px;
+    padding: 42px 14px 24px;
     background-size: cover;
     background-position: center top;
   }
@@ -569,7 +632,7 @@ body {
   }
 
   .rule-row {
-    gap: 7px;
+    gap: 6px;
   }
 
   .rule-actions {
@@ -578,8 +641,8 @@ body {
 
   .btn-ok,
   .btn-no {
-    width: 27px;
-    height: 27px;
+    width: 24px;
+    height: 24px;
   }
 }
 </style>
@@ -591,7 +654,9 @@ body {
   <!-- SCREEN 1: CASE -->
   <div class="screen active" id="s-case">
     <div class="card-window case-window">
-      <img class="case-image" src="case-reglament.png" alt="Кейс по регламенту">
+      <div class="case-image-wrap">
+        <img class="case-image" src="case-reglament.png" alt="Кейс по регламенту">
+      </div>
 
       <div class="case-content">
         <div class="case-tag">Кейс</div>
@@ -723,7 +788,20 @@ body {
           <div class="rule-num">7.</div>
           <div class="rule-content">
             <div class="rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — сотрудник отдела снабжения.</div>
+
+            <div class="replace-panel" id="rp-7">
+              <div class="replace-label">Выберите рабочую формулировку</div>
+
+              <button class="replace-option" type="button" onclick="pickReplace(7,0)">Ответственный за передачу документов — любой сотрудник отдела снабжения, который получил документы.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(7,1)">Ответственный за передачу документов — руководитель отдела снабжения.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(7,2)">Ответственный определяется отделом снабжения в зависимости от ситуации.</button>
+
+              <div class="replace-hint" id="rh-7">Необходимо уточнить формулировку. Попробуйте еще раз</div>
+            </div>
           </div>
+
           <div class="rule-actions">
             <button class="btn-ok" type="button" onclick="vote(7,'ok')" title="Рабочий пункт">✓</button>
             <button class="btn-no" type="button" onclick="vote(7,'no')" title="Нерабочий пункт">✗</button>
@@ -764,7 +842,7 @@ body {
 
   <!-- SCREEN 3: FINAL -->
   <div class="screen" id="s-final">
-    <div class="editor-wrap" style="position: relative;">
+    <div class="editor-wrap">
       <canvas class="confetti-canvas" id="confetti"></canvas>
 
       <div class="editor-content final-content">
@@ -805,9 +883,9 @@ body {
           <div class="final-rule-text"><b>Как оформлены документы:</b> <span class="final-correction">документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена.</span></div>
         </div>
 
-        <div class="final-rule">
+        <div class="final-rule highlight">
           <div class="final-rule-num">7.</div>
-          <div class="final-rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
+          <div class="final-rule-text"><b>Кто несет ответственность:</b> <span class="final-correction">ответственный за передачу документов — руководитель отдела снабжения.</span></div>
         </div>
 
         <div class="final-rule highlight">
@@ -830,13 +908,14 @@ const correctVote = {
   4: "no",
   5: "ok",
   6: "no",
-  7: "ok",
+  7: "no",
   8: "no"
 };
 
 const correctReplace = {
   4: 1,
   6: 0,
+  7: 1,
   8: 2
 };
 
@@ -974,11 +1053,20 @@ function go(id) {
     screen.classList.remove("active");
   });
 
-  document.getElementById(id).classList.add("active");
-  window.scrollTo(0, 0);
+  const target = document.getElementById(id);
+  target.classList.add("active");
+
+  setTimeout(function() {
+    target.scrollIntoView({
+      behavior: "auto",
+      block: "start"
+    });
+
+    window.scrollTo(0, 0);
+  }, 0);
 
   if (id === "s-final") {
-    setTimeout(launchConfetti, 300);
+    setTimeout(launchConfetti, 200);
   }
 }
 
@@ -1028,13 +1116,13 @@ function launchConfetti() {
   const colors = ["#2D5BE3", "#276749", "#F6AD55", "#FC8181", "#68D391", "#7BA7F7"];
   const particles = [];
 
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 90; i++) {
     particles.push({
       x: canvas.width / 2,
-      y: canvas.height / 2,
-      vx: (Math.random() - 0.5) * 12,
-      vy: (Math.random() - 1.5) * 10,
-      r: Math.random() * 6 + 3,
+      y: canvas.height * 0.25,
+      vx: (Math.random() - 0.5) * 10,
+      vy: (Math.random() - 1.5) * 8,
+      r: Math.random() * 5 + 2,
       color: colors[Math.floor(Math.random() * colors.length)],
       alpha: 1,
       rot: Math.random() * 360,
@@ -1050,8 +1138,8 @@ function launchConfetti() {
     particles.forEach(function(p) {
       p.x += p.vx;
       p.y += p.vy;
-      p.vy += 0.3;
-      p.alpha -= 0.012;
+      p.vy += 0.25;
+      p.alpha -= 0.013;
       p.rot += p.rotV;
 
       if (p.alpha <= 0) return;
