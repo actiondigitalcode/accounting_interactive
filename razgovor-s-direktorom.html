@@ -33,10 +33,19 @@
     padding: 20px;
   }
 
-  .container { width: 100%; max-width: 700px; }
+  .container {
+    width: 100%;
+    max-width: 700px;
+  }
 
-  .screen { display: none; animation: fadeIn 0.35s ease; }
-  .screen.active { display: block; }
+  .screen {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .screen.active {
+    display: block;
+  }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(6px); }
@@ -71,7 +80,10 @@
     overflow: hidden;
   }
 
-  .case-header-inner { position: relative; z-index: 2; }
+  .case-header-inner {
+    position: relative;
+    z-index: 2;
+  }
 
   .case-tag {
     display: inline-block;
@@ -93,7 +105,9 @@
     line-height: 1.4;
   }
 
-  .case-body { padding: 28px; }
+  .case-body {
+    padding: 28px;
+  }
 
   .case-body p {
     font-size: 15px;
@@ -127,7 +141,9 @@
     transition: background 0.2s;
   }
 
-  .btn-start:hover { background: var(--accent-dark); }
+  .btn-start:hover {
+    background: var(--accent-dark);
+  }
 
   .step-row {
     display: flex;
@@ -143,8 +159,13 @@
     transition: background 0.3s;
   }
 
-  .step-dot.active { background: var(--accent); }
-  .step-dot.done { background: var(--right); }
+  .step-dot.active {
+    background: var(--accent);
+  }
+
+  .step-dot.done {
+    background: var(--right);
+  }
 
   .scene-wrap {
     position: relative;
@@ -232,7 +253,9 @@
     color: #1C4532;
   }
 
-  .options-wrap { padding: 12px 20px 20px; }
+  .options-wrap {
+    padding: 12px 20px 20px;
+  }
 
   .options-label {
     font-size: 11px;
@@ -265,7 +288,9 @@
     background: #F0F4FF;
   }
 
-  .option-btn:disabled { cursor: default; }
+  .option-btn:disabled {
+    cursor: default;
+  }
 
   .option-btn.sel-wrong {
     background: var(--wrong-bg);
@@ -304,14 +329,18 @@
     border: 1px solid #FEB2B2;
   }
 
-  .retry-btn:hover { background: #FED7D7; }
+  .retry-btn:hover {
+    background: #FED7D7;
+  }
 
   .next-btn {
     background: var(--accent);
     color: white;
   }
 
-  .next-btn:hover { background: var(--accent-dark); }
+  .next-btn:hover {
+    background: var(--accent-dark);
+  }
 
   .final-scene {
     position: relative;
@@ -403,8 +432,9 @@
           <h2>Разговор с директором</h2>
         </div>
       </div>
+
       <div class="case-body">
-        <p>Марина — главный бухгалтер строительной компании. Сейчас утро пятницы. В бухгалтерию заходит директор: он только что посмотрел финансовые показатели за квартал и хочет понять, почему налог на прибыль такой большой.</p>
+        <p>Марина — главный бухгалтер строительной компании. Сейчас утро пятницы. В бухгалтерию заходит директор: он только что посмотрел финансовые показатели за квартал и хочет понять, «почему налог такой большой».</p>
         <p>На самом деле бухгалтерия проверила дебиторскую задолженность и сформировала резерв по сомнительным долгам по пяти просроченным необеспеченным долгам. Это уменьшило налоговую базу и снизило налог на прибыль в пределах, разрешенных законом.</p>
         <p class="case-question">Как объяснить директору ситуацию и донести ценность этой работы?</p>
         <button class="btn-start" onclick="go('screen-1')">Начать →</button>
@@ -492,7 +522,7 @@
 
       <div class="final-body">
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
-        <h2 class="final-title">Марина продемонстрировала ценность работы бухгалтерии</h2>
+        <h2 class="final-title">Марине удалось продемонстрировать ценность работы бухгалтерии</h2>
         <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу.</p>
         <div class="final-highlight">Именно так работает язык цифр — через конкретные суммы и понятные объяснения.</div>
         <button class="btn-restart" onclick="restart()">↩ Попробовать еще раз</button>
@@ -512,8 +542,8 @@ const D = {
     },
     B: {
       ok: true,
-      reply: 'А что это значит?',
-      note: null
+      reply: '',
+      note: 'Марина назвала конкретную цифру — и директор понял, что бухгалтерия не просто «считает налоги», а ищет законные способы их снизить.'
     },
     C: {
       ok: false,
@@ -530,7 +560,7 @@ const D = {
     B: {
       ok: false,
       reply: 'А, ну понятно.',
-      note: 'Формально верно, но он не узнал ничего конкретного.'
+      note: 'Формально верно, но директор не узнал ничего конкретного.'
     },
     C: {
       ok: true,
@@ -576,8 +606,13 @@ function pick(step, opt) {
 
   const fb = document.getElementById(`fb-${step}`);
   const bubbleEl = document.getElementById(`bubble${step}-text`);
+  const bubbleWrap = bubbleEl ? bubbleEl.closest('.bubble-wrap') : null;
 
   if (bubbleEl) bubbleEl.textContent = d.reply;
+
+  if (step === 1 && d.ok && bubbleWrap) {
+    bubbleWrap.style.display = 'none';
+  }
 
   if (d.ok) {
     fb.className = 'feedback-bar right';
@@ -611,11 +646,16 @@ function reset(step) {
 
   const origTexts = {
     1: 'Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?',
-    2: 'А что это значит?'
+    2: 'А что это значит, можете подробнее?'
   };
 
   const bEl = document.getElementById(`bubble${step}-text`);
-  if (bEl) bEl.textContent = origTexts[step];
+  if (bEl) {
+    bEl.textContent = origTexts[step];
+
+    const bubbleWrap = bEl.closest('.bubble-wrap');
+    if (bubbleWrap) bubbleWrap.style.display = 'block';
+  }
 }
 
 function go(id) {
