@@ -481,8 +481,8 @@
 
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
-        <button class="option-btn" id="o1a" onclick="pick(1,'A')">Выручка выросла на 18%, но расходы росли медленнее — налоговая база стала больше.</button>
-        <button class="option-btn" id="o1b" onclick="pick(1,'B')">За счет резерва по сомнительным долгам мы уменьшили налоговую базу и снизили налог к уплате на 960 тысяч.</button>
+        <button class="option-btn" id="o1a" onclick="pick(1,'A')">Выручка выросла на 18%, но расходы росли медленнее — прибыль и налоговая база стали больше.</button>
+        <button class="option-btn" id="o1b" onclick="pick(1,'B')">Маржа улучшилась, но часть долгов просрочена. Мы создали резерв и снизили налог к уплате на 960 тысяч.</button>
         <button class="option-btn" id="o1c" onclick="pick(1,'C')">Мы проверили расчет налога и сверили его с обороткой. Ошибок нет, сумма подтверждается документами.</button>
 
         <div class="action-btns">
@@ -508,7 +508,7 @@
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
-            <div class="btext" id="bubble2-text">А что это значит?</div>
+            <div class="btext" id="bubble2-text">Можете подробнее?</div>
           </div>
         </div>
 
@@ -563,7 +563,7 @@ const D = {
     C: {
       ok: false,
       reply: 'Понял, спасибо.',
-      note: 'Директор ничего не понял, но не стал переспрашивать.'
+      note: 'Директор ничего не понял, но не стал переспрашивать. Момент для демонстрации ценности упущен.'
     }
   },
   2: {
