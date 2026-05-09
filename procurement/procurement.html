@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Регламент: найдите слабые пункты</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #F7F5F0;
+  --card: #FFFFFF;
+  --accent: #2D5BE3;
+  --accent-dark: #1A3FA0;
+  --text: #1A1A2E;
+  --text-light: #6B7280;
+  --wrong: #C53030;
+  --wrong-bg: #FFF5F5;
+  --right: #276749;
+  --right-bg: #F0FFF4;
+  --neutral: #F9F8F5;
+  --border: #E5E2DA;
+  --shadow: 0 4px 24px rgba(0,0,0,0.09);
+}
+
+body {
+  font-family: Georgia, serif;
+  background: var(--bg);
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* SCREEN SYSTEM */
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SCREEN 1: CASE */
+.case-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.case-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-overlay {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  width: 64%;
+  height: 92%;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.case-tag {
+  display: block;
+  text-align: center;
+  background: rgba(45,91,227,0.10);
+  color: var(--accent-dark);
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin: 0 auto 10px;
+  width: fit-content;
+}
+
+.case-overlay p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.case-question {
+  font-style: italic;
+  color: var(--text-light);
+  border-left: 2px solid var(--accent);
+  padding-left: 10px;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.btn-start {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.btn-start:hover {
+  background: var(--accent-dark);
+}
+
+/* SCREEN 2: RULES */
+.doc-wrap {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 18px 8%;
+}
+
+.doc-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.doc-subtitle {
+  font-size: 11px;
+  color: var(--text-light);
+  text-align: center;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+.doc-instruction {
+  background: #EEF2FF;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--accent-dark);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.rule-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border: 1.5px solid var(--border);
+  background: var(--neutral);
+  transition: all 0.25s;
+  cursor: default;
+}
+
+.rule-row.correct {
+  background: #F0FFF4;
+  border-color: #68D391;
+}
+
+.rule-row.incorrect {
+  background: #FFF5F5;
+  border-color: #FC8181;
+}
+
+.rule-num {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  color: var(--text-light);
+  min-width: 18px;
+  padding-top: 2px;
+}
+
+.rule-content {
+  flex: 1;
+}
+
+.rule-text {
+  flex: 1;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.rule-text b {
+  color: var(--text);
+  font-weight: bold;
+}
+
+.rule-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.btn-ok,
+.btn-no {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.btn-ok:disabled,
+.btn-no:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.btn-ok {
+  color: var(--right);
+}
+
+.btn-ok:hover:not(:disabled) {
+  background: var(--right-bg);
+  transform: scale(1.1);
+}
+
+.btn-ok.selected {
+  background: var(--right);
+  color: #fff;
+}
+
+.btn-no {
+  color: var(--wrong);
+}
+
+.btn-no:hover:not(:disabled) {
+  background: var(--wrong-bg);
+  transform: scale(1.1);
+}
+
+.btn-no.selected {
+  background: var(--wrong);
+  color: #fff;
+}
+
+.vote-hint {
+  font-size: 11px;
+  color: var(--wrong);
+  margin-top: 6px;
+}
+
+/* REPLACE OPTIONS */
+.replace-panel {
+  display: none;
+  margin-top: 10px;
+  padding: 12px;
+  background: #FFF9F0;
+  border: 1px solid #F6AD55;
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease;
+}
+
+.replace-panel.active {
+  display: block;
+}
+
+.replace-label {
+  font-size: 11px;
+  color: #744210;
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.replace-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #E5E2DA;
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text);
+  cursor: pointer;
+  margin-bottom: 6px;
+  transition: all 0.2s;
+  font-family: Georgia, serif;
+}
+
+.replace-option:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: #F0F4FF;
+}
+
+.replace-option:disabled {
+  cursor: default;
+}
+
+.replace-option.sel-right {
+  background: var(--right-bg);
+  border-color: #68D391;
+  color: var(--right);
+}
+
+.replace-option.sel-wrong {
+  background: var(--wrong-bg);
+  border-color: #FC8181;
+  color: var(--wrong);
+}
+
+.replace-hint {
+  display: none;
+  font-size: 11px;
+  color: var(--wrong);
+  margin-top: 4px;
+  padding-left: 2px;
+}
+
+.replace-hint.show {
+  display: block;
+}
+
+/* SUBMIT */
+.submit-wrap {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-submit {
+  padding: 12px 36px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  transition: background 0.2s;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.btn-submit.ready {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.btn-submit:hover {
+  background: var(--accent-dark);
+}
+
+/* SCREEN 3: FINAL */
+.final-wrap {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 28px 10%;
+  position: relative;
+  overflow: hidden;
+}
+
+.confetti-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.final-badge {
+  display: inline-block;
+  background: var(--right-bg);
+  color: var(--right);
+  border: 1px solid #9AE6B4;
+  border-radius: 20px;
+  padding: 5px 16px;
+  font-size: 12px;
+  margin-bottom: 14px;
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.05em;
+}
+
+.final-title {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.final-doc-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.final-rule {
+  display: flex;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  background: var(--right-bg);
+  border: 1px solid #9AE6B4;
+}
+
+.final-rule.highlight {
+  border-color: #F6AD55;
+  background: #FFFBEB;
+}
+
+.final-rule-num {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  color: var(--right);
+  min-width: 16px;
+  padding-top: 2px;
+}
+
+.final-rule.highlight .final-rule-num {
+  color: #744210;
+}
+
+.final-rule-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.final-rule-text b {
+  color: var(--right);
+}
+
+.final-correction {
+  color: var(--right);
+}
+
+.btn-restart {
+  display: block;
+  margin: 20px auto 0;
+  padding: 11px 28px;
+  background: var(--bg);
+  color: var(--text-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-restart:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 10px;
+  }
+
+  .case-wrap {
+    aspect-ratio: auto;
+    min-height: 620px;
+  }
+
+  .case-overlay {
+    top: 3%;
+    left: 3%;
+    right: 3%;
+    width: auto;
+    height: 94%;
+  }
+
+  .rule-row {
+    gap: 8px;
+  }
+
+  .rule-actions {
+    flex-direction: column;
+  }
+
+  .doc-wrap,
+  .final-wrap {
+    padding: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- SCREEN 1: CASE -->
+  <div class="screen active" id="s-case">
+    <div class="case-wrap">
+      <img src="comp_task.png" alt="">
+      <div class="case-overlay">
+        <div class="case-tag">Кейс</div>
+
+        <p>В пятницу поставщик привез материалы на склад и вместе с грузом передал бумажную накладную снабженцу Леониду. Понедельник был выходным, поэтому Леонид решил, что можно не спешить, — и передал скан накладной в бухгалтерию в среду.</p>
+
+        <p>Когда бухгалтерия открыла файл, оказалось, что нижняя часть накладной обрезана, подпись кладовщика не видна, а счет-фактура не приложена. Бухгалтерия поставила комплект на возврат и указала замечания, но запрос поставщику на исправленные документы ушел только через два дня: снабжение посчитало, что исправления должна запросить бухгалтерия, а бухгалтерия — что поставщика ведет снабжение.</p>
+
+        <p>В итоге закупка попала в список проблемных документов на закрытии месяца.</p>
+
+        <p class="case-question">Регламент был подписан. Найдите пункты, из-за которых и возникла путаница.</p>
+
+        <button class="btn-start" type="button" onclick="go('s-rules')">Начать →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: RULES -->
+  <div class="screen" id="s-rules">
+    <div class="doc-wrap">
+      <div class="doc-title">Регламент передачи документов</div>
+      <div class="doc-subtitle">Снабжение → Бухгалтерия</div>
+
+      <div class="doc-instruction">
+        Отметьте каждый пункт: ✓ если формулировка рабочая, ✗ если ее можно понять по-разному. Для нерабочих пунктов выберите исправленную версию.
+      </div>
+
+      <!-- ПУНКТ 1 -->
+      <div class="rule-row" id="row-1">
+        <div class="rule-num">1.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект документов: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
+        </div>
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(1,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(1,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 2 -->
+      <div class="rule-row" id="row-2">
+        <div class="rule-num">2.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение» на общем диске. Файл называется по шаблону: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
+        </div>
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(2,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(2,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 3 -->
+      <div class="rule-row" id="row-3">
+        <div class="rule-num">3.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>К какому сроку:</b> документы передаются в день получения, но не позднее следующего рабочего дня до 12:00.</div>
+        </div>
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(3,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(3,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 4 -->
+      <div class="rule-row" id="row-4">
+        <div class="rule-num">4.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>Что делать, если срок попадает на выходной:</b> при совпадении срока передачи с нерабочими днями документы передаются в разумный срок после восстановления рабочего процесса.</div>
+
+          <div class="replace-panel" id="rp-4">
+            <div class="replace-label">Выберите рабочую формулировку</div>
+
+            <button class="replace-option" type="button" onclick="pickReplace(4,0)">Если срок попадает на нерабочий день — документы передаются в ближайшее возможное время после выхода на работу.</button>
+
+            <button class="replace-option" type="button" onclick="pickReplace(4,1)">Если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</button>
+
+            <button class="replace-option" type="button" onclick="pickReplace(4,2)">Документы передаются с учетом производственной необходимости и графика работы сотрудников.</button>
+
+            <div class="replace-hint" id="rh-4">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+          </div>
+        </div>
+
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(4,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(4,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 5 -->
+      <div class="rule-row" id="row-5">
+        <div class="rule-num">5.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>Что считается выполненным:</b> передача считается выполненной только если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
+        </div>
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(5,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(5,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 6 -->
+      <div class="rule-row" id="row-6">
+        <div class="rule-num">6.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>Как оформлены документы:</b> документы должны быть оформлены надлежащим образом и соответствовать установленным требованиям.</div>
+
+          <div class="replace-panel" id="rp-6">
+            <div class="replace-label">Выберите рабочую формулировку</div>
+
+            <button class="replace-option" type="button" onclick="pickReplace(6,0)">Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</button>
+
+            <button class="replace-option" type="button" onclick="pickReplace(6,1)">Документы должны содержать все необходимые реквизиты и быть пригодны для принятия к учету бухгалтерией.</button>
+
+            <button class="replace-option" type="button" onclick="pickReplace(6,2)">Качество документов должно соответствовать стандартам документооборота, принятым в компании.</button>
+
+            <div class="replace-hint" id="rh-6">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+          </div>
+        </div>
+
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(6,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(6,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 7 -->
+      <div class="rule-row" id="row-7">
+        <div class="rule-num">7.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
+        </div>
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(7,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(7,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <!-- ПУНКТ 8 -->
+      <div class="rule-row" id="row-8">
+        <div class="rule-num">8.</div>
+        <div class="rule-content">
+          <div class="rule-text"><b>Что делать если что-то пошло не так:</b> при выявлении несоответствий бухгалтерия уведомляет снабжение с указанием замечаний. Снабжение взаимодействует с поставщиком для получения корректных документов в рамках своей зоны ответственности.</div>
+
+          <div class="replace-panel" id="rp-8">
+            <div class="replace-label">Выберите рабочую формулировку</div>
+
+            <button class="replace-option" type="button" onclick="pickReplace(8,0)">Стороны оперативно взаимодействуют при возникновении вопросов по документам и совместно обеспечивают их своевременное устранение.</button>
+
+            <button class="replace-option" type="button" onclick="pickReplace(8,1)">При выявлении несоответствий бухгалтерия фиксирует замечания и направляет их снабжению. Снабжение принимает меры для получения корректных документов в согласованные сроки.</button>
+
+            <button class="replace-option" type="button" onclick="pickReplace(8,2)">Бухгалтерия сообщает снабжению что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</button>
+
+            <div class="replace-hint" id="rh-8">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+          </div>
+        </div>
+
+        <div class="rule-actions">
+          <button class="btn-ok" type="button" onclick="vote(8,'ok')" title="Рабочий пункт">✓</button>
+          <button class="btn-no" type="button" onclick="vote(8,'no')" title="Нерабочий пункт">✗</button>
+        </div>
+      </div>
+
+      <div class="submit-wrap">
+        <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть эталонный регламент →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: FINAL -->
+  <div class="screen" id="s-final">
+    <div class="final-wrap">
+      <canvas class="confetti-canvas" id="confetti"></canvas>
+
+      <div style="text-align:center; margin-bottom:14px;">
+        <img src="comp_success.png" alt="" style="width:100%;border-radius:10px;margin-bottom:14px;display:block;">
+        <div class="final-badge">✓ Вы успешно справились с заданием</div>
+        <div class="final-title">Вы нашли и исправили проблемные пункты регламента</div>
+      </div>
+
+      <div class="final-doc-title">Регламент передачи документов · Исправленная версия</div>
+
+      <div class="final-rule">
+        <div class="final-rule-num">1.</div>
+        <div class="final-rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
+      </div>
+
+      <div class="final-rule">
+        <div class="final-rule-num">2.</div>
+        <div class="final-rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение». Файл называется: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
+      </div>
+
+      <div class="final-rule">
+        <div class="final-rule-num">3.</div>
+        <div class="final-rule-text"><b>К какому сроку:</b> документы передаются в день получения, не позднее следующего рабочего дня до 12:00.</div>
+      </div>
+
+      <div class="final-rule highlight">
+        <div class="final-rule-num">4.</div>
+        <div class="final-rule-text"><b>Что делать, если срок попадает на выходной:</b> <span class="final-correction">если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</span></div>
+      </div>
+
+      <div class="final-rule">
+        <div class="final-rule-num">5.</div>
+        <div class="final-rule-text"><b>Что считается выполненным:</b> передача считается выполненной, если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
+      </div>
+
+      <div class="final-rule highlight">
+        <div class="final-rule-num">6.</div>
+        <div class="final-rule-text"><b>Как оформлены документы:</b> <span class="final-correction">документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</span></div>
+      </div>
+
+      <div class="final-rule">
+        <div class="final-rule-num">7.</div>
+        <div class="final-rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
+      </div>
+
+      <div class="final-rule highlight">
+        <div class="final-rule-num">8.</div>
+        <div class="final-rule-text"><b>Что делать, если что-то пошло не так:</b> <span class="final-correction">бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</span></div>
+      </div>
+
+      <button class="btn-restart" type="button" onclick="restart()">↩ Попробовать еще раз</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const correctVote = {
+  1: "ok",
+  2: "ok",
+  3: "ok",
+  4: "no",
+  5: "ok",
+  6: "no",
+  7: "ok",
+  8: "no"
+};
+
+const correctReplace = {
+  4: 1,
+  6: 0,
+  8: 2
+};
+
+const votes = {};
+
+function vote(n, choice) {
+  const row = document.getElementById("row-" + n);
+  const okBtn = row.querySelector(".btn-ok");
+  const noBtn = row.querySelector(".btn-no");
+  const replacePanel = document.getElementById("rp-" + n);
+
+  if (okBtn.disabled || noBtn.disabled) return;
+
+  removeVoteHint(row);
+
+  okBtn.classList.remove("selected");
+  noBtn.classList.remove("selected");
+  row.classList.remove("correct", "incorrect");
+
+  if (choice === "ok") {
+    okBtn.classList.add("selected");
+
+    if (correctVote[n] === "ok") {
+      row.classList.add("correct");
+      votes[n] = true;
+      okBtn.disabled = true;
+      noBtn.disabled = true;
+
+      if (replacePanel) {
+        replacePanel.classList.remove("active");
+      }
+    } else {
+      row.classList.add("incorrect");
+      votes[n] = false;
+      showVoteHint(row);
+
+      if (replacePanel) {
+        replacePanel.classList.remove("active");
+      }
+    }
+  }
+
+  if (choice === "no") {
+    noBtn.classList.add("selected");
+
+    if (correctVote[n] === "no") {
+      row.classList.add("incorrect");
+      votes[n] = false;
+      okBtn.disabled = true;
+      noBtn.disabled = true;
+
+      if (replacePanel) {
+        replacePanel.classList.add("active");
+      }
+    } else {
+      row.classList.add("incorrect");
+      votes[n] = false;
+      showVoteHint(row);
+
+      if (replacePanel) {
+        replacePanel.classList.remove("active");
+      }
+    }
+  }
+
+  checkReady();
+}
+
+function showVoteHint(row) {
+  removeVoteHint(row);
+
+  const hint = document.createElement("div");
+  hint.className = "vote-hint";
+  hint.textContent = "Попробуйте ещё раз";
+  row.querySelector(".rule-content").appendChild(hint);
+}
+
+function removeVoteHint(row) {
+  const oldHint = row.querySelector(".vote-hint");
+
+  if (oldHint) {
+    oldHint.remove();
+  }
+}
+
+function pickReplace(n, idx) {
+  const rp = document.getElementById("rp-" + n);
+  const hint = document.getElementById("rh-" + n);
+  const btns = rp.querySelectorAll(".replace-option");
+  const selected = btns[idx];
+
+  btns.forEach(function(btn) {
+    btn.classList.remove("sel-right", "sel-wrong");
+  });
+
+  hint.classList.remove("show");
+
+  if (idx === correctReplace[n]) {
+    selected.classList.add("sel-right");
+
+    btns.forEach(function(btn) {
+      btn.disabled = true;
+    });
+
+    votes[n] = true;
+
+    const row = document.getElementById("row-" + n);
+    row.classList.remove("incorrect");
+    row.classList.add("correct");
+  } else {
+    selected.classList.add("sel-wrong");
+    hint.classList.add("show");
+    votes[n] = false;
+  }
+
+  checkReady();
+}
+
+function checkReady() {
+  const allDone = [1,2,3,4,5,6,7,8].every(function(n) {
+    return votes[n] === true;
+  });
+
+  const btn = document.getElementById("btn-submit");
+
+  if (allDone) {
+    btn.classList.add("ready");
+  } else {
+    btn.classList.remove("ready");
+  }
+}
+
+function go(id) {
+  document.querySelectorAll(".screen").forEach(function(screen) {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0, 0);
+
+  if (id === "s-final") {
+    setTimeout(launchConfetti, 300);
+  }
+}
+
+function restart() {
+  [1,2,3,4,5,6,7,8].forEach(function(n) {
+    delete votes[n];
+
+    const row = document.getElementById("row-" + n);
+
+    row.classList.remove("correct", "incorrect");
+    removeVoteHint(row);
+
+    row.querySelectorAll(".btn-ok, .btn-no").forEach(function(btn) {
+      btn.classList.remove("selected");
+      btn.disabled = false;
+    });
+
+    const rp = document.getElementById("rp-" + n);
+
+    if (rp) {
+      rp.classList.remove("active");
+
+      rp.querySelectorAll(".replace-option").forEach(function(btn) {
+        btn.classList.remove("sel-right", "sel-wrong");
+        btn.disabled = false;
+      });
+
+      const rh = rp.querySelector(".replace-hint");
+
+      if (rh) {
+        rh.classList.remove("show");
+      }
+    }
+  });
+
+  document.getElementById("btn-submit").classList.remove("ready");
+  go("s-case");
+}
+
+function launchConfetti() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  const colors = ["#2D5BE3", "#276749", "#F6AD55", "#FC8181", "#68D391", "#7BA7F7"];
+  const particles = [];
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      vx: (Math.random() - 0.5) * 12,
+      vy: (Math.random() - 1.5) * 10,
+      r: Math.random() * 6 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: 1,
+      rot: Math.random() * 360,
+      rotV: (Math.random() - 0.5) * 8
+    });
+  }
+
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(function(p) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.3;
+      p.alpha -= 0.012;
+      p.rot += p.rotV;
+
+      if (p.alpha <= 0) return;
+
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.5);
+      ctx.restore();
+    });
+
+    frame++;
+
+    if (frame < 120) {
+      requestAnimationFrame(draw);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
+  draw();
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.9/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>
