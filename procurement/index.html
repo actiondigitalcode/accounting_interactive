@@ -17,15 +17,15 @@
   --card: #FFFFFF;
   --accent: #2D5BE3;
   --accent-dark: #1A3FA0;
-  --text: #1A1A2E;
+  --text: #111827;
   --text-light: #6B7280;
   --wrong: #C53030;
   --wrong-bg: #FFF5F5;
   --right: #276749;
   --right-bg: #F0FFF4;
-  --neutral: rgba(249,248,245,0.92);
+  --neutral: rgba(255,255,255,0.88);
   --border: #E5E2DA;
-  --shadow: 0 4px 24px rgba(0,0,0,0.09);
+  --shadow: 0 12px 36px rgba(0,0,0,0.10);
 }
 
 body {
@@ -38,7 +38,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 880px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -65,7 +65,7 @@ body {
   }
 }
 
-/* COMMON CARD */
+/* SCREEN 1: CASE */
 
 .card-window {
   width: 100%;
@@ -76,8 +76,6 @@ body {
   box-shadow: var(--shadow);
   overflow: hidden;
 }
-
-/* SCREEN 1: CASE */
 
 .case-window {
   display: grid;
@@ -90,7 +88,7 @@ body {
   height: 100%;
   min-height: 430px;
   object-fit: cover;
-  object-position: 30% center;
+  object-position: 40% center;
   display: block;
 }
 
@@ -151,58 +149,66 @@ body {
   background: var(--accent-dark);
 }
 
-/* SCREEN 2: RULES */
+/* EDITOR BACKGROUND FOR SCREEN 2 AND 3 */
 
-.doc-wrap {
-  background:
-    linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)),
-    url("comp_task.png");
+.editor-wrap {
+  width: 100%;
+  min-height: 620px;
+  background-image: url("comp_task.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-
   border-radius: 18px;
   box-shadow: var(--shadow);
-  padding: 24px 32px 28px;
+  overflow: hidden;
+  padding: 74px 88px 58px;
 }
 
+.editor-content {
+  width: 78%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* SCREEN 2: RULES */
+
 .doc-title {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .doc-subtitle {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--text-light);
   text-align: center;
   font-family: "Courier New", monospace;
   letter-spacing: 0.05em;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .doc-instruction {
-  background: rgba(238,242,255,0.92);
+  background: rgba(238,242,255,0.84);
   border-left: 3px solid var(--accent);
   border-radius: 0 8px 8px 0;
-  padding: 10px 14px;
-  font-size: 13px;
+  padding: 8px 11px;
+  font-size: 10.5px;
   color: var(--accent-dark);
-  margin-bottom: 18px;
-  line-height: 1.5;
+  margin-bottom: 12px;
+  line-height: 1.45;
 }
 
 .rule-row {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  border: 1.5px solid var(--border);
-  background: var(--neutral);
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(229,226,218,0.9);
+  background: rgba(255,255,255,0.82);
   transition: all 0.25s;
   cursor: default;
   backdrop-filter: blur(2px);
@@ -210,20 +216,20 @@ body {
 }
 
 .rule-row.correct {
-  background: rgba(240,255,244,0.94);
+  background: rgba(240,255,244,0.90);
   border-color: #68D391;
 }
 
 .rule-row.incorrect {
-  background: rgba(255,245,245,0.94);
+  background: rgba(255,245,245,0.90);
   border-color: #FC8181;
 }
 
 .rule-num {
   font-family: "Courier New", monospace;
-  font-size: 12px;
+  font-size: 9.5px;
   color: var(--text-light);
-  min-width: 22px;
+  min-width: 17px;
   padding-top: 2px;
 }
 
@@ -232,8 +238,8 @@ body {
 }
 
 .rule-text {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 10.5px;
+  line-height: 1.42;
   color: var(--text);
 }
 
@@ -244,25 +250,25 @@ body {
 
 .rule-actions {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   flex-shrink: 0;
-  padding-top: 1px;
+  padding-top: 0;
 }
 
 .btn-ok,
 .btn-no {
-  width: 34px;
-  height: 34px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
 }
 
 .btn-ok:disabled,
@@ -277,7 +283,7 @@ body {
 
 .btn-ok:hover:not(:disabled) {
   background: var(--right-bg);
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .btn-ok.selected {
@@ -291,7 +297,7 @@ body {
 
 .btn-no:hover:not(:disabled) {
   background: var(--wrong-bg);
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .btn-no.selected {
@@ -300,20 +306,20 @@ body {
 }
 
 .vote-hint {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--wrong);
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 /* REPLACE OPTIONS */
 
 .replace-panel {
   display: none;
-  margin-top: 10px;
-  padding: 12px;
-  background: rgba(255,249,240,0.96);
+  margin-top: 7px;
+  padding: 8px;
+  background: rgba(255,249,240,0.94);
   border: 1px solid #F6AD55;
-  border-radius: 10px;
+  border-radius: 8px;
   animation: fadeIn 0.3s ease;
 }
 
@@ -322,12 +328,12 @@ body {
 }
 
 .replace-label {
-  font-size: 11px;
+  font-size: 9px;
   color: #744210;
   font-family: "Courier New", monospace;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .replace-option {
@@ -336,13 +342,13 @@ body {
   text-align: left;
   background: #fff;
   border: 1px solid #E5E2DA;
-  border-radius: 7px;
-  padding: 8px 10px;
-  font-size: 12px;
-  line-height: 1.45;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 10px;
+  line-height: 1.35;
   color: var(--text);
   cursor: pointer;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   transition: all 0.2s;
   font-family: Georgia, serif;
 }
@@ -370,10 +376,9 @@ body {
 
 .replace-hint {
   display: none;
-  font-size: 12px;
+  font-size: 10px;
   color: var(--wrong);
-  margin-top: 4px;
-  padding-left: 2px;
+  margin-top: 3px;
 }
 
 .replace-hint.show {
@@ -384,16 +389,16 @@ body {
 
 .submit-wrap {
   text-align: center;
-  margin-top: 22px;
+  margin-top: 13px;
 }
 
 .btn-submit {
-  padding: 12px 36px;
+  padding: 9px 28px;
   background: var(--accent);
   color: #fff;
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 9px;
+  font-size: 12px;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: background 0.2s;
@@ -412,13 +417,13 @@ body {
 
 /* SCREEN 3: FINAL */
 
-.final-wrap {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  padding: 28px 32px 30px;
-  position: relative;
-  overflow: hidden;
+.final-content {
+  padding-top: 6px;
+}
+
+.final-top {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .confetti-canvas {
@@ -430,65 +435,58 @@ body {
   z-index: 10;
 }
 
-.success-image {
-  width: 100%;
-  max-height: 240px;
-  object-fit: cover;
-  border-radius: 14px;
-  margin-bottom: 18px;
-  display: block;
-}
-
 .final-badge {
   display: inline-block;
-  background: var(--right-bg);
+  background: rgba(240,255,244,0.92);
   color: var(--right);
   border: 1px solid #9AE6B4;
   border-radius: 20px;
-  padding: 5px 16px;
-  font-size: 12px;
-  margin-bottom: 14px;
+  padding: 4px 13px;
+  font-size: 10px;
+  margin-bottom: 8px;
   font-family: "Courier New", monospace;
   letter-spacing: 0.05em;
 }
 
 .final-title {
-  font-size: 17px;
+  font-size: 13px;
   color: var(--text);
-  margin-bottom: 20px;
-  line-height: 1.5;
+  margin-bottom: 12px;
+  line-height: 1.4;
 }
 
 .final-doc-title {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
-  margin-bottom: 16px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 7px;
   border-bottom: 1px solid var(--border);
 }
 
 .final-rule {
   display: flex;
-  gap: 10px;
-  padding: 9px 10px;
+  gap: 8px;
+  padding: 6px 8px;
   border-radius: 8px;
-  margin-bottom: 7px;
-  background: var(--right-bg);
+  margin-bottom: 5px;
+  background: rgba(240,255,244,0.88);
   border: 1px solid #9AE6B4;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .final-rule.highlight {
   border-color: #F6AD55;
-  background: #FFFBEB;
+  background: rgba(255,251,235,0.90);
 }
 
 .final-rule-num {
   font-family: "Courier New", monospace;
-  font-size: 11px;
+  font-size: 9.5px;
   color: var(--right);
-  min-width: 18px;
+  min-width: 16px;
   padding-top: 2px;
 }
 
@@ -497,8 +495,8 @@ body {
 }
 
 .final-rule-text {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 10.5px;
+  line-height: 1.42;
   color: var(--text);
 }
 
@@ -512,13 +510,13 @@ body {
 
 .btn-restart {
   display: block;
-  margin: 22px auto 0;
-  padding: 11px 28px;
-  background: var(--bg);
+  margin: 14px auto 0;
+  padding: 9px 24px;
+  background: rgba(255,255,255,0.86);
   color: var(--text-light);
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 11px;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: all 0.2s;
@@ -547,7 +545,7 @@ body {
   .case-image {
     height: 220px;
     min-height: 0;
-    object-position: 30% center;
+    object-position: 40% center;
   }
 
   .case-content {
@@ -558,21 +556,30 @@ body {
     font-size: 13px;
   }
 
-  .doc-wrap,
-  .final-wrap {
-    padding: 18px;
+  .editor-wrap {
+    min-height: auto;
+    padding: 62px 16px 32px;
+    background-size: cover;
+    background-position: center top;
   }
 
-  .success-image {
-    max-height: 180px;
+  .editor-content {
+    width: 100%;
+    max-width: 100%;
   }
 
   .rule-row {
-    gap: 8px;
+    gap: 7px;
   }
 
   .rule-actions {
     flex-direction: column;
+  }
+
+  .btn-ok,
+  .btn-no {
+    width: 27px;
+    height: 27px;
   }
 }
 </style>
@@ -604,210 +611,212 @@ body {
 
   <!-- SCREEN 2: RULES -->
   <div class="screen" id="s-rules">
-    <div class="doc-wrap">
-      <div class="doc-title">Регламент передачи документов</div>
-      <div class="doc-subtitle">Снабжение → Бухгалтерия</div>
+    <div class="editor-wrap">
+      <div class="editor-content">
+        <div class="doc-title">Регламент передачи документов</div>
+        <div class="doc-subtitle">Снабжение → Бухгалтерия</div>
 
-      <div class="doc-instruction">
-        Отметьте каждый пункт: ✓ если формулировка рабочая, ✗ если ее можно понять по-разному. Для нерабочих пунктов выберите исправленную версию.
-      </div>
-
-      <!-- ПУНКТ 1 -->
-      <div class="rule-row" id="row-1">
-        <div class="rule-num">1.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект документов: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
+        <div class="doc-instruction">
+          Отметьте каждый пункт: ✓ если формулировка рабочая, ✗ если ее можно понять по-разному. Для нерабочих пунктов выберите исправленную версию.
         </div>
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(1,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(1,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
 
-      <!-- ПУНКТ 2 -->
-      <div class="rule-row" id="row-2">
-        <div class="rule-num">2.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение» на общем диске. Файл называется по шаблону: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
-        </div>
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(2,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(2,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
-
-      <!-- ПУНКТ 3 -->
-      <div class="rule-row" id="row-3">
-        <div class="rule-num">3.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>К какому сроку:</b> документы передаются в день получения, но не позднее следующего рабочего дня до 12:00.</div>
-        </div>
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(3,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(3,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
-
-      <!-- ПУНКТ 4 -->
-      <div class="rule-row" id="row-4">
-        <div class="rule-num">4.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>Что делать, если срок попадает на выходной:</b> при совпадении срока передачи с нерабочими днями документы передаются в разумный срок после восстановления рабочего процесса.</div>
-
-          <div class="replace-panel" id="rp-4">
-            <div class="replace-label">Выберите рабочую формулировку</div>
-
-            <button class="replace-option" type="button" onclick="pickReplace(4,0)">Если срок попадает на нерабочий день — документы передаются в ближайшее возможное время после выхода на работу.</button>
-
-            <button class="replace-option" type="button" onclick="pickReplace(4,1)">Если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</button>
-
-            <button class="replace-option" type="button" onclick="pickReplace(4,2)">Документы передаются с учетом производственной необходимости и графика работы сотрудников.</button>
-
-            <div class="replace-hint" id="rh-4">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+        <!-- ПУНКТ 1 -->
+        <div class="rule-row" id="row-1">
+          <div class="rule-num">1.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект документов: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
+          </div>
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(1,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(1,'no')" title="Нерабочий пункт">✗</button>
           </div>
         </div>
 
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(4,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(4,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
-
-      <!-- ПУНКТ 5 -->
-      <div class="rule-row" id="row-5">
-        <div class="rule-num">5.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>Что считается выполненным:</b> передача считается выполненной только если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
-        </div>
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(5,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(5,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
-
-      <!-- ПУНКТ 6 -->
-      <div class="rule-row" id="row-6">
-        <div class="rule-num">6.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>Как оформлены документы:</b> документы должны быть оформлены надлежащим образом и соответствовать установленным требованиям.</div>
-
-          <div class="replace-panel" id="rp-6">
-            <div class="replace-label">Выберите рабочую формулировку</div>
-
-            <button class="replace-option" type="button" onclick="pickReplace(6,0)">Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</button>
-
-            <button class="replace-option" type="button" onclick="pickReplace(6,1)">Документы должны содержать все необходимые реквизиты и быть пригодны для принятия к учету бухгалтерией.</button>
-
-            <button class="replace-option" type="button" onclick="pickReplace(6,2)">Качество документов должно соответствовать стандартам документооборота, принятым в компании.</button>
-
-            <div class="replace-hint" id="rh-6">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+        <!-- ПУНКТ 2 -->
+        <div class="rule-row" id="row-2">
+          <div class="rule-num">2.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение» на общем диске. Файл называется по шаблону: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
+          </div>
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(2,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(2,'no')" title="Нерабочий пункт">✗</button>
           </div>
         </div>
 
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(6,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(6,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
-
-      <!-- ПУНКТ 7 -->
-      <div class="rule-row" id="row-7">
-        <div class="rule-num">7.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
-        </div>
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(7,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(7,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
-
-      <!-- ПУНКТ 8 -->
-      <div class="rule-row" id="row-8">
-        <div class="rule-num">8.</div>
-        <div class="rule-content">
-          <div class="rule-text"><b>Что делать если что-то пошло не так:</b> при выявлении несоответствий бухгалтерия уведомляет снабжение с указанием замечаний. Снабжение взаимодействует с поставщиком для получения корректных документов в рамках своей зоны ответственности.</div>
-
-          <div class="replace-panel" id="rp-8">
-            <div class="replace-label">Выберите рабочую формулировку</div>
-
-            <button class="replace-option" type="button" onclick="pickReplace(8,0)">Стороны оперативно взаимодействуют при возникновении вопросов по документам и совместно обеспечивают их своевременное устранение.</button>
-
-            <button class="replace-option" type="button" onclick="pickReplace(8,1)">При выявлении несоответствий бухгалтерия фиксирует замечания и направляет их снабжению. Снабжение принимает меры для получения корректных документов в согласованные сроки.</button>
-
-            <button class="replace-option" type="button" onclick="pickReplace(8,2)">Бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</button>
-
-            <div class="replace-hint" id="rh-8">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+        <!-- ПУНКТ 3 -->
+        <div class="rule-row" id="row-3">
+          <div class="rule-num">3.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>К какому сроку:</b> документы передаются в день получения, но не позднее следующего рабочего дня до 12:00.</div>
+          </div>
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(3,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(3,'no')" title="Нерабочий пункт">✗</button>
           </div>
         </div>
 
-        <div class="rule-actions">
-          <button class="btn-ok" type="button" onclick="vote(8,'ok')" title="Рабочий пункт">✓</button>
-          <button class="btn-no" type="button" onclick="vote(8,'no')" title="Нерабочий пункт">✗</button>
-        </div>
-      </div>
+        <!-- ПУНКТ 4 -->
+        <div class="rule-row" id="row-4">
+          <div class="rule-num">4.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>Что делать, если срок попадает на выходной:</b> при совпадении срока передачи с нерабочими днями документы передаются в разумный срок после восстановления рабочего процесса.</div>
 
-      <div class="submit-wrap">
-        <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть эталонный регламент →</button>
+            <div class="replace-panel" id="rp-4">
+              <div class="replace-label">Выберите рабочую формулировку</div>
+
+              <button class="replace-option" type="button" onclick="pickReplace(4,0)">Если срок попадает на нерабочий день — документы передаются в ближайшее возможное время после выхода на работу.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(4,1)">Если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(4,2)">Документы передаются с учетом производственной необходимости и графика работы сотрудников.</button>
+
+              <div class="replace-hint" id="rh-4">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+            </div>
+          </div>
+
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(4,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(4,'no')" title="Нерабочий пункт">✗</button>
+          </div>
+        </div>
+
+        <!-- ПУНКТ 5 -->
+        <div class="rule-row" id="row-5">
+          <div class="rule-num">5.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>Что считается выполненным:</b> передача считается выполненной только если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
+          </div>
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(5,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(5,'no')" title="Нерабочий пункт">✗</button>
+          </div>
+        </div>
+
+        <!-- ПУНКТ 6 -->
+        <div class="rule-row" id="row-6">
+          <div class="rule-num">6.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>Как оформлены документы:</b> документы должны быть оформлены надлежащим образом и соответствовать установленным требованиям.</div>
+
+            <div class="replace-panel" id="rp-6">
+              <div class="replace-label">Выберите рабочую формулировку</div>
+
+              <button class="replace-option" type="button" onclick="pickReplace(6,0)">Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(6,1)">Документы должны содержать все необходимые реквизиты и быть пригодны для принятия к учету бухгалтерией.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(6,2)">Качество документов должно соответствовать стандартам документооборота, принятым в компании.</button>
+
+              <div class="replace-hint" id="rh-6">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+            </div>
+          </div>
+
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(6,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(6,'no')" title="Нерабочий пункт">✗</button>
+          </div>
+        </div>
+
+        <!-- ПУНКТ 7 -->
+        <div class="rule-row" id="row-7">
+          <div class="rule-num">7.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
+          </div>
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(7,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(7,'no')" title="Нерабочий пункт">✗</button>
+          </div>
+        </div>
+
+        <!-- ПУНКТ 8 -->
+        <div class="rule-row" id="row-8">
+          <div class="rule-num">8.</div>
+          <div class="rule-content">
+            <div class="rule-text"><b>Что делать если что-то пошло не так:</b> при выявлении несоответствий бухгалтерия уведомляет снабжение с указанием замечаний. Снабжение взаимодействует с поставщиком для получения корректных документов в рамках своей зоны ответственности.</div>
+
+            <div class="replace-panel" id="rp-8">
+              <div class="replace-label">Выберите рабочую формулировку</div>
+
+              <button class="replace-option" type="button" onclick="pickReplace(8,0)">Стороны оперативно взаимодействуют при возникновении вопросов по документам и совместно обеспечивают их своевременное устранение.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(8,1)">При выявлении несоответствий бухгалтерия фиксирует замечания и направляет их снабжению. Снабжение принимает меры для получения корректных документов в согласованные сроки.</button>
+
+              <button class="replace-option" type="button" onclick="pickReplace(8,2)">Бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</button>
+
+              <div class="replace-hint" id="rh-8">Эта формулировка все еще размытая. Попробуйте еще раз.</div>
+            </div>
+          </div>
+
+          <div class="rule-actions">
+            <button class="btn-ok" type="button" onclick="vote(8,'ok')" title="Рабочий пункт">✓</button>
+            <button class="btn-no" type="button" onclick="vote(8,'no')" title="Нерабочий пункт">✗</button>
+          </div>
+        </div>
+
+        <div class="submit-wrap">
+          <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть эталонный регламент →</button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- SCREEN 3: FINAL -->
   <div class="screen" id="s-final">
-    <div class="final-wrap">
+    <div class="editor-wrap" style="position: relative;">
       <canvas class="confetti-canvas" id="confetti"></canvas>
 
-      <div style="text-align:center; margin-bottom:14px;">
-        <img class="success-image" src="comp_success.png" alt="Успех">
+      <div class="editor-content final-content">
+        <div class="final-top">
+          <div class="final-badge">✓ Вы успешно справились с заданием</div>
+          <div class="final-title">Вы нашли и исправили проблемные пункты регламента</div>
+        </div>
 
-        <div class="final-badge">✓ Вы успешно справились с заданием</div>
-        <div class="final-title">Вы нашли и исправили проблемные пункты регламента</div>
+        <div class="final-doc-title">Регламент передачи документов · Исправленная версия</div>
+
+        <div class="final-rule">
+          <div class="final-rule-num">1.</div>
+          <div class="final-rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
+        </div>
+
+        <div class="final-rule">
+          <div class="final-rule-num">2.</div>
+          <div class="final-rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение». Файл называется: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
+        </div>
+
+        <div class="final-rule">
+          <div class="final-rule-num">3.</div>
+          <div class="final-rule-text"><b>К какому сроку:</b> документы передаются в день получения, не позднее следующего рабочего дня до 12:00.</div>
+        </div>
+
+        <div class="final-rule highlight">
+          <div class="final-rule-num">4.</div>
+          <div class="final-rule-text"><b>Что делать, если срок попадает на выходной:</b> <span class="final-correction">если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</span></div>
+        </div>
+
+        <div class="final-rule">
+          <div class="final-rule-num">5.</div>
+          <div class="final-rule-text"><b>Что считается выполненным:</b> передача считается выполненной, если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
+        </div>
+
+        <div class="final-rule highlight">
+          <div class="final-rule-num">6.</div>
+          <div class="final-rule-text"><b>Как оформлены документы:</b> <span class="final-correction">документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</span></div>
+        </div>
+
+        <div class="final-rule">
+          <div class="final-rule-num">7.</div>
+          <div class="final-rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
+        </div>
+
+        <div class="final-rule highlight">
+          <div class="final-rule-num">8.</div>
+          <div class="final-rule-text"><b>Что делать, если что-то пошло не так:</b> <span class="final-correction">бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</span></div>
+        </div>
+
+        <button class="btn-restart" type="button" onclick="restart()">↩ Попробовать еще раз</button>
       </div>
-
-      <div class="final-doc-title">Регламент передачи документов · Исправленная версия</div>
-
-      <div class="final-rule">
-        <div class="final-rule-num">1.</div>
-        <div class="final-rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект: счет, договор/спецификацию, УПД/накладную/акт, счет-фактуру при наличии, транспортные документы.</div>
-      </div>
-
-      <div class="final-rule">
-        <div class="final-rule-num">2.</div>
-        <div class="final-rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение». Файл называется: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
-      </div>
-
-      <div class="final-rule">
-        <div class="final-rule-num">3.</div>
-        <div class="final-rule-text"><b>К какому сроку:</b> документы передаются в день получения, не позднее следующего рабочего дня до 12:00.</div>
-      </div>
-
-      <div class="final-rule highlight">
-        <div class="final-rule-num">4.</div>
-        <div class="final-rule-text"><b>Что делать, если срок попадает на выходной:</b> <span class="final-correction">если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</span></div>
-      </div>
-
-      <div class="final-rule">
-        <div class="final-rule-num">5.</div>
-        <div class="final-rule-text"><b>Что считается выполненным:</b> передача считается выполненной, если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
-      </div>
-
-      <div class="final-rule highlight">
-        <div class="final-rule-num">6.</div>
-        <div class="final-rule-text"><b>Как оформлены документы:</b> <span class="final-correction">документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена при наличии.</span></div>
-      </div>
-
-      <div class="final-rule">
-        <div class="final-rule-num">7.</div>
-        <div class="final-rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — руководитель отдела снабжения.</div>
-      </div>
-
-      <div class="final-rule highlight">
-        <div class="final-rule-num">8.</div>
-        <div class="final-rule-text"><b>Что делать, если что-то пошло не так:</b> <span class="final-correction">бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</span></div>
-      </div>
-
-      <button class="btn-restart" type="button" onclick="restart()">↩ Попробовать еще раз</button>
     </div>
   </div>
 
