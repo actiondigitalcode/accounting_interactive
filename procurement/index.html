@@ -23,7 +23,7 @@
   --wrong-bg: #FFF5F5;
   --right: #276749;
   --right-bg: #F0FFF4;
-  --neutral: #F9F8F5;
+  --neutral: rgba(249,248,245,0.92);
   --border: #E5E2DA;
   --shadow: 0 4px 24px rgba(0,0,0,0.09);
 }
@@ -90,6 +90,7 @@ body {
   height: 100%;
   min-height: 430px;
   object-fit: cover;
+  object-position: 30% center;
   display: block;
 }
 
@@ -153,19 +154,16 @@ body {
 /* SCREEN 2: RULES */
 
 .doc-wrap {
-  background: #fff;
+  background:
+    linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)),
+    url("comp_task.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
   border-radius: 18px;
   box-shadow: var(--shadow);
   padding: 24px 32px 28px;
-}
-
-.task-image {
-  width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  display: block;
-  border-radius: 14px;
-  margin-bottom: 20px;
 }
 
 .doc-title {
@@ -186,7 +184,7 @@ body {
 }
 
 .doc-instruction {
-  background: #EEF2FF;
+  background: rgba(238,242,255,0.92);
   border-left: 3px solid var(--accent);
   border-radius: 0 8px 8px 0;
   padding: 10px 14px;
@@ -207,15 +205,17 @@ body {
   background: var(--neutral);
   transition: all 0.25s;
   cursor: default;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .rule-row.correct {
-  background: #F0FFF4;
+  background: rgba(240,255,244,0.94);
   border-color: #68D391;
 }
 
 .rule-row.incorrect {
-  background: #FFF5F5;
+  background: rgba(255,245,245,0.94);
   border-color: #FC8181;
 }
 
@@ -311,7 +311,7 @@ body {
   display: none;
   margin-top: 10px;
   padding: 12px;
-  background: #FFF9F0;
+  background: rgba(255,249,240,0.96);
   border: 1px solid #F6AD55;
   border-radius: 10px;
   animation: fadeIn 0.3s ease;
@@ -547,6 +547,7 @@ body {
   .case-image {
     height: 220px;
     min-height: 0;
+    object-position: 30% center;
   }
 
   .case-content {
@@ -562,7 +563,6 @@ body {
     padding: 18px;
   }
 
-  .task-image,
   .success-image {
     max-height: 180px;
   }
@@ -605,8 +605,6 @@ body {
   <!-- SCREEN 2: RULES -->
   <div class="screen" id="s-rules">
     <div class="doc-wrap">
-      <img class="task-image" src="comp_task.png" alt="Задание">
-
       <div class="doc-title">Регламент передачи документов</div>
       <div class="doc-subtitle">Снабжение → Бухгалтерия</div>
 
