@@ -6,19 +6,15 @@
   <title>Рабочий мессенджер</title>
   <style>
     :root {
-      --bg: #f1f5f9;
-      --card: #ffffff;
       --text: #0f172a;
       --muted: #64748b;
       --border: #dbe3ee;
       --dark: #0f172a;
       --red-bg: #fef2f2;
       --red-border: #ef4444;
-      --red-soft: #fca5a5;
       --red-text: #7f1d1d;
       --green-bg: #ecfdf5;
       --green-border: #10b981;
-      --green-soft: #86efac;
       --green-text: #064e3b;
     }
 
@@ -33,7 +29,7 @@
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    body { padding: 8px; }
+    body { padding: 6px; }
 
     .app {
       width: 100%;
@@ -42,137 +38,146 @@
     }
 
     .card {
-      background: var(--card);
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+      position: relative;
+      background: white;
       border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.10);
+      overflow: hidden;
     }
 
-    .header {
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       background: var(--dark);
       color: white;
-      padding: 14px 22px;
+      padding: 11px 16px;
     }
 
     .eyebrow {
-      margin: 0 0 2px;
+      margin: 0;
       color: #cbd5e1;
-      font-size: 12px;
+      font-size: 11px;
+      line-height: 1.2;
     }
 
     h1 {
-      margin: 0;
-      font-size: 22px;
+      margin: 1px 0 0;
+      font-size: 18px;
       line-height: 1.15;
     }
 
     .content {
-      padding: 18px 22px;
-      font-size: 15px;
-      line-height: 1.42;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.35;
     }
 
-    .content p { margin: 0 0 10px; }
+    .content p { margin: 0 0 8px; }
+    .content p:last-child { margin-bottom: 0; }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .case-box {
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+    }
 
     .lead {
-      font-size: 16px;
       font-weight: 750;
       color: #020617;
-    }
-
-    .task-box {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: #f8fafc;
     }
 
     .task-title {
-      margin: 0 0 3px;
-      font-weight: 750;
+      margin: 0 0 2px;
+      font-size: 13px;
+      font-weight: 800;
       color: #020617;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 14px;
     }
 
     button { font: inherit; }
 
     .primary-btn {
       border: 0;
-      border-radius: 14px;
-      background: var(--dark);
-      color: white;
-      padding: 10px 16px;
+      border-radius: 12px;
+      background: white;
+      color: var(--dark);
+      padding: 9px 13px;
       cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
-    .primary-btn:hover { transform: translateY(-1px); }
+    .primary-btn.dark {
+      background: var(--dark);
+      color: white;
+    }
 
-    .chat-area {
-      padding: 14px;
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.35fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .panel {
       background: #f8fafc;
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 16px;
+      padding: 12px;
     }
 
     .sender {
       margin: 0 0 5px;
       color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .roman-message {
-      width: 78%;
-      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .bubble {
       background: white;
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 11px 14px;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
-      font-size: 15px;
-      line-height: 1.38;
+      border-radius: 16px;
+      border-top-left-radius: 5px;
+      padding: 10px 11px;
+      box-shadow: 0 4px 9px rgba(15, 23, 42, 0.05);
+      font-size: 13px;
+      line-height: 1.34;
     }
 
-    .bubble-left { border-top-left-radius: 6px; }
-
     .question {
-      margin: 0 4px 8px 0;
-      text-align: right;
+      margin: 0 0 8px;
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.02em;
       color: #334155;
+      text-align: right;
     }
 
     .answer-list {
       display: grid;
-      gap: 8px;
+      gap: 7px;
     }
 
     .answer {
-      width: 88%;
-      margin-left: auto;
+      width: 100%;
       border: 1px solid var(--border);
       background: white;
       color: var(--text);
-      border-radius: 20px;
-      border-top-right-radius: 6px;
-      padding: 11px 14px;
+      border-radius: 15px;
+      border-top-right-radius: 5px;
+      padding: 9px 10px;
       text-align: left;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.06);
       transition: border-color 0.15s, background 0.15s, transform 0.15s;
     }
 
@@ -183,29 +188,29 @@
 
     .answer-inner {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: flex-start;
     }
 
     .number {
       flex: 0 0 auto;
-      width: 25px;
-      height: 25px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #020b2d;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
-      margin-top: 1px;
+      margin-top: 0;
     }
 
     .answer-text {
       margin: 0;
-      font-size: 15px;
-      line-height: 1.38;
+      font-size: 13px;
+      line-height: 1.32;
     }
 
     .answer.correct {
@@ -220,29 +225,26 @@
 
     .feedback {
       display: none;
-      margin-top: 12px;
-      border-radius: 18px;
-      padding: 12px 14px;
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 12px;
+      border-radius: 15px;
+      padding: 11px 13px 12px;
       border: 1px solid;
-      font-size: 14px;
-      line-height: 1.38;
+      font-size: 13px;
+      line-height: 1.32;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+      z-index: 3;
     }
 
     .feedback.visible { display: block; }
-
-    .feedback.correct {
-      background: var(--green-bg);
-      border-color: var(--green-soft);
-    }
-
-    .feedback.wrong {
-      background: var(--red-bg);
-      border-color: var(--red-soft);
-    }
+    .feedback.correct { background: var(--green-bg); border-color: #86efac; }
+    .feedback.wrong { background: var(--red-bg); border-color: #fca5a5; }
 
     .feedback-title {
       margin: 0 0 4px;
-      font-weight: 800;
+      font-weight: 850;
     }
 
     .feedback.correct .feedback-title { color: var(--green-text); }
@@ -251,13 +253,14 @@
 
     .success {
       display: none;
-      margin-top: 12px;
-      border-radius: 18px;
+      margin-top: 9px;
+      border-radius: 14px;
       background: var(--dark);
       color: white;
-      padding: 13px 15px;
-      font-size: 16px;
+      padding: 10px 12px;
+      font-size: 14px;
       font-weight: 800;
+      text-align: center;
     }
 
     .success.visible { display: block; }
@@ -265,88 +268,94 @@
     .retry-wrap {
       display: flex;
       justify-content: center;
-      margin-top: 10px;
+      margin-top: 7px;
     }
 
     .retry {
       border: 0;
       background: transparent;
       color: #475569;
-      border-radius: 12px;
-      padding: 8px 12px;
+      border-radius: 10px;
+      padding: 6px 10px;
       cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: 750;
+      font-size: 12px;
     }
 
-    .retry:hover {
-      background: #f1f5f9;
-      color: #0f172a;
-    }
-
+    .retry:hover { background: #f1f5f9; color: #0f172a; }
     .hidden { display: none; }
+    .spacer-for-feedback { height: 94px; display: none; }
+    .spacer-for-feedback.visible { display: block; }
 
-    @media (max-width: 640px) {
-      body { padding: 6px; }
-      .header { padding: 12px 16px; }
-      .content { padding: 16px; }
-      h1 { font-size: 20px; }
-      .roman-message, .answer { width: 100%; }
+    @media (max-width: 620px) {
+      body { padding: 5px; }
+      .top { padding: 10px 12px; }
+      .content { padding: 12px; }
+      h1 { font-size: 17px; }
+      .chat-layout { grid-template-columns: 1fr; gap: 8px; }
+      .bubble, .answer-text { font-size: 12.5px; }
+      .feedback { left: 10px; right: 10px; bottom: 10px; }
     }
   </style>
 </head>
 <body>
   <main class="app">
     <section id="screen-case" class="card">
-      <div class="header">
-        <p class="eyebrow">Интерактивное задание</p>
-        <h1>Рабочая ситуация</h1>
+      <div class="top">
+        <div>
+          <p class="eyebrow">Интерактивное задание</p>
+          <h1>Рабочая ситуация</h1>
+        </div>
+        <button class="primary-btn" id="open-chat">К чату</button>
       </div>
 
-      <div class="content">
-        <p class="lead">Вы — главный бухгалтер сети частных клиник.</p>
-        <p>Роман, руководитель филиала, просит оплатить счет подрядчика на 180 000 рублей.</p>
-        <p>Подрядчик за выходные отремонтировал кабинет диагностики. Работы выполнены, кабинет уже принимает пациентов.</p>
-        <p>Акта выполненных работ пока нет. Роман говорит, что подрядчик «дошлет позже», но просит оплатить сегодня, чтобы не портить отношения: филиалу еще нужны его услуги.</p>
-
-        <div class="task-box">
-          <p class="task-title">Задача</p>
-          <p>Выберите ответ, который сохранит профессиональную позицию и не оттолкнет коллегу.</p>
+      <div class="content case-grid">
+        <div class="case-box">
+          <p class="lead">Вы — главный бухгалтер сети частных клиник.</p>
+          <p>Роман, руководитель филиала, просит оплатить счет подрядчика на 180 000 рублей.</p>
+          <p>Работы по кабинету диагностики выполнены, кабинет уже принимает пациентов. Акта пока нет: подрядчик обещает дослать его позже.</p>
+          <p>Роман хочет оплатить сегодня, чтобы не портить отношения с подрядчиком.</p>
         </div>
 
-        <div class="actions">
-          <button class="primary-btn" id="open-chat">Перейти к чату</button>
+        <div class="case-box">
+          <p class="task-title">Задача</p>
+          <p>Выберите ответ, который сохранит профессиональную позицию и не оттолкнет коллегу.</p>
         </div>
       </div>
     </section>
 
     <section id="screen-chat" class="card hidden">
-      <div class="header">
-        <p class="eyebrow">Рабочий мессенджер</p>
-        <h1>Что ответить Роману?</h1>
+      <div class="top">
+        <div>
+          <p class="eyebrow">Рабочий мессенджер</p>
+          <h1>Что ответить Роману?</h1>
+        </div>
+        <button class="primary-btn" id="back-case">Назад</button>
       </div>
 
       <div class="content">
-        <div class="chat-area">
-          <div class="roman-message">
+        <div class="chat-layout">
+          <div class="panel">
             <p class="sender">Роман, руководитель филиала</p>
-            <div class="bubble bubble-left">Давайте оплатим счет сейчас. Работы же реально выполнены, кабинет уже принимает пациентов. Акт подрядчик дошлет позже.</div>
+            <div class="bubble">Давайте оплатим счет сейчас. Работы же реально выполнены, кабинет уже принимает пациентов. Акт подрядчик дошлет позже.</div>
           </div>
 
-          <p class="question">Как вы ответите?</p>
-          <div class="answer-list" id="answer-list"></div>
-        </div>
-
-        <div id="feedback" class="feedback">
-          <p id="feedback-title" class="feedback-title"></p>
-          <p id="feedback-text" class="feedback-text"></p>
+          <div class="panel">
+            <p class="question">Как вы ответите?</p>
+            <div class="answer-list" id="answer-list"></div>
+          </div>
         </div>
 
         <div id="success" class="success">Вы успешно справились с заданием</div>
-
         <div class="retry-wrap">
           <button class="retry" id="retry">Попробовать снова</button>
         </div>
+        <div id="spacer" class="spacer-for-feedback"></div>
+      </div>
+
+      <div id="feedback" class="feedback">
+        <p id="feedback-title" class="feedback-title"></p>
+        <p id="feedback-text" class="feedback-text"></p>
       </div>
     </section>
   </main>
@@ -357,37 +366,39 @@
         id: 1,
         text: "Нет, без акта оплату провести нельзя. Сначала пусть подрядчик пришлет документы.",
         correct: false,
-        explanation: "Вы правы: без акта у бухгалтерии нет подтверждения, что работы выполнены. Но формулировка звучит как категорический запрет и усиливает образ бухгалтерии как отдела, который замедляет работу других подразделений."
+        explanation: "Вы правы: без акта у бухгалтерии нет подтверждения, что работы выполнены. Но ответ звучит как категорический запрет и усиливает образ бухгалтерии как отдела, который замедляет работу других подразделений."
       },
       {
         id: 2,
         text: "Если директор подтвердит, что работы выполнены, подготовлю оплату, а акт приложим позже.",
         correct: false,
-        explanation: "Ответ выглядит как готовность помочь, но уводит от профессиональной позиции бухгалтера. Подтверждение директора не заменяет закрывающий документ от подрядчика. Главному бухгалтеру важно предупредить о последствиях и предложить безопасный способ провести оплату."
+        explanation: "Ответ выглядит как готовность помочь, но уводит от профессиональной позиции бухгалтера. Подтверждение директора не заменяет закрывающий документ от подрядчика."
       },
       {
         id: 3,
         text: "Оплату можно подготовить сейчас, но отправить платеж сможем после акта. Давайте попросим подрядчика прислать его через ЭДО или передать оригинал.",
         correct: true,
-        explanation: "Вы не спорите с тем, что работы выполнены. Вы показываете Роману понятный для него риск: без акта платеж не ускорится, а может зависнуть, и подрядчик все равно не получит деньги сегодня. Вы также предлагаете рабочий маршрут: получить полноценный закрывающий документ и после этого провести оплату без лишнего риска."
+        explanation: "Вы не спорите с тем, что работы выполнены. Вы показываете Роману понятный риск: без акта платеж не ускорится, а может зависнуть. И предлагаете рабочий маршрут — получить полноценный закрывающий документ."
       },
       {
         id: 4,
         text: "Тогда перенесем оплату на следующую неделю. Если акт появится, оплатим.",
         correct: false,
-        explanation: "Этот вариант безопаснее, чем оплата без акта, но он не помогает получить документ быстрее. Важно не просто избежать риска, а показать коллеге рабочий маршрут: что нужно сделать, чтобы оплату можно было провести без риска."
+        explanation: "Этот вариант безопаснее, чем оплата без акта, но он не помогает получить документ быстрее. Важно показать коллеге маршрут: что нужно сделать, чтобы оплату можно было провести без риска."
       }
     ];
 
     const screenCase = document.getElementById("screen-case");
     const screenChat = document.getElementById("screen-chat");
     const openChat = document.getElementById("open-chat");
+    const backCase = document.getElementById("back-case");
     const answerList = document.getElementById("answer-list");
     const feedback = document.getElementById("feedback");
     const feedbackTitle = document.getElementById("feedback-title");
     const feedbackText = document.getElementById("feedback-text");
     const success = document.getElementById("success");
     const retry = document.getElementById("retry");
+    const spacer = document.getElementById("spacer");
 
     function renderAnswers() {
       answerList.innerHTML = "";
@@ -416,6 +427,7 @@
       feedbackTitle.textContent = answer.correct ? "Верный выбор" : "Не лучший вариант";
       feedbackText.textContent = answer.explanation;
       success.classList.toggle("visible", answer.correct);
+      spacer.classList.add("visible");
     }
 
     function reset() {
@@ -425,12 +437,18 @@
       feedbackTitle.textContent = "";
       feedbackText.textContent = "";
       success.classList.remove("visible");
+      spacer.classList.remove("visible");
       renderAnswers();
     }
 
     openChat.addEventListener("click", () => {
       screenCase.classList.add("hidden");
       screenChat.classList.remove("hidden");
+    });
+
+    backCase.addEventListener("click", () => {
+      screenChat.classList.add("hidden");
+      screenCase.classList.remove("hidden");
     });
 
     retry.addEventListener("click", reset);
