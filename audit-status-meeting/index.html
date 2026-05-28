@@ -9,7 +9,6 @@
       --red: #d00005;
       --red-dark: #9f0004;
       --text: #172033;
-      --muted: #5b6473;
       --panel: rgba(255, 255, 255, 0.76);
       --panel-strong: rgba(255, 255, 255, 0.90);
       --border: rgba(208, 0, 5, 0.16);
@@ -19,7 +18,8 @@
       --right-bg: rgba(236, 253, 245, 0.94);
       --right-border: #10b981;
       --right-text: #064e3b;
-      --blue-bg: rgba(238, 246, 255, 0.92);
+      --neutral-bg: rgba(238, 246, 255, 0.92);
+      --neutral-border: rgba(59, 130, 246, 0.24);
     }
 
     * { box-sizing: border-box; }
@@ -35,8 +35,8 @@
 
     .stage {
       position: relative;
-      width: min(100%, 900px);
-      max-width: 900px;
+      width: min(100%, 740px);
+      max-width: 740px;
       aspect-ratio: 16 / 9;
       margin: 0 auto;
       overflow: hidden;
@@ -54,48 +54,47 @@
       top: 5.4%;
       width: 57.6%;
       height: auto;
-      max-height: 67%;
-      padding: clamp(9px, 0.9vw, 13px);
-      border-radius: clamp(16px, 1.8vw, 22px);
+      padding: clamp(6px, 0.72vw, 10px);
+      border-radius: clamp(15px, 1.7vw, 20px);
       background: var(--panel);
       border: 1px solid rgba(255,255,255,0.55);
-      box-shadow: 0 14px 32px rgba(31, 41, 55, 0.14);
+      box-shadow: 0 12px 28px rgba(31, 41, 55, 0.14);
       backdrop-filter: blur(7px);
       -webkit-backdrop-filter: blur(7px);
-      overflow: hidden;
+      overflow: visible;
     }
 
     .label {
       display: inline-block;
-      margin: 0 0 clamp(5px, 0.6vw, 8px);
-      padding: clamp(5px, 0.55vw, 7px) clamp(9px, 0.9vw, 12px);
+      margin: 0 0 clamp(4px, 0.5vw, 7px);
+      padding: clamp(4px, 0.5vw, 6px) clamp(8px, 0.8vw, 11px);
       border-radius: 999px;
       background: var(--red);
       color: white;
       font-weight: 850;
-      font-size: clamp(11px, 0.9vw, 14px);
+      font-size: clamp(10px, 0.85vw, 13px);
       line-height: 1.05;
     }
 
     .case-text {
-      font-size: clamp(10px, 0.82vw, 12.5px);
-      line-height: 1.18;
+      font-size: clamp(8.8px, 0.72vw, 10.8px);
+      line-height: 1.14;
       color: var(--text);
     }
 
-    .case-text p { margin: 0 0 clamp(4px, 0.48vw, 7px); }
+    .case-text p { margin: 0 0 clamp(3px, 0.32vw, 5px); }
 
     .quote {
-      margin: clamp(4px, 0.45vw, 7px) 0;
-      padding: clamp(5px, 0.6vw, 8px) clamp(8px, 0.8vw, 10px);
-      border-left: 4px solid var(--red);
-      background: rgba(255,255,255,0.46);
-      border-radius: 12px;
+      margin: clamp(3px, 0.35vw, 5px) 0;
+      padding: clamp(4px, 0.48vw, 6px) clamp(6px, 0.65vw, 9px);
+      border-left: 3px solid var(--red);
+      background: rgba(255,255,255,0.48);
+      border-radius: 10px;
       font-weight: 700;
     }
 
     .question {
-      margin-top: clamp(5px, 0.58vw, 8px);
+      margin-top: clamp(4px, 0.42vw, 6px);
       font-weight: 850;
       color: #111827;
     }
@@ -103,7 +102,7 @@
     .case-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(8px, 1vw, 13px);
+      gap: clamp(5px, 0.64vw, 9px);
       align-items: start;
     }
 
@@ -114,8 +113,8 @@
     .btn-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: clamp(6px, 0.7vw, 10px);
+      gap: 7px;
+      margin-top: clamp(5px, 0.55vw, 8px);
     }
 
     .btn-row.end { justify-content: flex-end; }
@@ -123,71 +122,71 @@
     .btn-row.center { justify-content: center; }
 
     .btn {
-      border-radius: 12px;
-      padding: clamp(6px, 0.75vw, 9px) clamp(10px, 1vw, 14px);
-      font-size: clamp(10.5px, 0.9vw, 13px);
+      border-radius: 11px;
+      padding: clamp(5px, 0.62vw, 8px) clamp(8px, 0.85vw, 12px);
+      font-size: clamp(9.5px, 0.78vw, 11.5px);
       font-weight: 850;
       white-space: nowrap;
       transition: transform 0.12s ease, opacity 0.12s ease;
     }
 
     .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: var(--red); color: white; box-shadow: 0 8px 18px rgba(208, 0, 5, 0.24); }
+    .btn-primary { background: var(--red); color: white; box-shadow: 0 7px 16px rgba(208, 0, 5, 0.24); }
     .btn-secondary { color: var(--red-dark); background: rgba(255,255,255,0.72); border: 1px solid rgba(208, 0, 5, 0.22); }
 
     .screen-title {
-      margin: 0 0 clamp(5px, 0.6vw, 8px);
-      font-size: clamp(11px, 0.95vw, 14px);
+      margin: 0 0 clamp(4px, 0.5vw, 7px);
+      font-size: clamp(10px, 0.85vw, 12.5px);
       font-weight: 850;
     }
 
     .director-line {
-      margin: 0 0 clamp(6px, 0.7vw, 9px);
-      padding: clamp(7px, 0.8vw, 10px) clamp(9px, 0.9vw, 12px);
-      border-radius: 14px;
+      margin: 0 0 clamp(5px, 0.6vw, 8px);
+      padding: clamp(5px, 0.62vw, 8px) clamp(7px, 0.75vw, 10px);
+      border-radius: 12px;
       background: rgba(255,255,255,0.58);
       border: 1px solid rgba(208, 0, 5, 0.13);
-      font-size: clamp(10.5px, 0.9vw, 13px);
-      line-height: 1.22;
+      font-size: clamp(9.5px, 0.78vw, 11.5px);
+      line-height: 1.16;
       font-weight: 650;
     }
 
     .answer-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: clamp(6px, 0.7vw, 9px);
+      gap: clamp(5px, 0.62vw, 8px);
     }
 
     .answer-card {
       width: 100%;
       text-align: left;
       display: flex;
-      gap: 7px;
+      gap: 6px;
       align-items: flex-start;
-      padding: clamp(6px, 0.7vw, 9px);
-      border-radius: 14px;
+      padding: clamp(5px, 0.58vw, 8px);
+      border-radius: 12px;
       background: var(--panel-strong);
       border: 1px solid var(--border);
       color: var(--text);
-      box-shadow: 0 6px 14px rgba(31, 41, 55, 0.07);
-      font-size: clamp(10px, 0.76vw, 12px);
-      line-height: 1.18;
-      min-height: clamp(54px, 6.4vw, 82px);
+      box-shadow: 0 5px 12px rgba(31, 41, 55, 0.07);
+      font-size: clamp(8.8px, 0.68vw, 10.8px);
+      line-height: 1.12;
+      min-height: clamp(48px, 5.4vw, 70px);
     }
 
     .answer-card:hover { background: rgba(255,255,255,0.98); }
 
     .answer-number {
       flex: 0 0 auto;
-      width: clamp(18px, 1.7vw, 22px);
-      height: clamp(18px, 1.7vw, 22px);
+      width: clamp(16px, 1.45vw, 20px);
+      height: clamp(16px, 1.45vw, 20px);
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       background: var(--red);
       color: white;
-      font-size: clamp(9px, 0.75vw, 11px);
+      font-size: clamp(8px, 0.62vw, 10px);
       font-weight: 850;
       margin-top: 1px;
     }
@@ -198,28 +197,28 @@
     .selected-wrap.visible { display: block; }
 
     .selected-answer {
-      padding: clamp(7px, 0.75vw, 10px);
-      border-radius: 14px;
-      background: var(--blue-bg);
-      border: 1px solid rgba(59, 130, 246, 0.24);
-      font-size: clamp(10.5px, 0.82vw, 12.5px);
-      line-height: 1.20;
+      padding: clamp(6px, 0.62vw, 9px);
+      border-radius: 12px;
+      background: var(--neutral-bg) !important;
+      border: 1px solid var(--neutral-border) !important;
+      font-size: clamp(9.5px, 0.75vw, 11.5px);
+      line-height: 1.16;
       font-weight: 650;
-      margin-bottom: clamp(5px, 0.6vw, 8px);
+      margin-bottom: clamp(5px, 0.5vw, 7px);
     }
 
     .selected-answer.wrong,
     .selected-answer.correct {
-      background: var(--blue-bg) !important;
-      border-color: rgba(59, 130, 246, 0.24) !important;
+      background: var(--neutral-bg) !important;
+      border-color: var(--neutral-border) !important;
     }
 
     .explanation {
-      padding: clamp(7px, 0.75vw, 10px);
-      border-radius: 14px;
-      font-size: clamp(10.5px, 0.8vw, 12.4px);
-      line-height: 1.22;
-      margin-bottom: clamp(5px, 0.6vw, 8px);
+      padding: clamp(6px, 0.62vw, 9px);
+      border-radius: 12px;
+      font-size: clamp(9.5px, 0.72vw, 11.2px);
+      line-height: 1.16;
+      margin-bottom: clamp(5px, 0.5vw, 7px);
       border: 1px solid;
     }
 
@@ -230,11 +229,11 @@
     .explanation.correct strong { color: var(--right-text); }
 
     @media (max-width: 760px) {
-      .stage { aspect-ratio: auto; min-height: 520px; }
-      .panel { left: 5%; top: 4%; width: 90%; max-height: 90%; }
+      .stage { width: 100%; aspect-ratio: auto; min-height: 520px; }
+      .panel { left: 5%; top: 4%; width: 90%; }
       .case-grid, .answer-list { grid-template-columns: 1fr; }
       .answer-card { min-height: auto; }
-      .case-text { font-size: 12px; }
+      .case-text { font-size: 12px; line-height: 1.2; }
     }
   </style>
 </head>
@@ -247,11 +246,11 @@
           <div class="case-grid">
             <div>
               <p><strong>Вы — главный бухгалтер компании, которая готовится привлечь инвесторов.</strong> Перед сделкой проходит аудит.</p>
-              <p>Аудиторы прислали предварительный список вопросов по учету: по старым остаткам нужны расшифровки, по проектным расходам — пояснить классификацию, по одному пункту не хватает сверки.</p>
+              <p>Аудиторы прислали предварительный список вопросов: по старым остаткам нужны расшифровки, по проектным расходам — пояснения по классификации, по одному пункту не хватает сверки.</p>
             </div>
             <div>
-              <p>За неделю до встречи бухгалтерия уже запрашивала у проектных руководителей пояснения. Часть ответов пришла только накануне вечером, а по двум пунктам данных еще нет.</p>
-              <p>Вы понимаете, что часть вопросов закроется пояснениями, но отдельные пункты могут повлиять на сроки аудита.</p>
+              <p>За неделю до встречи бухгалтерия уже запрашивала пояснения у проектных руководителей. Часть ответов пришла только накануне вечером, по двум пунктам данных еще нет.</p>
+              <p>Часть вопросов, скорее всего, закроется пояснениями, но отдельные пункты могут повлиять на сроки аудита.</p>
             </div>
             <div class="case-full">
               <div class="quote">«Аудиторы нашли замечания по учету. Почему я узнаю об этом от них, а не от бухгалтерии? Получается, мы сами не контролируем качество учета».</div>
@@ -417,4 +416,3 @@
   </script>
 </body>
 </html>
-
