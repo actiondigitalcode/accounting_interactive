@@ -4,274 +4,150 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Разговор с директором</title>
-
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --interactive-h: 389px;
-
     --bg: #F5F3EE;
     --card: #FFFFFF;
-    --accent: #d00005;
-    --accent-dark: #9f0004;
-    --text: #172033;
-    --text-light: #4B5563;
-
-    --wrong: #7f1d1d;
-    --wrong-bg: rgba(254, 242, 242, 0.92);
-    --wrong-border: #ef4444;
-
-    --right: #064e3b;
-    --right-bg: rgba(236, 253, 245, 0.92);
-    --right-border: #10b981;
-
-    --neutral-bg: rgba(255,255,255,0.62);
-    --border: rgba(208, 0, 5, 0.22);
-    --shadow: 0 12px 28px rgba(31, 41, 55, 0.12);
-  }
-
-  html,
-  body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    --accent: #2D5BE3;
+    --accent-dark: #1A3FA0;
+    --text: #1A1A2E;
+    --text-light: #6B7280;
+    --wrong: #C53030;
+    --wrong-bg: #FFF5F5;
+    --right: #276749;
+    --right-bg: #F0FFF4;
+    --neutral-bg: #F9F8F5;
+    --border: #E5E2DA;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
   }
 
   body {
-    font-family: Georgia, serif;
+    font-family: 'Georgia', serif;
     background: var(--bg);
     padding: 8px;
-    color: var(--text);
+    overflow: hidden;
+    width: 100%;
   }
 
   .container {
     width: 100%;
     max-width: 100%;
-    height: var(--interactive-h);
-    overflow: hidden;
   }
 
-  .screen {
-    display: none;
-    height: var(--interactive-h);
-    overflow: hidden;
-    animation: fadeIn 0.35s ease;
-  }
+  .screen { display: none; animation: fadeIn 0.35s ease; }
+  .screen.active { display: block; }
 
-  .screen.active {
-    display: block;
-  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeInPlace { from { opacity: 0; } to { opacity: 1; } }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeInPlace {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .case-card,
-  .dialogue-card,
-  .final-card {
-    height: var(--interactive-h);
+  .case-card, .dialogue-card, .final-card {
     background: var(--card);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: var(--shadow);
   }
 
-  /* =========================
-     ЭКРАН 1
-     ========================= */
-
-  #screen-case .case-card {
-    position: relative;
-    padding: 14px 14px 13px;
-    background-color: #eaf2fb;
-    background-image: url("case-bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-
-  #screen-case .case-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.04);
-    z-index: 0;
-  }
-
-  #screen-case .case-header {
-    position: relative;
-    z-index: 1;
+  .case-header {
     width: 100%;
-    height: auto;
-    background: transparent;
+    height: 130px;
+    background: #1A1A2E;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 28px;
     text-align: center;
-    overflow: visible;
+    position: relative;
+    overflow: hidden;
   }
 
-  #screen-case .case-bg {
-    display: none;
-  }
+  .case-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  #screen-case .case-header-inner {
+  .case-header-inner {
     position: relative;
     z-index: 2;
-    width: 30%;
-    min-width: 190px;
-    padding: 7px 16px 8px;
-    background: rgba(255,255,255,0.24);
-    border: 1px solid rgba(255,255,255,0.42);
-    border-radius: 15px;
-    box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 18px;
+    padding: 18px 28px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.14);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
-  #screen-case .case-tag {
+  .case-tag {
     display: inline-block;
-    margin-bottom: 5px;
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: rgba(208, 0, 5, 0.86);
-    color: #FFFFFF;
-    font-family: Georgia, serif;
-    font-weight: 700;
-    font-size: 8px;
-    line-height: 1.1;
-    letter-spacing: 0.08em;
+    background: rgba(45,91,227,0.10);
+    color: var(--accent-dark);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
   }
 
-  #screen-case .case-header h2 {
-    color: var(--text);
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.22;
-  }
+  .case-header h2 { color: var(--text); font-size: 22px; font-weight: normal; line-height: 1.4; }
 
-  #screen-case .case-body {
-    position: relative;
-    z-index: 1;
-    width: 92%;
-    margin: 12px auto 0;
-    padding: 14px 15px 13px;
-    background: rgba(255,255,255,0.24);
-    border: 1px solid rgba(255,255,255,0.42);
-    border-radius: 16px;
-    box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    text-align: center;
-  }
+  .case-body { padding: 14px; }
+  .case-body p { font-size: 13px; line-height: 1.6; color: var(--text); margin-bottom: 8px; }
 
-  #screen-case .case-body p {
-    font-size: 15px;
-    line-height: 1.42;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  #screen-case .case-question {
+  .case-question {
     font-style: italic;
-    color: var(--text);
-    border-left: none;
-    padding-left: 0;
-    margin-top: 10px;
-    font-size: 15px;
-    line-height: 1.42;
+    color: var(--text-light);
+    border-left: 3px solid var(--accent);
+    padding-left: 12px;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.6;
   }
 
-  #screen-case .btn-start {
+  .btn-start {
     display: block;
     width: 100%;
-    margin-top: 12px;
-    padding: 10px;
+    margin-top: 14px;
+    padding: 12px;
     background: var(--accent);
     color: white;
     border: none;
-    border-radius: 11px;
+    border-radius: 10px;
     font-size: 16px;
-    font-weight: 700;
-    font-family: Georgia, serif;
+    font-family: 'Georgia', serif;
     cursor: pointer;
-    transition: background 0.2s, transform 0.12s ease;
-    box-shadow: 0 7px 16px rgba(208, 0, 5, 0.24);
+    transition: background 0.2s;
   }
+  .btn-start:hover { background: var(--accent-dark); }
 
-  #screen-case .btn-start:hover {
-    background: var(--accent-dark);
-    transform: translateY(-1px);
-  }
-
-  /* =========================
-     ОСТАЛЬНЫЕ ЭКРАНЫ
-     ========================= */
-
-  .step-row {
-    display: flex;
-    gap: 6px;
-    padding: 8px 16px 0;
-    height: 18px;
-  }
-
-  .step-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(208, 0, 5, 0.18);
-    transition: background 0.3s;
-  }
-
-  .step-dot.active {
-    background: var(--accent);
-  }
-
-  .step-dot.done {
-    background: var(--right);
-  }
+  .step-row { display: flex; gap: 6px; padding: 14px 20px 0; }
+  .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
+  .step-dot.active { background: var(--accent); }
+  .step-dot.done { background: var(--right); }
 
   .scene-wrap {
     position: relative;
     width: 100%;
-    height: 145px;
+    aspect-ratio: 16/6;
     background: #e8e4dc;
     overflow: hidden;
   }
 
-  .scene-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 15%;
-    display: block;
-  }
+  .scene-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
 
   .bubble-wrap {
     position: absolute;
-    top: 7%;
+    top: 8%;
     left: 38%;
     width: 36%;
   }
 
   .bubble {
-    position: relative;
-    padding: 7px 10px;
+    background: white;
     border-radius: 10px;
-    background: rgba(255,255,255,0.86);
+    padding: 8px 12px;
     box-shadow: 0 3px 14px rgba(0,0,0,0.22);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+    position: relative;
   }
 
   .bubble::after {
@@ -282,322 +158,145 @@
     width: 0;
     height: 0;
     border-right: 9px solid transparent;
-    border-top: 9px solid rgba(255,255,255,0.86);
+    border-top: 9px solid white;
     border-left: 0 solid transparent;
   }
 
   .bubble .spk {
-    margin-bottom: 3px;
-    color: var(--accent);
-    font-family: Georgia, serif;
-    font-size: 9px;
-    font-weight: 700;
-    line-height: 1.1;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
   }
 
-  .bubble .btext {
-    color: var(--text);
-    font-size: 12.5px;
-    line-height: 1.28;
-  }
+  .bubble .btext { font-size: 11px; line-height: 1.5; color: var(--text); }
 
   .feedback-bar {
     display: none;
     position: absolute;
-    bottom: 8px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 88%;
-    z-index: 10;
-    padding: 8px 13px;
+    width: 86%;
     border-radius: 10px;
-    font-size: 13.4px;
-    line-height: 1.28;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    z-index: 10;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18);
     animation: fadeInPlace 0.25s ease;
     text-align: center;
   }
 
-  .feedback-bar.wrong {
-    background: var(--wrong-bg);
-    border: 1px solid var(--wrong-border);
-    color: var(--wrong);
-  }
+  .feedback-bar.wrong { background: rgba(255,245,245,0.97); border: 1px solid #FC8181; color: #742A2A; }
+  .feedback-bar.right { background: rgba(240,255,244,0.97); border: 1px solid #68D391; color: #1C4532; }
 
-  .feedback-bar.right {
-    background: var(--right-bg);
-    border: 1px solid var(--right-border);
-    color: var(--right);
-  }
-
-  .options-wrap {
-    height: 226px;
-    padding: 5px 18px 10px;
-    overflow: hidden;
-  }
+  .options-wrap { padding: 6px 14px 14px; }
 
   .options-label {
-    margin-bottom: 5px;
-    color: var(--text-light);
-    font-family: Georgia, serif;
-    font-size: 10px;
-    line-height: 1.05;
-    font-weight: 700;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
   }
 
   .option-btn {
     display: block;
     width: 100%;
-    min-height: 39px;
-    margin-bottom: 6px;
-    padding: 6px 14px;
     text-align: left;
-    background: rgba(255,255,255,0.66);
+    background: var(--neutral-bg);
     border: 1px solid var(--border);
-    border-radius: 9px;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 13px;
+    line-height: 1.5;
     color: var(--text);
     cursor: pointer;
+    margin-bottom: 7px;
     transition: all 0.2s;
-    font-family: Georgia, serif;
-    font-size: 14.6px;
-    line-height: 1.22;
+    font-family: 'Georgia', serif;
   }
 
-  .option-btn:hover:not(:disabled) {
-    border-color: var(--accent);
-    background: rgba(255,255,255,0.86);
-  }
+  .option-btn:hover:not(:disabled) { border-color: var(--accent); background: #F0F4FF; }
+  .option-btn:disabled { cursor: default; }
+  .option-btn.sel-wrong { background: var(--wrong-bg); border-color: #FC8181; color: var(--wrong); }
+  .option-btn.sel-right { background: var(--right-bg); border-color: #68D391; color: var(--right); }
 
-  .option-btn:disabled {
-    cursor: default;
-  }
+  .action-btns { display: flex; gap: 8px; margin-top: 4px; }
 
-  .option-btn.sel-wrong {
-    background: var(--wrong-bg);
-    border-color: var(--wrong-border);
-    color: var(--wrong);
-  }
-
-  .option-btn.sel-right {
-    background: var(--right-bg);
-    border-color: var(--right-border);
-    color: var(--right);
-  }
-
-  .action-btns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin-top: 2px;
-    height: 30px;
-  }
-
-  .retry-btn,
-  .next-btn {
-    display: none;
-    flex: 0 0 auto;
-    width: 42%;
-    min-width: 190px;
-    max-width: 360px;
-    padding: 8px 16px;
+  .retry-btn, .next-btn {
+    flex: 1;
+    padding: 12px;
     border: none;
-    border-radius: 9px;
+    border-radius: 8px;
     font-size: 14px;
-    line-height: 1;
-    font-family: Georgia, serif;
-    font-weight: 700;
+    font-family: 'Georgia', serif;
     cursor: pointer;
     transition: all 0.2s;
-    text-align: center;
+    display: none;
   }
 
-  .retry-btn {
-    background: rgba(255,255,255,0.72);
-    color: var(--accent-dark);
-    border: 1px solid rgba(208, 0, 5, 0.24);
-  }
-
-  .retry-btn:hover {
-    background: rgba(255,255,255,0.92);
-  }
-
-  .next-btn {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 7px 16px rgba(208, 0, 5, 0.24);
-  }
-
-  .next-btn:hover {
-    background: var(--accent-dark);
-  }
-
-  /* =========================
-     ФИНАЛ
-     ========================= */
+  .retry-btn { background: #FFF5F5; color: var(--wrong); border: 1px solid #FEB2B2; }
+  .retry-btn:hover { background: #FED7D7; }
+  .next-btn { background: var(--accent); color: white; }
+  .next-btn:hover { background: var(--accent-dark); }
 
   .final-scene {
     position: relative;
     width: 100%;
-    height: 145px;
-    background: linear-gradient(135deg,#172033 0%,#d00005 100%);
+    aspect-ratio: 16/6;
+    background: linear-gradient(135deg,#1A1A2E 0%,#2D5BE3 100%);
     overflow: hidden;
   }
 
-  .final-scene img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .final-scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  .final-body {
-    height: 244px;
-    padding: 12px 14px;
-    text-align: center;
-    overflow: hidden;
-  }
+  .final-body { padding: 14px; text-align: center; }
 
   .final-badge {
     display: inline-block;
-    margin-bottom: 10px;
-    padding: 5px 16px;
-    border-radius: 20px;
     background: var(--right-bg);
     color: var(--right);
-    border: 1px solid var(--right-border);
-    font-family: Georgia, serif;
-    font-size: 12.5px;
-    line-height: 1.15;
+    border: 1px solid #9AE6B4;
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    margin-bottom: 16px;
+    font-family: 'Courier New', monospace;
     letter-spacing: 0.05em;
   }
 
-  .final-title {
-    margin-bottom: 7px;
-    color: var(--text);
-    font-size: 17px;
-    line-height: 1.28;
-  }
-
-  .final-text {
-    margin-bottom: 10px;
-    color: var(--text-light);
-    font-size: 14px;
-    line-height: 1.34;
-  }
+  .final-title { font-size: 16px; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .final-text { font-size: 13px; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
 
   .final-highlight {
-    margin-bottom: 12px;
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.68);
+    background: var(--neutral-bg);
     border-left: 3px solid var(--accent);
     border-radius: 0 8px 8px 0;
-    color: var(--text);
+    padding: 14px 18px;
     text-align: left;
-    font-size: 14.5px;
-    line-height: 1.34;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 22px;
   }
 
   .btn-restart {
-    padding: 9px 24px;
-    background: rgba(255,255,255,0.72);
-    color: var(--accent-dark);
-    border: 1px solid rgba(208, 0, 5, 0.24);
+    padding: 12px 28px;
+    background: var(--bg);
+    color: var(--text-light);
+    border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 14px;
-    font-family: Georgia, serif;
-    font-weight: 700;
+    font-family: 'Georgia', serif;
     cursor: pointer;
     transition: all 0.2s;
   }
-
-  .btn-restart:hover {
-    background: rgba(255,255,255,0.92);
-    color: var(--text);
-  }
-
-  @media (max-width: 520px) {
-    :root {
-      --interactive-h: 389px;
-    }
-
-    body {
-      padding: 6px;
-    }
-
-    #screen-case .case-header-inner {
-      min-width: 178px;
-      width: 40%;
-      padding: 7px 14px 8px;
-    }
-
-    #screen-case .case-header h2 {
-      font-size: 13.5px;
-    }
-
-    #screen-case .case-body {
-      width: 94%;
-      margin-top: 10px;
-      padding: 12px 13px;
-    }
-
-    #screen-case .case-body p,
-    #screen-case .case-question {
-      font-size: 13.7px;
-      line-height: 1.34;
-    }
-
-    .scene-wrap,
-    .final-scene {
-      height: 140px;
-    }
-
-    .options-wrap {
-      height: 231px;
-      padding: 5px 12px 10px;
-    }
-
-    .options-label {
-      font-size: 9.5px;
-      margin-bottom: 5px;
-    }
-
-    .option-btn {
-      min-height: 39px;
-      padding: 6px 10px;
-      font-size: 13.3px;
-      line-height: 1.18;
-      margin-bottom: 6px;
-    }
-
-    .bubble .btext {
-      font-size: 11.4px;
-      line-height: 1.22;
-    }
-
-    .feedback-bar {
-      font-size: 12.4px;
-      line-height: 1.22;
-      padding: 7px 10px;
-    }
-
-    .retry-btn,
-    .next-btn {
-      width: 48%;
-      min-width: 160px;
-      padding: 8px 12px;
-      font-size: 13.5px;
-    }
-
-    .final-body {
-      height: 249px;
-    }
-  }
+  .btn-restart:hover { background: var(--border); color: var(--text); }
 </style>
 </head>
 
@@ -613,7 +312,6 @@
           <h2>Разговор с директором</h2>
         </div>
       </div>
-
       <div class="case-body">
         <p>Марина — главный бухгалтер строительной компании. Сейчас утро пятницы. В бухгалтерию заходит директор: он только что посмотрел финансовые показатели за квартал и хочет понять, «почему налог на прибыль такой большой».</p>
         <p>На самом деле выросла выручка компании — а вместе с ней и налог. При этом бухгалтерия проверила дебиторскую задолженность и сформировала резерв по сомнительным долгам для пяти просроченных задолженностей, снизив налоговую базу, насколько возможно.</p>
@@ -629,28 +327,23 @@
         <div class="step-dot active"></div>
         <div class="step-dot"></div>
       </div>
-
       <div class="scene-wrap">
         <img id="scene1-neutral" src="director-neutral.png" alt="" style="display:block">
         <img id="scene1-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
         <img id="scene1-happy" src="director-interested.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
             <div class="btext" id="bubble1-text">Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?</div>
           </div>
         </div>
-
         <div id="fb-1" class="feedback-bar"></div>
       </div>
-
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
         <button class="option-btn" id="o1a" onclick="pick(1,'A')">Выручка выросла на 18%, но расходы росли медленнее — прибыль и налоговая база стали больше.</button>
         <button class="option-btn" id="o1b" onclick="pick(1,'B')">Маржа улучшилась, но часть долгов просрочена. Мы создали резерв и снизили налог к уплате на 960 тысяч.</button>
         <button class="option-btn" id="o1c" onclick="pick(1,'C')">Мы проверили расчет налога и сверили его с обороткой. Ошибок нет, сумма подтверждается документами.</button>
-
         <div class="action-btns">
           <button class="retry-btn" id="r1" onclick="reset(1)">↩ Попробовать еще раз</button>
           <button class="next-btn" id="n1" onclick="go('screen-2')">Продолжить →</button>
@@ -665,28 +358,23 @@
         <div class="step-dot done"></div>
         <div class="step-dot active"></div>
       </div>
-
       <div class="scene-wrap">
         <img id="scene2-interested" src="director-interested.png" alt="" style="display:block">
         <img id="scene2-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
         <img id="scene2-happy" src="director-happy.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-
         <div class="bubble-wrap">
           <div class="bubble">
             <div class="spk">Директор</div>
             <div class="btext" id="bubble2-text">Можете подробнее?</div>
           </div>
         </div>
-
         <div id="fb-2" class="feedback-bar"></div>
       </div>
-
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
         <button class="option-btn" id="o2a" onclick="pick(2,'A')">Есть пять клиентов, которые не платят больше трех месяцев. Их долг — 4,8 млн. Мы создали по нему резерв: закон разрешает учесть это в расходах и снизить налог.</button>
         <button class="option-btn" id="o2b" onclick="pick(2,'B')">После анализа дебиторской задолженности мы применили инструмент, который разрешен Налоговым кодексом.</button>
         <button class="option-btn" id="o2c" onclick="pick(2,'C')">Мы сэкономили около миллиона рублей — без этого налог был бы около 5,2 млн.</button>
-
         <div class="action-btns">
           <button class="retry-btn" id="r2" onclick="reset(2)">↩ Попробовать еще раз</button>
           <button class="next-btn" id="n2" onclick="go('screen-final')">Завершить →</button>
@@ -700,7 +388,6 @@
       <div class="final-scene">
         <img src="handshake.png" alt="">
       </div>
-
       <div class="final-body">
         <div class="final-badge">✓ Вы успешно справились с заданием</div>
         <h2 class="final-title">Марине удалось продемонстрировать ценность работы бухгалтерии</h2>
@@ -734,31 +421,20 @@ const map = {
 
 function setScene(step, mood) {
   const prefix = step === 1 ? 'scene1' : 'scene2';
-
   const moodMap = step === 1
     ? { neutral: 'neutral', angry: 'angry', interested: 'happy' }
     : { interested: 'interested', angry: 'angry', happy: 'happy' };
-
   const imgs = step === 1
     ? ['scene1-neutral', 'scene1-angry', 'scene1-happy']
     : ['scene2-interested', 'scene2-angry', 'scene2-happy'];
-
-  imgs.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-
+  imgs.forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
   const target = document.getElementById(`${prefix}-${moodMap[mood] || mood}`);
   if (target) target.style.display = 'block';
 }
 
 function pick(step, opt) {
   const d = D[step][opt];
-
-  Object.values(map[step]).forEach(id => {
-    document.getElementById(id).disabled = true;
-  });
-
+  Object.values(map[step]).forEach(id => { document.getElementById(id).disabled = true; });
   document.getElementById(map[step][opt]).classList.add(d.ok ? 'sel-right' : 'sel-wrong');
 
   const fb = document.getElementById(`fb-${step}`);
@@ -781,8 +457,6 @@ function pick(step, opt) {
     document.getElementById(`r${step}`).style.display = 'block';
     setScene(step, 'angry');
   }
-
-  sendHeight();
 }
 
 function reset(step) {
@@ -791,52 +465,42 @@ function reset(step) {
     b.disabled = false;
     b.classList.remove('sel-right', 'sel-wrong');
   });
-
   document.getElementById(`fb-${step}`).style.display = 'none';
   document.getElementById(`r${step}`).style.display = 'none';
   document.getElementById(`n${step}`).style.display = 'none';
-
   setScene(step, step === 1 ? 'neutral' : 'interested');
 
   const origTexts = {
     1: 'Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?',
     2: 'Можете подробнее?'
   };
-
   const bEl = document.getElementById(`bubble${step}-text`);
-
   if (bEl) {
     bEl.textContent = origTexts[step];
     const bubbleWrap = bEl.closest('.bubble-wrap');
     if (bubbleWrap) bubbleWrap.style.display = 'block';
   }
-
-  sendHeight();
 }
 
 function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
-  sendHeight();
 }
 
-function restart() {
-  reset(1);
-  reset(2);
-  go('screen-case');
-}
+function restart() { reset(1); reset(2); go('screen-case'); }
+</script>
 
+<script>
 function sendHeight() {
-  const h = 405;
-
+  const h = document.body.scrollHeight;
   window.parent.postMessage({ type: 'setHeight', height: h }, '*');
-  window.parent.postMessage('[iFrameSizer]' + h + ':0:0:bodyOffset', '*');
+  // Also try iFrameResizer format
+  window.parent.postMessage('[iFrameSizer]' + document.body.scrollHeight + ':0:0:bodyOffset', '*');
 }
-
 window.addEventListener('load', sendHeight);
 window.addEventListener('resize', sendHeight);
-
+// Send repeatedly for first 3 seconds in case platform loads slowly
 let count = 0;
 const interval = setInterval(() => {
   sendHeight();
@@ -844,7 +508,6 @@ const interval = setInterval(() => {
   if (count > 10) clearInterval(interval);
 }, 300);
 </script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.9/iframeResizer.contentWindow.min.js"></script>
 </body>
 </html>
