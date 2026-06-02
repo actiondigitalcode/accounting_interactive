@@ -1,850 +1,577 @@
 <!DOCTYPE html>
-<html lang="ru" style="overflow-x:hidden;">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Разговор с директором</title>
-
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --interactive-h: 389px;
-
-    --bg: #F5F3EE;
-    --card: #FFFFFF;
-    --accent: #d00005;
-    --accent-dark: #9f0004;
-    --text: #172033;
-    --text-light: #4B5563;
-
-    --wrong: #7f1d1d;
-    --wrong-bg: rgba(254, 242, 242, 0.92);
-    --wrong-border: #ef4444;
-
-    --right: #064e3b;
-    --right-bg: rgba(236, 253, 245, 0.92);
-    --right-border: #10b981;
-
-    --neutral-bg: rgba(255,255,255,0.62);
-    --border: rgba(208, 0, 5, 0.22);
-    --shadow: 0 12px 28px rgba(31, 41, 55, 0.12);
-  }
-
-  html,
-  body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  body {
-    font-family: Georgia, serif;
-    background: var(--bg);
-    padding: 8px;
-    color: var(--text);
-  }
-
-  .container {
-    width: 100%;
-    max-width: 100%;
-    height: var(--interactive-h);
-    overflow: hidden;
-  }
-
-  .screen {
-    display: none;
-    height: var(--interactive-h);
-    overflow: hidden;
-    animation: fadeIn 0.35s ease;
-  }
-
-  .screen.active {
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeInPlace {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .case-card,
-  .dialogue-card,
-  .final-card {
-    height: var(--interactive-h);
-    background: var(--card);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-
-  /* =========================
-     ЭКРАН 1
-     ========================= */
-
-  #screen-case .case-card {
-    position: relative;
-    padding: 14px 14px 13px;
-    background-color: #eaf2fb;
-    background-image: url("case-bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-
-  #screen-case .case-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.04);
-    z-index: 0;
-  }
-
-  #screen-case .case-header {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: auto;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    text-align: center;
-    overflow: visible;
-  }
-
-  #screen-case .case-bg {
-    display: none;
-  }
-
-  #screen-case .case-header-inner {
-    position: relative;
-    z-index: 2;
-    width: 30%;
-    min-width: 190px;
-    padding: 7px 16px 8px;
-    background: rgba(255,255,255,0.24);
-    border: 1px solid rgba(255,255,255,0.42);
-    border-radius: 15px;
-    box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-  }
-
-  #screen-case .case-tag {
-    display: inline-block;
-    margin-bottom: 5px;
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: rgba(208, 0, 5, 0.86);
-    color: #FFFFFF;
-    font-family: Georgia, serif;
-    font-weight: 700;
-    font-size: 8px;
-    line-height: 1.1;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  #screen-case .case-header h2 {
-    color: var(--text);
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.22;
-  }
-
-  #screen-case .case-body {
-    position: relative;
-    z-index: 1;
-    width: 92%;
-    margin: 12px auto 0;
-    padding: 14px 15px 13px;
-    background: rgba(255,255,255,0.24);
-    border: 1px solid rgba(255,255,255,0.42);
-    border-radius: 16px;
-    box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    text-align: center;
-  }
-
-  #screen-case .case-body p {
-    font-size: 15px;
-    line-height: 1.42;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  #screen-case .case-question {
-    font-style: italic;
-    color: var(--text);
-    border-left: none;
-    padding-left: 0;
-    margin-top: 10px;
-    font-size: 15px;
-    line-height: 1.42;
-  }
-
-  #screen-case .btn-start {
-    display: block;
-    width: 100%;
-    margin-top: 12px;
-    padding: 10px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 11px;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Georgia, serif;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.12s ease;
-    box-shadow: 0 7px 16px rgba(208, 0, 5, 0.24);
-  }
-
-  #screen-case .btn-start:hover {
-    background: var(--accent-dark);
-    transform: translateY(-1px);
-  }
-
-  /* =========================
-     ОСТАЛЬНЫЕ ЭКРАНЫ
-     ========================= */
-
-  .step-row {
-    display: flex;
-    gap: 6px;
-    padding: 8px 16px 0;
-    height: 18px;
-  }
-
-  .step-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(208, 0, 5, 0.18);
-    transition: background 0.3s;
-  }
-
-  .step-dot.active {
-    background: var(--accent);
-  }
-
-  .step-dot.done {
-    background: var(--right);
-  }
-
-  .scene-wrap {
-    position: relative;
-    width: 100%;
-    height: 145px;
-    background: #e8e4dc;
-    overflow: hidden;
-  }
-
-  .scene-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 15%;
-    display: block;
-  }
-
-  .bubble-wrap {
-    position: absolute;
-    top: 7%;
-    left: 38%;
-    width: 36%;
-  }
-
-  .bubble {
-    position: relative;
-    padding: 7px 10px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.86);
-    box-shadow: 0 3px 14px rgba(0,0,0,0.22);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-  }
-
-  .bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -9px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-right: 9px solid transparent;
-    border-top: 9px solid rgba(255,255,255,0.86);
-    border-left: 0 solid transparent;
-  }
-
-  .bubble .spk {
-    margin-bottom: 3px;
-    color: var(--accent);
-    font-family: Georgia, serif;
-    font-size: 9px;
-    font-weight: 700;
-    line-height: 1.1;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .bubble .btext {
-    color: var(--text);
-    font-size: 12.5px;
-    line-height: 1.28;
-  }
-
-  .feedback-bar {
-    display: none;
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 88%;
-    z-index: 10;
-    padding: 8px 13px;
-    border-radius: 10px;
-    font-size: 13.4px;
-    line-height: 1.28;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-    animation: fadeInPlace 0.25s ease;
-    text-align: center;
-  }
-
-  .feedback-bar.wrong {
-    background: var(--wrong-bg);
-    border: 1px solid var(--wrong-border);
-    color: var(--wrong);
-  }
-
-  .feedback-bar.right {
-    background: var(--right-bg);
-    border: 1px solid var(--right-border);
-    color: var(--right);
-  }
-
-  .options-wrap {
-    height: 226px;
-    padding: 5px 18px 10px;
-    overflow: hidden;
-  }
-
-  .options-label {
-    margin-bottom: 5px;
-    color: var(--text-light);
-    font-family: Georgia, serif;
-    font-size: 10px;
-    line-height: 1.05;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .option-btn {
-    display: block;
-    width: 100%;
-    min-height: 39px;
-    margin-bottom: 6px;
-    padding: 6px 14px;
-    text-align: left;
-    background: rgba(255,255,255,0.66);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: Georgia, serif;
-    font-size: 14.6px;
-    line-height: 1.22;
-  }
-
-  .option-btn:hover:not(:disabled) {
-    border-color: var(--accent);
-    background: rgba(255,255,255,0.86);
-  }
-
-  .option-btn:disabled {
-    cursor: default;
-  }
-
-  .option-btn.sel-wrong {
-    background: var(--wrong-bg);
-    border-color: var(--wrong-border);
-    color: var(--wrong);
-  }
-
-  .option-btn.sel-right {
-    background: var(--right-bg);
-    border-color: var(--right-border);
-    color: var(--right);
-  }
-
-  .action-btns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin-top: 2px;
-    height: 30px;
-  }
-
-  .retry-btn,
-  .next-btn {
-    display: none;
-    flex: 0 0 auto;
-    width: 42%;
-    min-width: 190px;
-    max-width: 360px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 9px;
-    font-size: 14px;
-    line-height: 1;
-    font-family: Georgia, serif;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-
-  .retry-btn {
-    background: rgba(255,255,255,0.72);
-    color: var(--accent-dark);
-    border: 1px solid rgba(208, 0, 5, 0.24);
-  }
-
-  .retry-btn:hover {
-    background: rgba(255,255,255,0.92);
-  }
-
-  .next-btn {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 7px 16px rgba(208, 0, 5, 0.24);
-  }
-
-  .next-btn:hover {
-    background: var(--accent-dark);
-  }
-
-  /* =========================
-     ФИНАЛ
-     ========================= */
-
-  .final-scene {
-    position: relative;
-    width: 100%;
-    height: 145px;
-    background: linear-gradient(135deg,#172033 0%,#d00005 100%);
-    overflow: hidden;
-  }
-
-  .final-scene img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .final-body {
-    height: 244px;
-    padding: 12px 14px;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .final-badge {
-    display: inline-block;
-    margin-bottom: 10px;
-    padding: 5px 16px;
-    border-radius: 20px;
-    background: var(--right-bg);
-    color: var(--right);
-    border: 1px solid var(--right-border);
-    font-family: Georgia, serif;
-    font-size: 12.5px;
-    line-height: 1.15;
-    letter-spacing: 0.05em;
-  }
-
-  .final-title {
-    margin-bottom: 7px;
-    color: var(--text);
-    font-size: 17px;
-    line-height: 1.28;
-  }
-
-  .final-text {
-    margin-bottom: 10px;
-    color: var(--text-light);
-    font-size: 14px;
-    line-height: 1.34;
-  }
-
-  .final-highlight {
-    margin-bottom: 12px;
-    padding: 10px 16px;
-    background: rgba(255,255,255,0.68);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    color: var(--text);
-    text-align: left;
-    font-size: 14.5px;
-    line-height: 1.34;
-  }
-
-  .btn-restart {
-    padding: 9px 24px;
-    background: rgba(255,255,255,0.72);
-    color: var(--accent-dark);
-    border: 1px solid rgba(208, 0, 5, 0.24);
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: Georgia, serif;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-restart:hover {
-    background: rgba(255,255,255,0.92);
-    color: var(--text);
-  }
-
-  @media (max-width: 520px) {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Статус-встреча с директором</title>
+  <style>
     :root {
-      --interactive-h: 389px;
+      --red: #d00005;
+      --red-dark: #9f0004;
+      --text: #172033;
+      --panel: rgba(255, 255, 255, 0.50);
+      --panel-strong: rgba(255, 255, 255, 0.70);
+      --border: rgba(208, 0, 5, 0.20);
+      --panel: rgba(255, 255, 255, 0.48);
+      --panel-strong: rgba(255, 255, 255, 0.68);
+      --border: rgba(208, 0, 5, 0.22);
+      --wrong-bg: rgba(254, 242, 242, 0.90);
+      --wrong-border: #ef4444;
+      --wrong-text: #7f1d1d;
+      --right-bg: rgba(236, 253, 245, 0.90);
+      --right-border: #10b981;
+      --right-text: #064e3b;
+      --neutral-bg: rgba(238, 246, 255, 0.84);
+      --neutral-border: rgba(59, 130, 246, 0.24);
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
-      padding: 6px;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    #screen-case .case-header-inner {
-      min-width: 178px;
-      width: 40%;
-      padding: 7px 14px 8px;
+    .stage {
+      position: relative;
+      width: min(100%, 740px);
+      max-width: 740px;
+      height: 315px;
+      margin: 0 auto;
+      overflow: hidden;
+      background-color: #eaf2fb;
+      background-image: url("https://actiondigitalcode.github.io/accounting_interactive/audit-status-meeting/audit_bg.png?v=2");
+      background-size: 98% auto;
+      background-repeat: no-repeat;
+      background-position: center bottom;
     }
 
-    #screen-case .case-header h2 {
-      font-size: 13.5px;
+    .screen {
+      display: none;
     }
 
-    #screen-case .case-body {
-      width: 94%;
-      margin-top: 10px;
-      padding: 12px 13px;
+    .screen.active {
+      display: block;
     }
 
-    #screen-case .case-body p,
-    #screen-case .case-question {
-      font-size: 13.7px;
-      line-height: 1.34;
+    .panel {
+      position: absolute;
+      left: 7%;
+      left: 5.5%;
+      top: 3.2%;
+      width: 86%;
+      width: 89%;
+      min-height: 292px;
+      padding: 8px 9px;
+      padding: 9px 10px;
+      border-radius: 18px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      box-shadow: 0 12px 28px rgba(31, 41, 55, 0.12);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+      overflow: visible;
     }
 
-    .scene-wrap,
-    .final-scene {
-      height: 140px;
-    }
-
-    .options-wrap {
-      height: 231px;
-      padding: 5px 12px 10px;
-    }
-
-    .options-label {
-      font-size: 9.5px;
-      margin-bottom: 5px;
-    }
-
-    .option-btn {
-      min-height: 39px;
-      padding: 6px 10px;
-      font-size: 13.3px;
-      line-height: 1.18;
-      margin-bottom: 6px;
-    }
-
-    .bubble .btext {
+    .label {
+      display: inline-block;
+      margin: 0 0 5px;
+      padding: 4px 9px;
+      margin: 0 0 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--red);
+      color: white;
+      font-weight: 850;
+      font-size: 11px;
       font-size: 11.4px;
-      line-height: 1.22;
+      line-height: 1.05;
     }
 
-    .feedback-bar {
+    .case-text {
+      font-size: 12px;
+      line-height: 1.15;
       font-size: 12.4px;
-      line-height: 1.22;
-      padding: 7px 10px;
+      line-height: 1.16;
+      color: var(--text);
     }
 
-    .retry-btn,
-    .next-btn {
-      width: 48%;
-      min-width: 160px;
-      padding: 8px 12px;
-      font-size: 13.5px;
+    .case-text p {
+      margin: 0 0 4px;
     }
 
-    .final-body {
-      height: 249px;
+    .quote {
+      margin: 4px 0;
+      padding: 5px 7px;
+      margin: 5px 0;
+      padding: 6px 8px;
+      border-left: 3px solid var(--red);
+      background: rgba(255, 255, 255, 0.34);
+      background: rgba(255, 255, 255, 0.32);
+      border-radius: 10px;
+      font-weight: 750;
     }
-  }
-</style>
+
+    .question {
+      margin-top: 4px;
+      font-weight: 850;
+      color: #111827;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .case-full {
+      grid-column: 1 / -1;
+    }
+
+    button {
+      font: inherit;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 6px;
+      margin-top: 7px;
+    }
+
+    .btn-row.end {
+      justify-content: flex-end;
+    }
+
+    .btn-row.between {
+      justify-content: space-between;
+    }
+
+    .btn-row.center {
+      justify-content: center;
+    }
+
+    .btn {
+      border-radius: 11px;
+      padding: 5px 10px;
+      font-size: 10.8px;
+      padding: 6px 11px;
+      font-size: 11px;
+      font-weight: 850;
+      white-space: nowrap;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 7px 16px rgba(208, 0, 5, 0.24);
+    }
+
+    .btn-secondary {
+      color: var(--red-dark);
+      background: rgba(255, 255, 255, 0.58);
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(208, 0, 5, 0.24);
+    }
+
+    .screen-title {
+      margin: 0 0 6px;
+      font-size: 12px;
+      margin: 0 0 7px;
+      font-size: 12.5px;
+      font-weight: 850;
+    }
+
+    .director-line {
+      margin: 0 0 6px;
+      padding: 6px 8px;
+      margin: 0 0 7px;
+      padding: 7px 8px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.36);
+      background: rgba(255, 255, 255, 0.34);
+      border: 1px solid rgba(208, 0, 5, 0.13);
+      font-size: 11px;
+      line-height: 1.16;
+      font-size: 11.4px;
+      line-height: 1.17;
+      font-weight: 650;
+    }
+
+    .answer-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      gap: 8px;
+    }
+
+    .answer-card {
+      width: 100%;
+      min-height: 78px;
+      text-align: left;
+      display: flex;
+      gap: 6px;
+      gap: 7px;
+      align-items: flex-start;
+      padding: 7px;
+      border-radius: 12px;
+      padding: 9px;
+      border-radius: 13px;
+      background: var(--panel-strong);
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: 0 5px 12px rgba(31, 41, 55, 0.07);
+      font-size: 11px;
+      line-height: 1.13;
+      min-height: 56px;
+      font-size: 12px;
+      line-height: 1.18;
+    }
+
+    .answer-card:hover {
+      background: rgba(255, 255, 255, 0.84);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .answer-number {
+      flex: 0 0 auto;
+      width: 19px;
+      height: 19px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--red);
+      color: white;
+      font-size: 9px;
+      font-size: 9.5px;
+      font-weight: 850;
+      margin-top: 1px;
+    }
+
+    .answer-text {
+      margin: 0;
+    }
+
+    .selected-wrap {
+      display: none;
+    }
+
+    .selected-wrap.visible {
+      display: block;
+    }
+
+    .selected-answer {
+      padding: 7px;
+      border-radius: 12px;
+      padding: 9px;
+      border-radius: 13px;
+      background: var(--neutral-bg) !important;
+      border: 1px solid var(--neutral-border) !important;
+      font-size: 11px;
+      line-height: 1.16;
+      font-size: 12px;
+      line-height: 1.18;
+      font-weight: 650;
+      margin-bottom: 6px;
+      margin-bottom: 7px;
+    }
+
+    .selected-answer.wrong,
+    .selected-answer.correct {
+      background: var(--neutral-bg) !important;
+      border-color: var(--neutral-border) !important;
+    }
+
+    .explanation {
+      padding: 7px;
+      border-radius: 12px;
+      font-size: 10.8px;
+      line-height: 1.16;
+      margin-bottom: 6px;
+      padding: 9px;
+      border-radius: 13px;
+      font-size: 11.8px;
+      line-height: 1.18;
+      margin-bottom: 7px;
+      border: 1px solid;
+    }
+
+    .explanation.wrong {
+      background: var(--wrong-bg);
+      border-color: var(--wrong-border);
+    }
+
+    .explanation.correct {
+      background: var(--right-bg);
+      border-color: var(--right-border);
+    }
+
+    .explanation strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .explanation.wrong strong {
+      color: var(--wrong-text);
+    }
+
+    .explanation.correct strong {
+      color: var(--right-text);
+    }
+
+    @media (max-width: 520px) {
+      .stage {
+        width: 100%;
+        height: 360px;
+        background-size: 112% auto;
+        background-position: center bottom;
+      }
+
+      .panel {
+        left: 5%;
+        top: 4%;
+        width: 90%;
+        min-height: auto;
+      }
+
+      .case-grid,
+      .answer-list {
+        grid-template-columns: 1fr;
+      }
+
+      .answer-card {
+        min-height: auto;
+        font-size: 10.5px;
+        font-size: 10.8px;
+        line-height: 1.14;
+      }
+
+      .case-text {
+        font-size: 11px;
+        line-height: 1.16;
+      }
+
+      .explanation,
+      .selected-answer,
+      .director-line {
+        font-size: 10.5px;
+        font-size: 10.8px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-<div class="container">
+  <main class="stage">
+    <section id="screen1" class="screen active">
+      <div class="panel">
+        <div class="label">Статус-встреча с директором</div>
 
-  <div class="screen active" id="screen-case">
-    <div class="case-card">
-      <div class="case-header">
-        <img src="case-bg.png" alt="" class="case-bg">
-        <div class="case-header-inner">
-          <div class="case-tag">Кейс</div>
-          <h2>Разговор с директором</h2>
-        </div>
-      </div>
+        <div class="case-text">
+          <div class="case-grid">
+            <div>
+              <p><strong>Вы — главный бухгалтер компании, которая готовится привлечь инвесторов.</strong> Перед сделкой проходит аудит.</p>
+              <p>Аудиторы прислали предварительный список вопросов: по старым остаткам нужны расшифровки, по проектным расходам — пояснения по классификации, по одному пункту не хватает сверки.</p>
+            </div>
 
-      <div class="case-body">
-        <p>Марина — главный бухгалтер строительной компании. Сейчас утро пятницы. В бухгалтерию заходит директор: он только что посмотрел финансовые показатели за квартал и хочет понять, «почему налог на прибыль такой большой».</p>
-        <p>На самом деле выросла выручка компании — а вместе с ней и налог. При этом бухгалтерия проверила дебиторскую задолженность и сформировала резерв по сомнительным долгам для пяти просроченных задолженностей, снизив налоговую базу, насколько возможно.</p>
-        <p class="case-question">Как объяснить директору ситуацию и смысл этой работы?</p>
-        <button class="btn-start" onclick="go('screen-1')">Начать →</button>
-      </div>
-    </div>
-  </div>
+            <div>
+              <p>За неделю до встречи бухгалтерия уже запрашивала пояснения у проектных руководителей. Часть ответов пришла только накануне вечером, по двум пунктам данных еще нет.</p>
+              <p>Часть вопросов, скорее всего, закроется пояснениями, но отдельные пункты могут повлиять на сроки аудита.</p>
+            </div>
 
-  <div class="screen" id="screen-1">
-    <div class="dialogue-card">
-      <div class="step-row">
-        <div class="step-dot active"></div>
-        <div class="step-dot"></div>
-      </div>
-
-      <div class="scene-wrap">
-        <img id="scene1-neutral" src="director-neutral.png" alt="" style="display:block">
-        <img id="scene1-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-        <img id="scene1-happy" src="director-interested.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-
-        <div class="bubble-wrap">
-          <div class="bubble">
-            <div class="spk">Директор</div>
-            <div class="btext" id="bubble1-text">Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?</div>
+            <div class="case-full">
+              <div class="quote">«Аудиторы нашли замечания по учету. Почему я узнаю об этом от них, а не от бухгалтерии? Получается, мы сами не контролируем качество учета».</div>
+              <p class="question">Как вы ответите директору?</p>
+            </div>
           </div>
         </div>
 
-        <div id="fb-1" class="feedback-bar"></div>
-      </div>
-
-      <div class="options-wrap">
-        <div class="options-label">Ответ Марины</div>
-        <button class="option-btn" id="o1a" onclick="pick(1,'A')">Выручка выросла на 18%, но расходы росли медленнее — прибыль и налоговая база стали больше.</button>
-        <button class="option-btn" id="o1b" onclick="pick(1,'B')">Маржа улучшилась, но часть долгов просрочена. Мы создали резерв и снизили налог к уплате на 960 тысяч.</button>
-        <button class="option-btn" id="o1c" onclick="pick(1,'C')">Мы проверили расчет налога и сверили его с обороткой. Ошибок нет, сумма подтверждается документами.</button>
-
-        <div class="action-btns">
-          <button class="retry-btn" id="r1" onclick="reset(1)">↩ Попробовать еще раз</button>
-          <button class="next-btn" id="n1" onclick="go('screen-2')">Продолжить →</button>
+        <div class="btn-row end">
+          <button class="btn btn-primary" onclick="showScreen(2)">К вариантам</button>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="screen" id="screen-2">
-    <div class="dialogue-card">
-      <div class="step-row">
-        <div class="step-dot done"></div>
-        <div class="step-dot active"></div>
-      </div>
+    <section id="screen2" class="screen">
+      <div class="panel">
+        <div class="label">Статус-встреча с директором</div>
 
-      <div class="scene-wrap">
-        <img id="scene2-interested" src="director-interested.png" alt="" style="display:block">
-        <img id="scene2-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-        <img id="scene2-happy" src="director-happy.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
+        <div id="step1Choices">
+          <p class="screen-title">Как вы ответите директору?</p>
+          <div class="answer-list" id="step1List"></div>
 
-        <div class="bubble-wrap">
-          <div class="bubble">
-            <div class="spk">Директор</div>
-            <div class="btext" id="bubble2-text">Можете подробнее?</div>
+          <div class="btn-row between">
+            <button class="btn btn-secondary" onclick="showScreen(1)">Вернуться к ситуации</button>
           </div>
         </div>
 
-        <div id="fb-2" class="feedback-bar"></div>
-      </div>
+        <div id="step1Selected" class="selected-wrap">
+          <div id="step1SelectedAnswer" class="selected-answer"></div>
+          <div id="step1Explanation" class="explanation"></div>
 
-      <div class="options-wrap">
-        <div class="options-label">Ответ Марины</div>
-        <button class="option-btn" id="o2a" onclick="pick(2,'A')">Есть пять клиентов, которые не платят больше трех месяцев. Их долг — 4,8 млн. Мы создали по нему резерв: закон разрешает учесть это в расходах и снизить налог.</button>
-        <button class="option-btn" id="o2b" onclick="pick(2,'B')">После анализа дебиторской задолженности мы применили инструмент, который разрешен Налоговым кодексом.</button>
-        <button class="option-btn" id="o2c" onclick="pick(2,'C')">Мы сэкономили около миллиона рублей — без этого налог был бы около 5,2 млн.</button>
-
-        <div class="action-btns">
-          <button class="retry-btn" id="r2" onclick="reset(2)">↩ Попробовать еще раз</button>
-          <button class="next-btn" id="n2" onclick="go('screen-final')">Завершить →</button>
+          <div class="btn-row between">
+            <button class="btn btn-secondary" onclick="showScreen(1)">Вернуться к ситуации</button>
+            <button id="step1Retry" class="btn btn-secondary" onclick="resetStep(1)">Попробовать снова</button>
+            <button id="step1Continue" class="btn btn-primary" onclick="showScreen(3)">Продолжить</button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="screen" id="screen-final">
-    <div class="final-card">
-      <div class="final-scene">
-        <img src="handshake.png" alt="">
+    <section id="screen3" class="screen">
+      <div class="panel">
+        <div class="label">Статус-встреча с директором</div>
+
+        <div class="director-line"><strong>Директор:</strong> Хорошо, покажите.</div>
+
+        <div id="step2Choices">
+          <p class="screen-title">Что вы ответите?</p>
+          <div class="answer-list" id="step2List"></div>
+        </div>
+
+        <div id="step2Selected" class="selected-wrap">
+          <div id="step2SelectedAnswer" class="selected-answer"></div>
+          <div id="step2Explanation" class="explanation"></div>
+
+          <div class="btn-row center">
+            <button id="step2Retry" class="btn btn-secondary" onclick="resetStep(2)">Попробовать снова</button>
+            <button id="finishBtn" class="btn btn-primary" onclick="finishCase()">Завершить</button>
+          </div>
+        </div>
       </div>
+    </section>
+  </main>
 
-      <div class="final-body">
-        <div class="final-badge">✓ Вы успешно справились с заданием</div>
-        <h2 class="final-title">Марине удалось продемонстрировать ценность работы бухгалтерии</h2>
-        <p class="final-text">У директора осталось позитивное впечатление: он получил ответ на свой вопрос и убедился, что бухгалтерия провела хорошую работу.</p>
-        <div class="final-highlight">Именно так работает язык бизнеса — через конкретные суммы и понятную пользу.</div>
-        <button class="btn-restart" onclick="restart()">↩ Попробовать еще раз</button>
-      </div>
-    </div>
-  </div>
+  <script>
+    const step1 = [
+      {
+        text: "Я бы не стала говорить, что бухгалтерия не контролирует учет. Часть замечаний возникла потому, что проектные руководители не дали расшифровки вовремя.",
+        correct: false,
+        explanation: "Это понятная реакция: вам кажется несправедливым, что проблему вешают на бухгалтерию. Но такой ответ скорее всего отдалит от решения конфликта."
+      },
+      {
+        text: "Это только предварительный список вопросов. На аудите такие замечания бывают почти всегда, это еще не значит, что у нас есть существенные ошибки в учете.",
+        correct: false,
+        explanation: "Ответ спокойный и не конфликтный, но как будто снижает значимость проблемы — вместо того, чтобы отстоять свои интересы и показать управляемый план."
+      },
+      {
+        text: "Я подготовлю официальный ответ аудиторам по списку вопросов и вернусь к вам, когда они его рассмотрят.",
+        correct: false,
+        explanation: "Ответ процедурно корректный, но директор поднял вопрос не только об аудиторах, а о качестве внутреннего контроля. Ему нужна оценка ситуации сейчас, а вам — показать бухгалтерию со справедливой стороны."
+      },
+      {
+        text: "Давайте я пройдусь по списку и покажу: где есть риск для отчетности, где нужны пояснения, а где не хватило данных или контроля. По каждому пункту дам план и срок.",
+        correct: true,
+        explanation: "Хороший заход: директор получает план решения проблемы, а вы переводите претензию в управляемый диалог."
+      }
+    ];
 
-</div>
+    const step2 = [
+      {
+        text: "Замечания посмотрела. Да, контроль нужно усилить. Возьму это в работу, чтобы в следующий раз таких вопросов от аудиторов не было.",
+        correct: false,
+        explanation: "Ответ выглядит ответственным, но он общий и не помогает директору понять масштаб проблемы. Получается, будто все замечания — результат слабого контроля со стороны бухгалтерии."
+      },
+      {
+        text: "Основные вопросы аудиторов связаны с расшифровками и проектными расходами. Эти данные зависят от проектных руководителей, поэтому сначала запрошу пояснения у них.",
+        correct: false,
+        explanation: "Ответ смещает фокус на чужую зону ответственности. При этом одно замечание связано с недостающей сверкой со стороны бухгалтерии, но в ответе об этом не говорится."
+      },
+      {
+        text: "По списку подготовим расшифровки, пояснения по проектам и недостающую сверку. После отправки ответа сообщу, остались ли у аудиторов вопросы.",
+        correct: false,
+        explanation: "Это именно те действия, которые нужно предпринять в ответ на замечания аудиторов. В то же время он не снимает вопрос о качестве контроля со стороны бухгалтерии."
+      },
+      {
+        text: "Существенного риска пока не вижу. Остатки расшифруем, по проектным расходам согласуем правило, по сверке — наша недоработка, добавлю контроль перед передачей аудиторам.",
+        correct: true,
+        explanation: "Вы даете понятную картину директору, не поддаетесь эмоциям, переводите диалог в конструктив и ставите границы: вот такие критерии соблюдены, вот что нужно доработать."
+      }
+    ];
 
-<script>
-const D = {
-  1: {
-    A: { ok: false, reply: 'Ну, понятно.', note: 'Директор услышал объяснение, но ценность работы бухгалтерии осталась неочевидной.' },
-    B: { ok: true,  reply: '', note: 'Марина назвала конкретную цифру, и директор прислушался. У него возникла мысль, что бухгалтерия не просто «считает налоги», а ищет законные способы их снизить.' },
-    C: { ok: false, reply: 'Понял, спасибо.', note: 'Директор ничего не понял, но не стал переспрашивать. Момент для демонстрации ценности упущен.' }
-  },
-  2: {
-    A: { ok: false, reply: 'Ладно, понял.', note: 'Технически верно, но ценность работы бухгалтерии осталась неочевидной.' },
-    B: { ok: false, reply: 'А, ну понятно.', note: 'Формально верно, но директор не узнал ничего конкретного.' },
-    C: { ok: true,  reply: 'Понял. Спасибо за хорошую работу.', note: null }
-  }
-};
+    function showScreen(number) {
+      document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+      document.getElementById(`screen${number}`).classList.add("active");
+    }
 
-const map = {
-  1: { A: 'o1a', B: 'o1b', C: 'o1c' },
-  2: { A: 'o2a', B: 'o2b', C: 'o2c' }
-};
+    function renderAnswers(stepNumber, data) {
+      const list = document.getElementById(stepNumber === 1 ? "step1List" : "step2List");
+      list.innerHTML = "";
 
-function setScene(step, mood) {
-  const prefix = step === 1 ? 'scene1' : 'scene2';
+      data.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.className = "answer-card";
+        button.innerHTML = `
+          <span class="answer-number">${index + 1}</span>
+          <p class="answer-text">${answer.text}</p>
+        `;
+        button.addEventListener("click", () => selectAnswer(stepNumber, answer));
+        list.appendChild(button);
+      });
+    }
 
-  const moodMap = step === 1
-    ? { neutral: 'neutral', angry: 'angry', interested: 'happy' }
-    : { interested: 'interested', angry: 'angry', happy: 'happy' };
+    function selectAnswer(stepNumber, answer) {
+      const choices = document.getElementById(stepNumber === 1 ? "step1Choices" : "step2Choices");
+      const selected = document.getElementById(stepNumber === 1 ? "step1Selected" : "step2Selected");
+      const selectedAnswer = document.getElementById(stepNumber === 1 ? "step1SelectedAnswer" : "step2SelectedAnswer");
+      const explanation = document.getElementById(stepNumber === 1 ? "step1Explanation" : "step2Explanation");
+      const retry = document.getElementById(stepNumber === 1 ? "step1Retry" : "step2Retry");
+      const next = document.getElementById(stepNumber === 1 ? "step1Continue" : "finishBtn");
 
-  const imgs = step === 1
-    ? ['scene1-neutral', 'scene1-angry', 'scene1-happy']
-    : ['scene2-interested', 'scene2-angry', 'scene2-happy'];
+      choices.style.display = "none";
+      selected.classList.add("visible");
 
-  imgs.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
+      selectedAnswer.textContent = answer.text;
+      selectedAnswer.className = `selected-answer ${answer.correct ? "correct" : "wrong"}`;
 
-  const target = document.getElementById(`${prefix}-${moodMap[mood] || mood}`);
-  if (target) target.style.display = 'block';
-}
+      explanation.className = `explanation ${answer.correct ? "correct" : "wrong"}`;
+      explanation.innerHTML = `<strong>${answer.correct ? "Верный выбор" : "Не лучший вариант"}</strong>${answer.explanation}`;
 
-function pick(step, opt) {
-  const d = D[step][opt];
+      retry.style.display = answer.correct ? "none" : "inline-block";
+      next.style.display = answer.correct ? "inline-block" : "none";
+    }
 
-  Object.values(map[step]).forEach(id => {
-    document.getElementById(id).disabled = true;
-  });
+    function resetStep(stepNumber) {
+      const choices = document.getElementById(stepNumber === 1 ? "step1Choices" : "step2Choices");
+      const selected = document.getElementById(stepNumber === 1 ? "step1Selected" : "step2Selected");
+      const retry = document.getElementById(stepNumber === 1 ? "step1Retry" : "step2Retry");
+      const next = document.getElementById(stepNumber === 1 ? "step1Continue" : "finishBtn");
 
-  document.getElementById(map[step][opt]).classList.add(d.ok ? 'sel-right' : 'sel-wrong');
+      choices.style.display = "block";
+      selected.classList.remove("visible");
+      retry.style.display = "inline-block";
+      next.style.display = "none";
+    }
 
-  const fb = document.getElementById(`fb-${step}`);
-  const bubbleEl = document.getElementById(`bubble${step}-text`);
-  const bubbleWrap = bubbleEl ? bubbleEl.closest('.bubble-wrap') : null;
+    function finishCase() {
+      resetStep(1);
+      resetStep(2);
+      showScreen(1);
+    }
 
-  if (bubbleEl) bubbleEl.textContent = d.reply;
-  if (step === 1 && d.ok && bubbleWrap) bubbleWrap.style.display = 'none';
+    renderAnswers(1, step1);
+    renderAnswers(2, step2);
 
-  if (d.ok) {
-    fb.className = 'feedback-bar right';
-    fb.innerHTML = d.note || '';
-    fb.style.display = d.note ? 'block' : 'none';
-    document.getElementById(`n${step}`).style.display = 'block';
-    setScene(step, step === 1 ? 'interested' : 'happy');
-  } else {
-    fb.className = 'feedback-bar wrong';
-    fb.innerHTML = d.note || '';
-    fb.style.display = 'block';
-    document.getElementById(`r${step}`).style.display = 'block';
-    setScene(step, 'angry');
-  }
-
-  sendHeight();
-}
-
-function reset(step) {
-  Object.values(map[step]).forEach(id => {
-    const b = document.getElementById(id);
-    b.disabled = false;
-    b.classList.remove('sel-right', 'sel-wrong');
-  });
-
-  document.getElementById(`fb-${step}`).style.display = 'none';
-  document.getElementById(`r${step}`).style.display = 'none';
-  document.getElementById(`n${step}`).style.display = 'none';
-
-  setScene(step, step === 1 ? 'neutral' : 'interested');
-
-  const origTexts = {
-    1: 'Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?',
-    2: 'Можете подробнее?'
-  };
-
-  const bEl = document.getElementById(`bubble${step}-text`);
-
-  if (bEl) {
-    bEl.textContent = origTexts[step];
-    const bubbleWrap = bEl.closest('.bubble-wrap');
-    if (bubbleWrap) bubbleWrap.style.display = 'block';
-  }
-
-  sendHeight();
-}
-
-function go(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-  sendHeight();
-}
-
-function restart() {
-  reset(1);
-  reset(2);
-  go('screen-case');
-}
-
-function sendHeight() {
-  const h = 405;
-
-  window.parent.postMessage({ type: 'setHeight', height: h }, '*');
-  window.parent.postMessage('[iFrameSizer]' + h + ':0:0:bodyOffset', '*');
-}
-
-window.addEventListener('load', sendHeight);
-window.addEventListener('resize', sendHeight);
-
-let count = 0;
-const interval = setInterval(() => {
-  sendHeight();
-  count++;
-  if (count > 10) clearInterval(interval);
-}, 300);
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.9/iframeResizer.contentWindow.min.js"></script>
+    document.getElementById("step1Continue").style.display = "none";
+    document.getElementById("finishBtn").style.display = "none";
+  </script>
 </body>
 </html>
