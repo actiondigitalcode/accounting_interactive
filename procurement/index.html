@@ -13,19 +13,32 @@
 }
 
 :root {
-  --bg: #F7F5F0;
+  --bg: #F5F3EE;
   --card: #FFFFFF;
-  --accent: #2D5BE3;
-  --accent-dark: #1A3FA0;
-  --text: #111827;
-  --text-light: #6B7280;
-  --wrong: #C53030;
-  --wrong-bg: #FFF5F5;
-  --right: #276749;
-  --right-bg: #F0FFF4;
-  --neutral: rgba(255,255,255,0.88);
-  --border: #E5E2DA;
-  --shadow: 0 12px 36px rgba(0,0,0,0.10);
+  --accent: #d00005;
+  --accent-dark: #9f0004;
+
+  --blue: #2D5BE3;
+  --blue-dark: #1A3FA0;
+  --blue-bg: rgba(45,91,227,0.08);
+  --blue-border: rgba(45,91,227,0.26);
+
+  --text: #172033;
+  --text-light: #4B5563;
+
+  --wrong: #7f1d1d;
+  --wrong-bg: rgba(254,242,242,0.94);
+  --wrong-border: #ef4444;
+
+  --right: #064e3b;
+  --right-bg: rgba(236,253,245,0.94);
+  --right-border: #10b981;
+
+  --border: rgba(208,0,5,0.22);
+  --shadow: 0 12px 28px rgba(31,41,55,0.12);
+
+  --case-height: 410px;
+  --work-height: 500px;
 }
 
 html,
@@ -37,8 +50,8 @@ body {
 body {
   font-family: Georgia, serif;
   background: var(--bg);
-  padding: 14px;
-  overflow-x: hidden;
+  padding: 10px;
+  overflow: hidden;
   color: var(--text);
 }
 
@@ -47,8 +60,6 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
-
-/* SCREEN SYSTEM */
 
 .screen {
   display: none;
@@ -71,7 +82,7 @@ body {
   }
 }
 
-/* SCREEN 1: CASE */
+/* SCREEN 1 */
 
 .card-window {
   width: 100%;
@@ -85,13 +96,13 @@ body {
 
 .case-window {
   display: grid;
-  grid-template-columns: 42% 58%;
-  min-height: 410px;
+  grid-template-columns: 39% 61%;
+  height: var(--case-height);
 }
 
 .case-image-wrap {
   width: 100%;
-  min-height: 410px;
+  height: var(--case-height);
   overflow: hidden;
   background: #fff;
 }
@@ -99,24 +110,24 @@ body {
 .case-image {
   width: 115%;
   height: 100%;
-  min-height: 410px;
   object-fit: cover;
   object-position: center center;
-  transform: translateX(8%);
+  transform: translateX(13%);
   display: block;
 }
 
 .case-content {
-  padding: 24px 28px;
+  padding: 22px 24px 20px 18px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
+  overflow: hidden;
 }
 
 .case-tag {
   display: block;
   text-align: center;
-  background: rgba(45,91,227,0.10);
+  background: rgba(208,0,5,0.10);
   color: var(--accent-dark);
   font-family: "Courier New", monospace;
   font-size: 10px;
@@ -124,19 +135,19 @@ body {
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: 999px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   width: fit-content;
 }
 
 .case-content p {
-  font-size: 13px;
-  line-height: 1.52;
+  font-size: 13.8px;
+  line-height: 1.46;
   color: var(--text);
 }
 
 .case-question {
   font-style: italic;
-  color: var(--text-light);
+  color: var(--text);
   border-left: 3px solid var(--accent);
   padding-left: 12px;
   margin-top: 2px;
@@ -150,7 +161,8 @@ body {
   color: #fff;
   border: none;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 13.5px;
+  font-weight: 700;
   font-family: Georgia, serif;
   cursor: pointer;
   transition: background 0.2s;
@@ -163,91 +175,96 @@ body {
   background: var(--accent-dark);
 }
 
-/* EDITOR BACKGROUND FOR SCREEN 2 AND 3 */
+/* SCREEN 2 AND 3 */
 
 .editor-wrap {
   width: 100%;
   max-width: 900px;
-  min-height: 520px;
+  height: var(--work-height);
   margin: 0 auto;
-  background-image: url("comp_task.png");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background: var(--card);
   border-radius: 18px;
   box-shadow: var(--shadow);
   overflow: hidden;
-  padding: 52px 76px 34px;
+  padding: 14px 28px 14px;
   position: relative;
 }
 
 .editor-content {
-  width: 76%;
-  max-width: 650px;
+  width: 100%;
+  max-width: 820px;
+  height: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* SCREEN 2: RULES */
+/* SCREEN 2 */
 
 .doc-title {
-  font-size: 12.5px;
+  font-size: 17px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
   margin-bottom: 2px;
+  line-height: 1.15;
 }
 
 .doc-subtitle {
-  font-size: 8.5px;
+  font-size: 10.5px;
   color: var(--text-light);
   text-align: center;
   font-family: "Courier New", monospace;
   letter-spacing: 0.05em;
-  margin-bottom: 9px;
+  margin-bottom: 7px;
 }
 
 .doc-instruction {
-  background: rgba(238,242,255,0.84);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 7px 7px 0;
-  padding: 6px 9px;
-  font-size: 8.8px;
-  color: var(--accent-dark);
-  margin-bottom: 8px;
-  line-height: 1.35;
+  background: rgba(255,255,255,0.78);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+  padding: 6px 10px;
+  font-size: 10.8px;
+  color: var(--text);
+  margin-bottom: 7px;
+  line-height: 1.25;
+  box-shadow: none;
+}
+
+.rules-list {
+  overflow: hidden;
 }
 
 .rule-row {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
-  padding: 4px 6px;
-  border-radius: 7px;
-  margin-bottom: 4px;
-  border: 1px solid rgba(229,226,218,0.9);
-  background: rgba(255,255,255,0.82);
+  gap: 7px;
+  padding: 5px 7px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(208,0,5,0.16);
+  background: rgba(255,255,255,0.78);
   transition: all 0.2s;
   cursor: default;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
 }
 
 .rule-row.correct {
-  background: rgba(240,255,244,0.90);
-  border-color: #68D391;
+  background: var(--right-bg);
+  border-color: var(--right-border);
 }
 
 .rule-row.incorrect {
-  background: rgba(255,245,245,0.90);
-  border-color: #FC8181;
+  background: var(--wrong-bg);
+  border-color: var(--wrong-border);
 }
 
 .rule-num {
   font-family: "Courier New", monospace;
-  font-size: 8.5px;
+  font-size: 10px;
   color: var(--text-light);
-  min-width: 15px;
-  padding-top: 1px;
+  min-width: 17px;
+  padding-top: 2px;
 }
 
 .rule-content {
@@ -255,8 +272,8 @@ body {
 }
 
 .rule-text {
-  font-size: 8.9px;
-  line-height: 1.32;
+  font-size: 10.8px;
+  line-height: 1.22;
   color: var(--text);
 }
 
@@ -267,19 +284,19 @@ body {
 
 .rule-actions {
   display: flex;
-  gap: 3px;
+  gap: 4px;
   flex-shrink: 0;
   padding-top: 0;
 }
 
 .btn-ok,
 .btn-no {
-  width: 21px;
-  height: 21px;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -323,100 +340,52 @@ body {
 }
 
 .vote-hint {
-  font-size: 8.5px;
+  font-size: 10px;
   color: var(--wrong);
   margin-top: 3px;
 }
 
-/* REPLACE OPTIONS */
+/* BOTTOM BUTTONS */
 
-.replace-panel {
-  display: none;
-  margin-top: 5px;
-  padding: 6px;
-  background: rgba(255,249,240,0.96);
-  border: 1px solid #F6AD55;
-  border-radius: 7px;
-  animation: fadeIn 0.25s ease;
+.bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 0;
 }
 
-.replace-panel.active {
-  display: block;
-}
-
-.replace-label {
-  font-size: 7.8px;
-  color: #744210;
-  font-family: "Courier New", monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 4px;
-}
-
-.replace-option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: #fff;
-  border: 1px solid #E5E2DA;
-  border-radius: 5px;
-  padding: 4px 6px;
-  font-size: 8.5px;
-  line-height: 1.25;
-  color: var(--text);
-  cursor: pointer;
-  margin-bottom: 4px;
-  transition: all 0.2s;
+.btn-back {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.72);
+  color: var(--accent-dark);
+  border: 1px solid rgba(208,0,5,0.24);
+  border-radius: 8px;
+  font-size: 12px;
   font-family: Georgia, serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.replace-option:hover:not(:disabled) {
-  border-color: var(--accent);
-  background: #F0F4FF;
+.btn-back:hover {
+  background: rgba(255,255,255,0.95);
 }
-
-.replace-option:disabled {
-  cursor: default;
-}
-
-.replace-option.sel-right {
-  background: var(--right-bg);
-  border-color: #68D391;
-  color: var(--right);
-}
-
-.replace-option.sel-wrong {
-  background: var(--wrong-bg);
-  border-color: #FC8181;
-  color: var(--wrong);
-}
-
-.replace-hint {
-  display: none;
-  font-size: 8.5px;
-  color: var(--wrong);
-  margin-top: 2px;
-}
-
-.replace-hint.show {
-  display: block;
-}
-
-/* SUBMIT */
 
 .submit-wrap {
-  text-align: center;
-  margin-top: 8px;
+  text-align: right;
 }
 
 .btn-submit {
-  padding: 7px 22px;
+  padding: 8px 22px;
   background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 8px;
-  font-size: 10.5px;
+  font-size: 12px;
   font-family: Georgia, serif;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.2s;
   opacity: 0.4;
@@ -432,7 +401,117 @@ body {
   background: var(--accent-dark);
 }
 
-/* SCREEN 3: FINAL */
+/* MODAL */
+
+.modal-backdrop {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(23,32,51,0.24);
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.modal-backdrop.active {
+  display: flex;
+}
+
+.replace-modal-card {
+  width: 78%;
+  max-width: 680px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(208,0,5,0.22);
+  border-radius: 16px;
+  box-shadow: 0 18px 42px rgba(31,41,55,0.18);
+  padding: 16px 18px;
+}
+
+.replace-label {
+  font-size: 11px;
+  color: var(--accent-dark);
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.replace-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--blue-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12.4px;
+  line-height: 1.25;
+  color: var(--text);
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+  font-family: Georgia, serif;
+}
+
+.replace-option:hover {
+  border-color: var(--blue);
+  background: var(--blue-bg);
+  color: var(--text);
+}
+
+.replace-option.sel-right,
+.replace-option.sel-right:hover {
+  background: var(--right-bg);
+  border-color: var(--right-border);
+  color: var(--right);
+}
+
+.replace-option.sel-wrong,
+.replace-option.sel-wrong:hover {
+  background: var(--wrong-bg);
+  border-color: var(--wrong-border);
+  color: var(--wrong);
+}
+
+.replace-hint {
+  display: none;
+  font-size: 11px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.replace-hint.show {
+  display: block;
+}
+
+.replace-hint.wrong {
+  color: var(--wrong);
+}
+
+.replace-hint.right {
+  color: var(--right);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.btn-modal-close {
+  padding: 7px 14px;
+  background: rgba(255,255,255,0.72);
+  color: var(--accent-dark);
+  border: 1px solid rgba(208,0,5,0.24);
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* SCREEN 3 */
 
 .final-content {
   padding-top: 0;
@@ -440,7 +519,7 @@ body {
 
 .final-top {
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .confetti-canvas {
@@ -452,59 +531,44 @@ body {
   z-index: 10;
 }
 
-.final-badge {
-  display: inline-block;
-  background: rgba(240,255,244,0.92);
-  color: var(--right);
-  border: 1px solid #9AE6B4;
-  border-radius: 20px;
-  padding: 3px 11px;
-  font-size: 8.8px;
-  margin-bottom: 5px;
-  font-family: "Courier New", monospace;
-  letter-spacing: 0.05em;
-}
-
 .final-title {
-  font-size: 11px;
+  font-size: 17px;
   color: var(--text);
   margin-bottom: 8px;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .final-doc-title {
-  font-size: 11.5px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
-  margin-bottom: 7px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(208,0,5,0.18);
 }
 
 .final-rule {
   display: flex;
-  gap: 6px;
-  padding: 4px 6px;
-  border-radius: 7px;
-  margin-bottom: 4px;
-  background: rgba(240,255,244,0.88);
-  border: 1px solid #9AE6B4;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  gap: 7px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  background: var(--right-bg);
+  border: 1px solid var(--right-border);
 }
 
 .final-rule.highlight {
   border-color: #F6AD55;
-  background: rgba(255,251,235,0.90);
+  background: rgba(255,251,235,0.92);
 }
 
 .final-rule-num {
   font-family: "Courier New", monospace;
-  font-size: 8.5px;
+  font-size: 10.5px;
   color: var(--right);
-  min-width: 14px;
-  padding-top: 1px;
+  min-width: 16px;
+  padding-top: 2px;
 }
 
 .final-rule.highlight .final-rule-num {
@@ -512,8 +576,8 @@ body {
 }
 
 .final-rule-text {
-  font-size: 8.9px;
-  line-height: 1.32;
+  font-size: 12px;
+  line-height: 1.25;
   color: var(--text);
 }
 
@@ -527,26 +591,32 @@ body {
 
 .btn-restart {
   display: block;
-  margin: 9px auto 0;
-  padding: 7px 20px;
-  background: rgba(255,255,255,0.86);
-  color: var(--text-light);
-  border: 1px solid var(--border);
+  margin: 8px auto 0;
+  padding: 8px 22px;
+  background: rgba(255,255,255,0.72);
+  color: var(--accent-dark);
+  border: 1px solid rgba(208,0,5,0.24);
   border-radius: 8px;
-  font-size: 9.5px;
+  font-size: 12px;
   font-family: Georgia, serif;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-restart:hover {
-  background: var(--border);
+  background: rgba(255,255,255,0.95);
   color: var(--text);
 }
 
-/* COMPACT IFRAME / PLATFORM */
+/* COMPACT */
 
 @media (max-width: 860px) {
+  :root {
+    --case-height: 390px;
+    --work-height: 500px;
+  }
+
   body {
     padding: 10px;
   }
@@ -561,88 +631,69 @@ body {
 
   .case-window {
     grid-template-columns: 39% 61%;
-    min-height: 390px;
-  }
-
-  .case-image-wrap,
-  .case-image {
-    min-height: 390px;
   }
 
   .case-content {
-    padding: 20px 22px;
+    padding: 20px 20px 18px 16px;
     gap: 8px;
   }
 
   .case-content p {
-    font-size: 11.5px;
-    line-height: 1.45;
-  }
-
-  .editor-wrap {
-    min-height: 500px;
-    padding: 48px 54px 30px;
-  }
-
-  .editor-content {
-    width: 80%;
-  }
-}
-
-/* ONLY VERY SMALL MOBILE */
-
-@media (max-width: 560px) {
-  .case-window {
-    display: block;
-    min-height: auto;
-  }
-
-  .case-image-wrap {
-    height: 190px;
-    min-height: 0;
+    font-size: 12.4px;
+    line-height: 1.38;
   }
 
   .case-image {
-    width: 115%;
-    height: 190px;
-    min-height: 0;
-    object-fit: cover;
-    object-position: center center;
-    transform: translateX(8%);
-  }
-
-  .case-content {
-    padding: 18px;
-  }
-
-  .case-content p {
-    font-size: 12px;
+    transform: translateX(13%);
   }
 
   .editor-wrap {
-    min-height: auto;
-    padding: 42px 14px 24px;
-    background-size: cover;
-    background-position: center top;
+    padding: 14px 24px 14px;
   }
 
-  .editor-content {
-    width: 100%;
-    max-width: 100%;
+  .doc-title {
+    font-size: 16px;
+  }
+
+  .doc-instruction {
+    font-size: 10.2px;
+    padding: 6px 9px;
+    margin-bottom: 6px;
   }
 
   .rule-row {
-    gap: 6px;
+    padding: 4px 6px;
+    margin-bottom: 4px;
   }
 
-  .rule-actions {
-    flex-direction: column;
+  .rule-text {
+    font-size: 10.2px;
+    line-height: 1.18;
   }
 
   .btn-ok,
   .btn-no {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .replace-modal-card {
+    width: 86%;
+  }
+
+  .replace-option {
+    font-size: 11.4px;
+    line-height: 1.2;
+  }
+
+  .final-rule {
+    margin-bottom: 5px;
+    padding: 6px 7px;
+  }
+
+  .final-rule-text {
+    font-size: 11.1px;
+    line-height: 1.18;
   }
 }
 </style>
@@ -651,7 +702,7 @@ body {
 <body>
 <div class="container">
 
-  <!-- SCREEN 1: CASE -->
+  <!-- SCREEN 1 -->
   <div class="screen active" id="s-case">
     <div class="card-window case-window">
       <div class="case-image-wrap">
@@ -674,7 +725,7 @@ body {
     </div>
   </div>
 
-  <!-- SCREEN 2: RULES -->
+  <!-- SCREEN 2 -->
   <div class="screen" id="s-rules">
     <div class="editor-wrap">
       <div class="editor-content">
@@ -685,169 +736,114 @@ body {
           Отметьте каждый пункт: ✓ — если формулировка рабочая, ✗ — если ее необходимо уточнить. Для нерабочих пунктов выберите исправленную версию.
         </div>
 
-        <!-- ПУНКТ 1 -->
-        <div class="rule-row" id="row-1">
-          <div class="rule-num">1.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект документов: счет, спецификацию, накладную, счет-фактуру, транспортные документы.</div>
-          </div>
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(1,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(1,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 2 -->
-        <div class="rule-row" id="row-2">
-          <div class="rule-num">2.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение» на общем диске. Файл называется по шаблону: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
-          </div>
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(2,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(2,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 3 -->
-        <div class="rule-row" id="row-3">
-          <div class="rule-num">3.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>К какому сроку:</b> документы передаются в день получения, но не позднее следующего рабочего дня до 12:00.</div>
-          </div>
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(3,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(3,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 4 -->
-        <div class="rule-row" id="row-4">
-          <div class="rule-num">4.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>Что делать, если срок попадает на выходной:</b> при совпадении срока передачи с нерабочими днями документы передаются в разумный срок после восстановления рабочего процесса.</div>
-
-            <div class="replace-panel" id="rp-4">
-              <div class="replace-label">Выберите рабочую формулировку</div>
-
-              <button class="replace-option" type="button" onclick="pickReplace(4,0)">Если срок попадает на нерабочий день — документы передаются в ближайшее возможное время после выхода на работу.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(4,1)">Если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(4,2)">Документы передаются с учетом производственной необходимости и графика работы сотрудников.</button>
-
-              <div class="replace-hint" id="rh-4">Необходимо уточнить формулировку. Попробуйте еще раз</div>
+        <div class="rules-list">
+          <div class="rule-row" id="row-1">
+            <div class="rule-num">1.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>Что передается:</b> по каждой закупке снабжение передает полный комплект документов: счет, спецификацию, накладную, счет-фактуру, транспортные документы.</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(1,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(1,'no')" title="Нерабочий пункт">✗</button>
             </div>
           </div>
 
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(4,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(4,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 5 -->
-        <div class="rule-row" id="row-5">
-          <div class="rule-num">5.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>Что считается выполненным:</b> передача считается выполненной только если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
-          </div>
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(5,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(5,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 6 -->
-        <div class="rule-row" id="row-6">
-          <div class="rule-num">6.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>Как оформлены документы:</b> документы должны быть оформлены надлежащим образом и соответствовать установленным требованиям.</div>
-
-            <div class="replace-panel" id="rp-6">
-              <div class="replace-label">Выберите рабочую формулировку</div>
-
-              <button class="replace-option" type="button" onclick="pickReplace(6,0)">Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(6,1)">Документы должны содержать все необходимые реквизиты и быть пригодны для принятия к учету бухгалтерией.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(6,2)">Качество документов должно соответствовать стандартам документооборота, принятым в компании.</button>
-
-              <div class="replace-hint" id="rh-6">Необходимо уточнить формулировку. Попробуйте еще раз</div>
+          <div class="rule-row" id="row-2">
+            <div class="rule-num">2.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>В каком виде:</b> бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение» на общем диске. Файл называется по шаблону: Дата_Поставщик_Документ. Мессенджер — только для уведомления.</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(2,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(2,'no')" title="Нерабочий пункт">✗</button>
             </div>
           </div>
 
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(6,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(6,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 7 -->
-        <div class="rule-row" id="row-7">
-          <div class="rule-num">7.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>Кто несет ответственность:</b> ответственный за передачу документов — сотрудник отдела снабжения.</div>
-
-            <div class="replace-panel" id="rp-7">
-              <div class="replace-label">Выберите рабочую формулировку</div>
-
-              <button class="replace-option" type="button" onclick="pickReplace(7,0)">Ответственный за передачу документов — любой сотрудник отдела снабжения, который получил документы.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(7,1)">Ответственный за передачу документов — руководитель отдела снабжения.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(7,2)">Ответственный определяется отделом снабжения в зависимости от ситуации.</button>
-
-              <div class="replace-hint" id="rh-7">Необходимо уточнить формулировку. Попробуйте еще раз</div>
+          <div class="rule-row" id="row-3">
+            <div class="rule-num">3.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>К какому сроку:</b> документы передаются в день получения, но не позднее следующего рабочего дня до 12:00.</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(3,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(3,'no')" title="Нерабочий пункт">✗</button>
             </div>
           </div>
 
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(7,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(7,'no')" title="Нерабочий пункт">✗</button>
-          </div>
-        </div>
-
-        <!-- ПУНКТ 8 -->
-        <div class="rule-row" id="row-8">
-          <div class="rule-num">8.</div>
-          <div class="rule-content">
-            <div class="rule-text"><b>Что делать если что-то пошло не так:</b> при выявлении несоответствий бухгалтерия уведомляет снабжение с указанием замечаний. Снабжение взаимодействует с поставщиком для получения корректных документов в рамках своей зоны ответственности.</div>
-
-            <div class="replace-panel" id="rp-8">
-              <div class="replace-label">Выберите рабочую формулировку</div>
-
-              <button class="replace-option" type="button" onclick="pickReplace(8,0)">Стороны оперативно взаимодействуют при возникновении вопросов по документам и совместно обеспечивают их своевременное устранение.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(8,1)">При выявлении несоответствий бухгалтерия фиксирует замечания и направляет их снабжению. Снабжение принимает меры для получения корректных документов в согласованные сроки.</button>
-
-              <button class="replace-option" type="button" onclick="pickReplace(8,2)">Бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</button>
-
-              <div class="replace-hint" id="rh-8">Необходимо уточнить формулировку. Попробуйте еще раз</div>
+          <div class="rule-row" id="row-4">
+            <div class="rule-num">4.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>Что делать, если срок попадает на выходной:</b> при совпадении срока передачи с нерабочими днями документы передаются в разумный срок после восстановления рабочего процесса.</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(4,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(4,'no')" title="Нерабочий пункт">✗</button>
             </div>
           </div>
 
-          <div class="rule-actions">
-            <button class="btn-ok" type="button" onclick="vote(8,'ok')" title="Рабочий пункт">✓</button>
-            <button class="btn-no" type="button" onclick="vote(8,'no')" title="Нерабочий пункт">✗</button>
+          <div class="rule-row" id="row-5">
+            <div class="rule-num">5.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>Что считается выполненным:</b> передача считается выполненной только если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(5,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(5,'no')" title="Нерабочий пункт">✗</button>
+            </div>
+          </div>
+
+          <div class="rule-row" id="row-6">
+            <div class="rule-num">6.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>Как оформлены документы:</b> документы должны быть оформлены надлежащим образом и соответствовать установленным требованиям.</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(6,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(6,'no')" title="Нерабочий пункт">✗</button>
+            </div>
+          </div>
+
+          <div class="rule-row" id="row-7">
+            <div class="rule-num">7.</div>
+            <div class="rule-content">
+              <div class="rule-text"><b>Что делать если что-то пошло не так:</b> при выявлении несоответствий бухгалтерия уведомляет снабжение с указанием замечаний. Снабжение взаимодействует с поставщиком для получения корректных документов в рамках своей зоны ответственности.</div>
+            </div>
+            <div class="rule-actions">
+              <button class="btn-ok" type="button" onclick="vote(7,'ok')" title="Рабочий пункт">✓</button>
+              <button class="btn-no" type="button" onclick="vote(7,'no')" title="Нерабочий пункт">✗</button>
+            </div>
           </div>
         </div>
 
-        <div class="submit-wrap">
-          <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть регламент →</button>
+        <div class="bottom-actions">
+          <button class="btn-back" type="button" onclick="go('s-case')">← Вернуться к ситуации</button>
+
+          <div class="submit-wrap">
+            <button class="btn-submit" type="button" id="btn-submit" onclick="go('s-final')">Посмотреть результат →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-backdrop" id="replace-modal">
+        <div class="replace-modal-card">
+          <div class="replace-label">Выберите рабочую формулировку</div>
+          <div id="modal-options"></div>
+          <div class="replace-hint" id="modal-hint"></div>
+          <div class="modal-actions">
+            <button class="btn-modal-close" type="button" onclick="closeReplaceModal()">Закрыть</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 3: FINAL -->
+  <!-- SCREEN 3 -->
   <div class="screen" id="s-final">
     <div class="editor-wrap">
       <canvas class="confetti-canvas" id="confetti"></canvas>
 
       <div class="editor-content final-content">
         <div class="final-top">
-          <div class="final-badge">✓ Вы успешно справились с заданием</div>
           <div class="final-title">Вы нашли и исправили проблемные пункты регламента</div>
         </div>
 
@@ -885,11 +881,6 @@ body {
 
         <div class="final-rule highlight">
           <div class="final-rule-num">7.</div>
-          <div class="final-rule-text"><b>Кто несет ответственность:</b> <span class="final-correction">ответственный за передачу документов — руководитель отдела снабжения.</span></div>
-        </div>
-
-        <div class="final-rule highlight">
-          <div class="final-rule-num">8.</div>
           <div class="final-rule-text"><b>Что делать, если что-то пошло не так:</b> <span class="final-correction">бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня.</span></div>
         </div>
 
@@ -908,26 +899,41 @@ const correctVote = {
   4: "no",
   5: "ok",
   6: "no",
-  7: "no",
-  8: "no"
+  7: "no"
 };
 
 const correctReplace = {
   4: 1,
   6: 0,
-  7: 1,
-  8: 2
+  7: 2
+};
+
+const replaceOptions = {
+  4: [
+    "Если срок попадает на нерабочий день — документы передаются в ближайшее возможное время после выхода на работу.",
+    "Если срок попадает на выходной — документы передаются в первый рабочий день до 12:00.",
+    "Документы передаются с учетом производственной необходимости и графика работы сотрудников."
+  ],
+  6: [
+    "Документы передаются в оригинале или качественном скане: подпись и печать поставщика видны, все поля заполнены, счет-фактура приложена.",
+    "Документы должны содержать все необходимые реквизиты и быть пригодны для принятия к учету бухгалтерией.",
+    "Качество документов должно соответствовать стандартам документооборота, принятым в компании."
+  ],
+  7: [
+    "Стороны оперативно взаимодействуют при возникновении вопросов по документам и совместно обеспечивают их своевременное устранение.",
+    "При выявлении несоответствий бухгалтерия фиксирует замечания и направляет их снабжению. Снабжение принимает меры для получения корректных документов в согласованные сроки.",
+    "Бухгалтерия сообщает снабжению, что не так. Снабжение связывается с поставщиком и запрашивает исправленные документы в течение одного рабочего дня."
+  ]
 };
 
 const votes = {};
+const corrected = {};
+let activeReplacePoint = null;
 
 function vote(n, choice) {
   const row = document.getElementById("row-" + n);
   const okBtn = row.querySelector(".btn-ok");
   const noBtn = row.querySelector(".btn-no");
-  const replacePanel = document.getElementById("rp-" + n);
-
-  if (okBtn.disabled || noBtn.disabled) return;
 
   removeVoteHint(row);
 
@@ -943,18 +949,10 @@ function vote(n, choice) {
       votes[n] = true;
       okBtn.disabled = true;
       noBtn.disabled = true;
-
-      if (replacePanel) {
-        replacePanel.classList.remove("active");
-      }
     } else {
       row.classList.add("incorrect");
       votes[n] = false;
       showVoteHint(row);
-
-      if (replacePanel) {
-        replacePanel.classList.remove("active");
-      }
     }
   }
 
@@ -964,20 +962,11 @@ function vote(n, choice) {
     if (correctVote[n] === "no") {
       row.classList.add("incorrect");
       votes[n] = false;
-      okBtn.disabled = true;
-      noBtn.disabled = true;
-
-      if (replacePanel) {
-        replacePanel.classList.add("active");
-      }
+      openReplaceModal(n);
     } else {
       row.classList.add("incorrect");
       votes[n] = false;
       showVoteHint(row);
-
-      if (replacePanel) {
-        replacePanel.classList.remove("active");
-      }
     }
   }
 
@@ -1001,41 +990,90 @@ function removeVoteHint(row) {
   }
 }
 
-function pickReplace(n, idx) {
-  const rp = document.getElementById("rp-" + n);
-  const hint = document.getElementById("rh-" + n);
-  const btns = rp.querySelectorAll(".replace-option");
-  const selected = btns[idx];
+function openReplaceModal(n) {
+  activeReplacePoint = n;
+
+  const modal = document.getElementById("replace-modal");
+  const optionsWrap = document.getElementById("modal-options");
+  const hint = document.getElementById("modal-hint");
+
+  optionsWrap.innerHTML = "";
+  hint.className = "replace-hint";
+  hint.textContent = "";
+
+  replaceOptions[n].forEach(function(text, index) {
+    const btn = document.createElement("button");
+    btn.className = "replace-option";
+    btn.type = "button";
+    btn.textContent = text;
+
+    if (corrected[n] === index) {
+      btn.classList.add("sel-right");
+    }
+
+    btn.onclick = function() {
+      pickReplace(n, index, btn);
+    };
+
+    optionsWrap.appendChild(btn);
+  });
+
+  modal.classList.add("active");
+}
+
+function closeReplaceModal() {
+  document.getElementById("replace-modal").classList.remove("active");
+  activeReplacePoint = null;
+}
+
+function pickReplace(n, idx, selectedButton) {
+  const modal = document.getElementById("replace-modal");
+  const hint = document.getElementById("modal-hint");
+  const btns = modal.querySelectorAll(".replace-option");
 
   btns.forEach(function(btn) {
     btn.classList.remove("sel-right", "sel-wrong");
   });
 
-  hint.classList.remove("show");
+  hint.className = "replace-hint";
+  hint.textContent = "";
+
+  const row = document.getElementById("row-" + n);
 
   if (idx === correctReplace[n]) {
-    selected.classList.add("sel-right");
-
-    btns.forEach(function(btn) {
-      btn.disabled = true;
-    });
+    selectedButton.classList.add("sel-right");
 
     votes[n] = true;
+    corrected[n] = idx;
 
-    const row = document.getElementById("row-" + n);
     row.classList.remove("incorrect");
     row.classList.add("correct");
+
+    const okBtn = row.querySelector(".btn-ok");
+    const noBtn = row.querySelector(".btn-no");
+    okBtn.disabled = true;
+    noBtn.disabled = true;
+
+    hint.className = "replace-hint show right";
+    hint.textContent = 'Вы уточнили формулировку. Нажмите "Закрыть", чтобы продолжить';
   } else {
-    selected.classList.add("sel-wrong");
-    hint.classList.add("show");
+    selectedButton.classList.add("sel-wrong");
+
     votes[n] = false;
+    delete corrected[n];
+
+    row.classList.remove("correct");
+    row.classList.add("incorrect");
+
+    hint.className = "replace-hint show wrong";
+    hint.textContent = "Необходимо уточнить формулировку. Попробуйте еще раз";
   }
 
   checkReady();
 }
 
 function checkReady() {
-  const allDone = [1,2,3,4,5,6,7,8].every(function(n) {
+  const allDone = [1,2,3,4,5,6,7].every(function(n) {
     return votes[n] === true;
   });
 
@@ -1056,23 +1094,19 @@ function go(id) {
   const target = document.getElementById(id);
   target.classList.add("active");
 
-  setTimeout(function() {
-    target.scrollIntoView({
-      behavior: "auto",
-      block: "start"
-    });
-
-    window.scrollTo(0, 0);
-  }, 0);
+  window.scrollTo(0, 0);
 
   if (id === "s-final") {
     setTimeout(launchConfetti, 200);
   }
+
+  sendHeight();
 }
 
 function restart() {
-  [1,2,3,4,5,6,7,8].forEach(function(n) {
+  [1,2,3,4,5,6,7].forEach(function(n) {
     delete votes[n];
+    delete corrected[n];
 
     const row = document.getElementById("row-" + n);
 
@@ -1083,25 +1117,9 @@ function restart() {
       btn.classList.remove("selected");
       btn.disabled = false;
     });
-
-    const rp = document.getElementById("rp-" + n);
-
-    if (rp) {
-      rp.classList.remove("active");
-
-      rp.querySelectorAll(".replace-option").forEach(function(btn) {
-        btn.classList.remove("sel-right", "sel-wrong");
-        btn.disabled = false;
-      });
-
-      const rh = rp.querySelector(".replace-hint");
-
-      if (rh) {
-        rh.classList.remove("show");
-      }
-    }
   });
 
+  closeReplaceModal();
   document.getElementById("btn-submit").classList.remove("ready");
   go("s-case");
 }
@@ -1113,10 +1131,10 @@ function launchConfetti() {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
-  const colors = ["#2D5BE3", "#276749", "#F6AD55", "#FC8181", "#68D391", "#7BA7F7"];
+  const colors = ["#d00005", "#10b981", "#F6AD55", "#ef4444", "#064e3b"];
   const particles = [];
 
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0; i < 70; i++) {
     particles.push({
       x: canvas.width / 2,
       y: canvas.height * 0.25,
@@ -1164,6 +1182,24 @@ function launchConfetti() {
 
   draw();
 }
+
+function sendHeight() {
+  const h = document.querySelector(".screen.active .card-window, .screen.active .editor-wrap");
+  const height = h ? Math.ceil(h.getBoundingClientRect().height + 20) : document.body.scrollHeight;
+
+  window.parent.postMessage({ type: "setHeight", height: height }, "*");
+  window.parent.postMessage("[iFrameSizer]" + height + ":0:0:bodyOffset", "*");
+}
+
+window.addEventListener("load", sendHeight);
+window.addEventListener("resize", sendHeight);
+
+let count = 0;
+const interval = setInterval(function() {
+  sendHeight();
+  count++;
+  if (count > 10) clearInterval(interval);
+}, 300);
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.9/iframeResizer.contentWindow.min.js"></script>
