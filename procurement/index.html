@@ -15,13 +15,14 @@
 :root {
   --bg: #F5F3EE;
   --card: #FFFFFF;
+
   --accent: #d00005;
   --accent-dark: #9f0004;
 
   --blue: #2D5BE3;
   --blue-dark: #1A3FA0;
   --blue-bg: rgba(45,91,227,0.08);
-  --blue-border: rgba(45,91,227,0.26);
+  --blue-border: rgba(45,91,227,0.24);
 
   --text: #172033;
   --text-light: #4B5563;
@@ -34,11 +35,11 @@
   --right-bg: rgba(236,253,245,0.94);
   --right-border: #10b981;
 
-  --border: rgba(208,0,5,0.22);
   --shadow: 0 12px 28px rgba(31,41,55,0.12);
 
-  --case-height: 410px;
+  --case-height: 390px;
   --work-height: 500px;
+  --final-height: 330px;
 }
 
 html,
@@ -50,9 +51,9 @@ body {
 body {
   font-family: Georgia, serif;
   background: var(--bg);
-  padding: 10px;
-  overflow: hidden;
   color: var(--text);
+  padding: 8px;
+  overflow: hidden;
 }
 
 .container {
@@ -82,7 +83,7 @@ body {
   }
 }
 
-/* SCREEN 1 */
+/* ===== SCREEN 1 ===== */
 
 .card-window {
   width: 100%;
@@ -96,7 +97,7 @@ body {
 
 .case-window {
   display: grid;
-  grid-template-columns: 39% 61%;
+  grid-template-columns: 34% 66%;
   height: var(--case-height);
 }
 
@@ -108,55 +109,53 @@ body {
 }
 
 .case-image {
-  width: 115%;
+  width: 123%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  transform: translateX(13%);
+  transform: translateX(22%);
   display: block;
 }
 
 .case-content {
-  padding: 22px 24px 20px 18px;
+  padding: 18px 20px 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 8px;
   overflow: hidden;
 }
 
 .case-tag {
-  display: block;
-  text-align: center;
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
   background: rgba(208,0,5,0.10);
   color: var(--accent-dark);
   font-family: "Courier New", monospace;
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 999px;
-  margin-bottom: 2px;
-  width: fit-content;
 }
 
 .case-content p {
-  font-size: 13.8px;
-  line-height: 1.46;
+  font-size: 13px;
+  line-height: 1.38;
   color: var(--text);
 }
 
 .case-question {
   font-style: italic;
-  color: var(--text);
   border-left: 3px solid var(--accent);
-  padding-left: 12px;
-  margin-top: 2px;
+  padding-left: 10px;
+  margin-top: 1px;
 }
 
 .btn-start {
   display: block;
   width: 100%;
-  padding: 11px;
+  margin-top: 2px;
+  padding: 10px;
   background: var(--accent);
   color: #fff;
   border: none;
@@ -168,14 +167,13 @@ body {
   transition: background 0.2s;
   text-align: center;
   flex-shrink: 0;
-  margin-top: auto;
 }
 
 .btn-start:hover {
   background: var(--accent-dark);
 }
 
-/* SCREEN 2 AND 3 */
+/* ===== SCREEN 2 / BASE ===== */
 
 .editor-wrap {
   width: 100%;
@@ -186,7 +184,7 @@ body {
   border-radius: 18px;
   box-shadow: var(--shadow);
   overflow: hidden;
-  padding: 14px 28px 14px;
+  padding: 10px 18px 12px;
   position: relative;
 }
 
@@ -200,39 +198,33 @@ body {
   overflow: hidden;
 }
 
-/* SCREEN 2 */
+/* ===== SCREEN 2 ===== */
 
 .doc-title {
-  font-size: 17px;
+  font-size: 13px;
   font-weight: bold;
+  line-height: 1.1;
   color: var(--text);
   text-align: center;
-  margin-bottom: 2px;
-  line-height: 1.15;
-}
-
-.doc-subtitle {
-  font-size: 10.5px;
-  color: var(--text-light);
-  text-align: center;
-  font-family: "Courier New", monospace;
-  letter-spacing: 0.05em;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
 }
 
 .doc-instruction {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.82);
   border-left: 3px solid var(--blue);
   border-radius: 0 8px 8px 0;
-  padding: 6px 10px;
-  font-size: 10.8px;
+  padding: 4px 8px;
+  font-size: 8.8px;
+  line-height: 1.14;
   color: var(--text);
-  margin-bottom: 7px;
-  line-height: 1.25;
+  margin-bottom: 5px;
   box-shadow: none;
+  flex-shrink: 0;
 }
 
 .rules-list {
+  flex: 0 0 auto;
   overflow: hidden;
 }
 
@@ -240,13 +232,12 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 7px;
-  padding: 5px 7px;
+  padding: 4px 7px;
   border-radius: 8px;
-  margin-bottom: 5px;
-  border: 1px solid rgba(208,0,5,0.16);
-  background: rgba(255,255,255,0.78);
+  margin-bottom: 4px;
+  border: 1px solid rgba(208,0,5,0.18);
+  background: rgba(255,255,255,0.82);
   transition: all 0.2s;
-  cursor: default;
 }
 
 .rule-row.correct {
@@ -260,11 +251,11 @@ body {
 }
 
 .rule-num {
-  font-family: "Courier New", monospace;
-  font-size: 10px;
+  min-width: 16px;
+  padding-top: 1px;
   color: var(--text-light);
-  min-width: 17px;
-  padding-top: 2px;
+  font-family: "Courier New", monospace;
+  font-size: 9.2px;
 }
 
 .rule-content {
@@ -272,21 +263,19 @@ body {
 }
 
 .rule-text {
-  font-size: 10.8px;
-  line-height: 1.22;
+  font-size: 10px;
+  line-height: 1.1;
   color: var(--text);
 }
 
 .rule-text b {
-  color: var(--text);
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .rule-actions {
   display: flex;
   gap: 4px;
   flex-shrink: 0;
-  padding-top: 0;
 }
 
 .btn-ok,
@@ -296,19 +285,19 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 10.5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
   background: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.10);
+  transition: all 0.2s;
 }
 
 .btn-ok:disabled,
 .btn-no:disabled {
   cursor: default;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .btn-ok {
@@ -317,7 +306,7 @@ body {
 
 .btn-ok:hover:not(:disabled) {
   background: var(--right-bg);
-  transform: scale(1.08);
+  transform: scale(1.07);
 }
 
 .btn-ok.selected {
@@ -331,7 +320,7 @@ body {
 
 .btn-no:hover:not(:disabled) {
   background: var(--wrong-bg);
-  transform: scale(1.08);
+  transform: scale(1.07);
 }
 
 .btn-no.selected {
@@ -340,12 +329,13 @@ body {
 }
 
 .vote-hint {
-  font-size: 10px;
+  font-size: 8.8px;
   color: var(--wrong);
-  margin-top: 3px;
+  margin-top: 2px;
+  line-height: 1.08;
 }
 
-/* BOTTOM BUTTONS */
+/* ===== BOTTOM BUTTONS ===== */
 
 .bottom-actions {
   display: flex;
@@ -354,11 +344,13 @@ body {
   gap: 12px;
   margin-top: 8px;
   padding-top: 0;
+  flex-shrink: 0;
+  z-index: 5;
 }
 
 .btn-back {
   padding: 8px 14px;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.78);
   color: var(--accent-dark);
   border: 1px solid rgba(208,0,5,0.24);
   border-radius: 8px;
@@ -401,7 +393,7 @@ body {
   background: var(--accent-dark);
 }
 
-/* MODAL */
+/* ===== MODAL ===== */
 
 .modal-backdrop {
   display: none;
@@ -411,7 +403,7 @@ body {
   background: rgba(23,32,51,0.24);
   align-items: center;
   justify-content: center;
-  padding: 22px;
+  padding: 20px;
 }
 
 .modal-backdrop.active {
@@ -421,20 +413,20 @@ body {
 .replace-modal-card {
   width: 78%;
   max-width: 680px;
-  background: rgba(255,255,255,0.96);
-  border: 1px solid rgba(208,0,5,0.22);
+  background: rgba(255,255,255,0.97);
+  border: 1px solid rgba(45,91,227,0.18);
   border-radius: 16px;
   box-shadow: 0 18px 42px rgba(31,41,55,0.18);
-  padding: 16px 18px;
+  padding: 15px 17px;
 }
 
 .replace-label {
-  font-size: 11px;
-  color: var(--accent-dark);
+  font-size: 10px;
+  color: var(--blue-dark);
   font-family: "Courier New", monospace;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 }
 
 .replace-option {
@@ -445,12 +437,12 @@ body {
   border: 1px solid var(--blue-border);
   border-radius: 8px;
   padding: 8px 10px;
-  font-size: 12.4px;
-  line-height: 1.25;
+  font-size: 11.6px;
+  line-height: 1.23;
   color: var(--text);
   cursor: pointer;
-  margin-bottom: 8px;
-  transition: all 0.2s;
+  margin-bottom: 7px;
+  transition: all 0.18s;
   font-family: Georgia, serif;
 }
 
@@ -476,9 +468,10 @@ body {
 
 .replace-hint {
   display: none;
-  font-size: 11px;
-  margin-top: 2px;
-  margin-bottom: 8px;
+  font-size: 10px;
+  margin-top: 1px;
+  margin-bottom: 7px;
+  line-height: 1.18;
 }
 
 .replace-hint.show {
@@ -496,12 +489,12 @@ body {
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .btn-modal-close {
   padding: 7px 14px;
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.78);
   color: var(--accent-dark);
   border: 1px solid rgba(208,0,5,0.24);
   border-radius: 8px;
@@ -511,15 +504,22 @@ body {
   cursor: pointer;
 }
 
-/* SCREEN 3 */
+/* ===== SCREEN 3 ===== */
+
+#s-final .editor-wrap {
+  height: var(--final-height);
+  padding: 10px 18px 12px;
+}
 
 .final-content {
   padding-top: 0;
+  overflow: hidden;
 }
 
 .final-top {
   text-align: center;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
 }
 
 .confetti-canvas {
@@ -532,28 +532,29 @@ body {
 }
 
 .final-title {
-  font-size: 17px;
+  font-size: 13.5px;
   color: var(--text);
-  margin-bottom: 8px;
-  line-height: 1.25;
+  margin-bottom: 5px;
+  line-height: 1.15;
 }
 
 .final-doc-title {
-  font-size: 15px;
+  font-size: 12.5px;
   font-weight: bold;
   color: var(--text);
   text-align: center;
-  margin-bottom: 8px;
-  padding-bottom: 6px;
+  margin-bottom: 5px;
+  padding-bottom: 4px;
   border-bottom: 1px solid rgba(208,0,5,0.18);
+  flex-shrink: 0;
 }
 
 .final-rule {
   display: flex;
-  gap: 7px;
-  padding: 7px 8px;
+  gap: 6px;
+  padding: 5px 7px;
   border-radius: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   background: var(--right-bg);
   border: 1px solid var(--right-border);
 }
@@ -564,11 +565,11 @@ body {
 }
 
 .final-rule-num {
-  font-family: "Courier New", monospace;
-  font-size: 10.5px;
+  min-width: 15px;
+  padding-top: 1px;
   color: var(--right);
-  min-width: 16px;
-  padding-top: 2px;
+  font-family: "Courier New", monospace;
+  font-size: 9.2px;
 }
 
 .final-rule.highlight .final-rule-num {
@@ -576,8 +577,8 @@ body {
 }
 
 .final-rule-text {
-  font-size: 12px;
-  line-height: 1.25;
+  font-size: 9.9px;
+  line-height: 1.12;
   color: var(--text);
 }
 
@@ -591,17 +592,18 @@ body {
 
 .btn-restart {
   display: block;
-  margin: 8px auto 0;
-  padding: 8px 22px;
-  background: rgba(255,255,255,0.72);
+  margin: 6px auto 0;
+  padding: 7px 20px;
+  background: rgba(255,255,255,0.78);
   color: var(--accent-dark);
   border: 1px solid rgba(208,0,5,0.24);
   border-radius: 8px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-family: Georgia, serif;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .btn-restart:hover {
@@ -609,91 +611,55 @@ body {
   color: var(--text);
 }
 
-/* COMPACT */
+/* ===== COMPACT ===== */
 
 @media (max-width: 860px) {
   :root {
     --case-height: 390px;
     --work-height: 500px;
+    --final-height: 330px;
   }
 
   body {
-    padding: 10px;
-  }
-
-  .container {
-    max-width: 100%;
-  }
-
-  .card-window {
-    max-width: 100%;
-  }
-
-  .case-window {
-    grid-template-columns: 39% 61%;
-  }
-
-  .case-content {
-    padding: 20px 20px 18px 16px;
-    gap: 8px;
-  }
-
-  .case-content p {
-    font-size: 12.4px;
-    line-height: 1.38;
-  }
-
-  .case-image {
-    transform: translateX(13%);
+    padding: 8px;
   }
 
   .editor-wrap {
-    padding: 14px 24px 14px;
-  }
-
-  .doc-title {
-    font-size: 16px;
-  }
-
-  .doc-instruction {
-    font-size: 10.2px;
-    padding: 6px 9px;
-    margin-bottom: 6px;
-  }
-
-  .rule-row {
-    padding: 4px 6px;
-    margin-bottom: 4px;
-  }
-
-  .rule-text {
-    font-size: 10.2px;
-    line-height: 1.18;
-  }
-
-  .btn-ok,
-  .btn-no {
-    width: 22px;
-    height: 22px;
+    padding: 10px 18px 12px;
   }
 
   .replace-modal-card {
     width: 86%;
   }
 
-  .replace-option {
-    font-size: 11.4px;
-    line-height: 1.2;
+  #s-final .editor-wrap {
+    height: var(--final-height);
+    padding: 10px 18px 12px;
+  }
+
+  .final-title {
+    font-size: 13px;
+  }
+
+  .final-doc-title {
+    font-size: 12px;
+    margin-bottom: 4px;
   }
 
   .final-rule {
-    margin-bottom: 5px;
-    padding: 6px 7px;
+    padding: 4px 7px;
+    margin-bottom: 4px;
   }
 
   .final-rule-text {
-    font-size: 11.1px;
-    line-height: 1.18;
+    font-size: 9.5px;
+    line-height: 1.1;
+  }
+
+  .btn-restart {
+    margin-top: 5px;
+    padding: 7px 18px;
+    font-size: 11px;
   }
 }
 </style>
@@ -730,10 +696,9 @@ body {
     <div class="editor-wrap">
       <div class="editor-content">
         <div class="doc-title">Регламент передачи документов</div>
-        <div class="doc-subtitle">Снабжение → Бухгалтерия</div>
 
         <div class="doc-instruction">
-          Отметьте каждый пункт: ✓ — если формулировка рабочая, ✗ — если ее необходимо уточнить. Для нерабочих пунктов выберите исправленную версию.
+          Отметьте пункты: ✓ — если формулировка рабочая, ✗ — если ее нужно уточнить. Для ✗ выберите новую версию.
         </div>
 
         <div class="rules-list">
@@ -926,6 +891,32 @@ const replaceOptions = {
   ]
 };
 
+const labels = {
+  4: "Что делать, если срок попадает на выходной:",
+  6: "Как оформлены документы:",
+  7: "Что делать если что-то пошло не так:"
+};
+
+const labelMap = {
+  1: "Что передается:",
+  2: "В каком виде:",
+  3: "К какому сроку:",
+  4: "Что делать, если срок попадает на выходной:",
+  5: "Что считается выполненным:",
+  6: "Как оформлены документы:",
+  7: "Что делать если что-то пошло не так:"
+};
+
+const originalTexts = {
+  1: "по каждой закупке снабжение передает полный комплект документов: счет, спецификацию, накладную, счет-фактуру, транспортные документы.",
+  2: "бумажные документы сканируются и загружаются в папку «Бухгалтерия / Входящие / Снабжение» на общем диске. Файл называется по шаблону: Дата_Поставщик_Документ. Мессенджер — только для уведомления.",
+  3: "документы передаются в день получения, но не позднее следующего рабочего дня до 12:00.",
+  4: "при совпадении срока передачи с нерабочими днями документы передаются в разумный срок после восстановления рабочего процесса.",
+  5: "передача считается выполненной только если документ загружен в утвержденный канал, внесен в реестр и имеет статус «Передано».",
+  6: "документы должны быть оформлены надлежащим образом и соответствовать установленным требованиям.",
+  7: "при выявлении несоответствий бухгалтерия уведомляет снабжение с указанием замечаний. Снабжение взаимодействует с поставщиком для получения корректных документов в рамках своей зоны ответственности."
+};
+
 const votes = {};
 const corrected = {};
 let activeReplacePoint = null;
@@ -1026,6 +1017,18 @@ function closeReplaceModal() {
   activeReplacePoint = null;
 }
 
+function replaceRuleText(n, newText) {
+  const row = document.getElementById("row-" + n);
+  const textEl = row.querySelector(".rule-text");
+  textEl.innerHTML = "<b>" + labels[n] + "</b> " + newText;
+}
+
+function restoreRuleText(n) {
+  const row = document.getElementById("row-" + n);
+  const textEl = row.querySelector(".rule-text");
+  textEl.innerHTML = "<b>" + labelMap[n] + "</b> " + originalTexts[n];
+}
+
 function pickReplace(n, idx, selectedButton) {
   const modal = document.getElementById("replace-modal");
   const hint = document.getElementById("modal-hint");
@@ -1046,11 +1049,17 @@ function pickReplace(n, idx, selectedButton) {
     votes[n] = true;
     corrected[n] = idx;
 
+    replaceRuleText(n, replaceOptions[n][idx]);
+
     row.classList.remove("incorrect");
     row.classList.add("correct");
 
     const okBtn = row.querySelector(".btn-ok");
     const noBtn = row.querySelector(".btn-no");
+
+    okBtn.classList.remove("selected");
+    noBtn.classList.remove("selected");
+
     okBtn.disabled = true;
     noBtn.disabled = true;
 
@@ -1112,6 +1121,7 @@ function restart() {
 
     row.classList.remove("correct", "incorrect");
     removeVoteHint(row);
+    restoreRuleText(n);
 
     row.querySelectorAll(".btn-ok, .btn-no").forEach(function(btn) {
       btn.classList.remove("selected");
