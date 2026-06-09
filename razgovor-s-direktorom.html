@@ -92,7 +92,7 @@
     padding: 14px 14px 13px;
     background-color: #eaf2fb;
     background-image: url("case-bg.png");
-    background-size: cover;
+    background-size: 92% auto;
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -129,8 +129,8 @@
     width: 30%;
     min-width: 190px;
     padding: 7px 16px 8px;
-    background: rgba(255,255,255,0.28);
-    border: 1px solid rgba(255,255,255,0.48);
+    background: rgba(255,255,255,0.60);
+    border: 1px solid rgba(255,255,255,0.58);
     border-radius: 15px;
     box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
     backdrop-filter: blur(9px);
@@ -165,8 +165,8 @@
     width: 92%;
     margin: 12px auto 0;
     padding: 14px 15px 13px;
-    background: rgba(255,255,255,0.28);
-    border: 1px solid rgba(255,255,255,0.48);
+    background: rgba(255,255,255,0.60);
+    border: 1px solid rgba(255,255,255,0.58);
     border-radius: 16px;
     box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
     backdrop-filter: blur(9px);
@@ -443,8 +443,8 @@
     position: relative;
     padding: 0;
     background-color: #eaf2fb;
-    background-image: url("handshake.png");
-    background-size: cover;
+    background-image: url("case-bg.png");
+    background-size: 92% auto;
     background-repeat: no-repeat;
     background-position: center center;
   }
@@ -465,8 +465,8 @@
     z-index: 2;
     width: 76%;
     padding: 14px 18px 13px;
-    background: rgba(255,255,255,0.26);
-    border: 1px solid rgba(255,255,255,0.46);
+    background: rgba(255,255,255,0.60);
+    border: 1px solid rgba(255,255,255,0.58);
     border-radius: 16px;
     box-shadow: 0 10px 24px rgba(31, 41, 55, 0.10);
     backdrop-filter: blur(9px);
@@ -492,7 +492,7 @@
     margin: 0 auto 12px;
     padding: 9px 12px;
     max-width: 92%;
-    background: rgba(255,255,255,0.20);
+    background: rgba(255,255,255,0.42);
     border-left: 3px solid var(--accent);
     border-radius: 0 8px 8px 0;
     color: var(--text);
@@ -524,8 +524,42 @@
       --interactive-h: 389px;
     }
 
+    html,
+    body {
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100%;
+    }
+
     body {
       padding: 6px;
+    }
+
+    .container {
+      height: auto;
+      overflow: visible;
+    }
+
+    .screen {
+      height: auto;
+      min-height: var(--interactive-h);
+      overflow: visible;
+    }
+
+    .case-card,
+    .dialogue-card,
+    .final-card {
+      min-height: var(--interactive-h);
+      height: auto;
+      overflow: visible;
+    }
+
+    #screen-case .case-card {
+      background-size: 88% auto;
+    }
+
+    #screen-final .final-card {
+      background-size: 88% auto;
     }
 
     #screen-case .case-header-inner {
@@ -555,7 +589,8 @@
     }
 
     .options-wrap {
-      height: 231px;
+      height: auto;
+      overflow: visible;
       padding: 5px 12px 10px;
     }
 
@@ -839,7 +874,13 @@ function restart() {
 }
 
 function sendHeight() {
-  const h = 405;
+  const active = document.querySelector('.screen.active');
+  const isMobile = window.matchMedia('(max-width: 520px)').matches;
+
+  const h = isMobile
+    ? Math.ceil((active ? active.scrollHeight : 389) + 20)
+    : 405;
+
   window.parent.postMessage({ type: 'setHeight', height: h }, '*');
   window.parent.postMessage('[iFrameSizer]' + h + ':0:0:bodyOffset', '*');
 }
