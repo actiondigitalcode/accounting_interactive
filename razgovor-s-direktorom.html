@@ -10,6 +10,7 @@
 
   :root {
     --interactive-h: 389px;
+    --scene-h: 145px;
 
     --bg: #F5F3EE;
     --card: #FFFFFF;
@@ -28,6 +29,12 @@
 
     --border: rgba(208, 0, 5, 0.22);
     --shadow: 0 12px 28px rgba(31, 41, 55, 0.12);
+
+    --option-fs: 13.05px;
+    --option-lh: 1.13;
+    --option-py: 5px;
+    --option-px: 11px;
+    --action-h: 28px;
   }
 
   html,
@@ -109,7 +116,6 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    height: auto;
     background: transparent;
     display: flex;
     align-items: center;
@@ -214,14 +220,19 @@
   }
 
   /* =========================
-     ОСТАЛЬНЫЕ ЭКРАНЫ
+     ДИАЛОГОВЫЕ ЭКРАНЫ
      ========================= */
 
+  .dialogue-card {
+    display: flex;
+    flex-direction: column;
+  }
+
   .step-row {
+    flex: 0 0 18px;
     display: flex;
     gap: 6px;
     padding: 8px 16px 0;
-    height: 18px;
   }
 
   .step-dot {
@@ -242,8 +253,9 @@
 
   .scene-wrap {
     position: relative;
+    flex: 0 0 var(--scene-h);
     width: 100%;
-    height: 145px;
+    height: var(--scene-h);
     background: #e8e4dc;
     overflow: hidden;
   }
@@ -254,6 +266,15 @@
     object-fit: cover;
     object-position: center 15%;
     display: block;
+  }
+
+  .scene-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
   }
 
   .bubble-wrap {
@@ -312,8 +333,8 @@
     z-index: 10;
     padding: 8px 13px;
     border-radius: 10px;
-    font-size: 13.4px;
-    line-height: 1.28;
+    font-size: 13.1px;
+    line-height: 1.22;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18);
     animation: fadeInPlace 0.25s ease;
     text-align: center;
@@ -332,17 +353,21 @@
   }
 
   .options-wrap {
-    height: 226px;
-    padding: 5px 18px 10px;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 4px 14px 8px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .options-label {
-    margin-bottom: 5px;
+    flex: 0 0 auto;
+    margin-bottom: 4px;
     color: var(--text-light);
     font-family: Georgia, serif;
-    font-size: 10px;
-    line-height: 1.05;
+    font-size: 9.5px;
+    line-height: 1;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -351,19 +376,19 @@
   .option-btn {
     display: block;
     width: 100%;
-    min-height: 39px;
-    margin-bottom: 6px;
-    padding: 6px 14px;
+    min-height: 0;
+    margin-bottom: 5px;
+    padding: var(--option-py) var(--option-px);
     text-align: left;
     background: rgba(255,255,255,0.66);
     border: 1px solid var(--border);
-    border-radius: 9px;
+    border-radius: 8px;
     color: var(--text);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
     font-family: Georgia, serif;
-    font-size: 14.6px;
-    line-height: 1.22;
+    font-size: var(--option-fs);
+    line-height: var(--option-lh);
   }
 
   .option-btn:hover:not(:disabled) {
@@ -388,12 +413,13 @@
   }
 
   .action-btns {
+    flex: 0 0 var(--action-h);
+    height: var(--action-h);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 2px;
-    height: 30px;
+    margin-top: auto;
   }
 
   .retry-btn,
@@ -401,12 +427,12 @@
     display: none;
     flex: 0 0 auto;
     width: 42%;
-    min-width: 190px;
-    max-width: 360px;
-    padding: 8px 16px;
+    min-width: 170px;
+    max-width: 320px;
+    padding: 7px 14px;
     border: none;
-    border-radius: 9px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-size: 13px;
     line-height: 1;
     font-family: Georgia, serif;
     font-weight: 700;
@@ -522,6 +548,12 @@
   @media (max-width: 520px) {
     :root {
       --interactive-h: 389px;
+      --scene-h: 145px;
+      --option-fs: 12.6px;
+      --option-lh: 1.14;
+      --option-py: 5px;
+      --option-px: 9px;
+      --action-h: 30px;
     }
 
     html,
@@ -583,45 +615,57 @@
     }
 
     .scene-wrap {
-      height: 140px;
+      height: var(--scene-h);
+      flex-basis: var(--scene-h);
     }
 
     .options-wrap {
       height: auto;
       overflow: visible;
-      padding: 5px 12px 10px;
+      padding: 5px 10px 10px;
     }
 
     .options-label {
-      font-size: 9.5px;
-      margin-bottom: 5px;
+      font-size: 9.4px;
+      margin-bottom: 4px;
     }
 
     .option-btn {
-      min-height: 39px;
-      padding: 6px 10px;
-      font-size: 13.3px;
-      line-height: 1.18;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
+      border-radius: 8px;
+    }
+
+    .bubble-wrap {
+      left: 37%;
+      width: 39%;
+    }
+
+    .bubble {
+      padding: 6px 8px;
+    }
+
+    .bubble .spk {
+      font-size: 8px;
     }
 
     .bubble .btext {
-      font-size: 11.4px;
-      line-height: 1.22;
+      font-size: 11.2px;
+      line-height: 1.2;
     }
 
     .feedback-bar {
-      font-size: 12.4px;
-      line-height: 1.22;
+      width: 90%;
+      font-size: 12.2px;
+      line-height: 1.2;
       padding: 7px 10px;
     }
 
     .retry-btn,
     .next-btn {
       width: 48%;
-      min-width: 160px;
+      min-width: 150px;
       padding: 8px 12px;
-      font-size: 13.5px;
+      font-size: 13px;
     }
 
     .final-overlay {
@@ -681,8 +725,8 @@
 
       <div class="scene-wrap">
         <img id="scene1-neutral" src="director-neutral.png" alt="" style="display:block">
-        <img id="scene1-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-        <img id="scene1-happy" src="director-interested.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
+        <img id="scene1-angry" class="scene-layer" src="director-angry.png" alt="" style="display:none">
+        <img id="scene1-happy" class="scene-layer" src="director-interested.png" alt="" style="display:none">
 
         <div class="bubble-wrap">
           <div class="bubble">
@@ -696,8 +740,11 @@
 
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
+
         <button class="option-btn" id="o1a" onclick="pick(1,'A')">Так сложилась структура доходов и расходов в этом квартале. Следующий квартал будет другим, и налог тоже изменится. Налоговая нагрузка находится в пределах среднеотраслевых показателей, беспокоиться не о чем.</button>
+
         <button class="option-btn" id="o1b" onclick="pick(1,'B')">У нас в два раза выросла выручка, и прибыль стала выше. Со своей стороны мы уже сделали то, что можно в рамках закона: создали резерв по проблемным контрагентам. Если бы не резерв, налог был бы еще выше.</button>
+
         <button class="option-btn" id="o1c" onclick="pick(1,'C')">Налог соответствует действующему законодательству, мы всё посчитали строго по кодексу и перепроверили все операции за квартал. Ошибок нет, сумма подтверждена документами.</button>
 
         <div class="action-btns">
@@ -717,8 +764,8 @@
 
       <div class="scene-wrap">
         <img id="scene2-interested" src="director-interested.png" alt="" style="display:block">
-        <img id="scene2-angry" src="director-angry.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
-        <img id="scene2-happy" src="director-happy.png" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%">
+        <img id="scene2-angry" class="scene-layer" src="director-angry.png" alt="" style="display:none">
+        <img id="scene2-happy" class="scene-layer" src="director-happy.png" alt="" style="display:none">
 
         <div class="bubble-wrap">
           <div class="bubble">
@@ -732,8 +779,11 @@
 
       <div class="options-wrap">
         <div class="options-label">Ответ Марины</div>
+
         <button class="option-btn" id="o2a" onclick="pick(2,'A')">Есть пять клиентов, которые не платят больше трех месяцев. Их долг — 4,8 млн. Мы создали по нему резерв: закон разрешает учесть это в расходах и снизить налог.</button>
+
         <button class="option-btn" id="o2b" onclick="pick(2,'B')">После анализа дебиторской задолженности мы применили инструмент, который разрешен Налоговым кодексом.</button>
+
         <button class="option-btn" id="o2c" onclick="pick(2,'C')">Мы сэкономили около миллиона рублей — без этого налог был бы около 5,2 млн.</button>
 
         <div class="action-btns">
@@ -760,20 +810,49 @@
 <script>
 const D = {
   1: {
-    A: { ok: false, reply: 'Ну, понятно.', note: 'Директор услышал объяснение, но ценность работы бухгалтерии осталась неочевидной.' },
-    B: { ok: true,  reply: '', note: 'Марина объяснила ситуацию — и этим переключила внимание директора с раздражения на интерес.' },
-    C: { ok: false, reply: 'Понял, спасибо.', note: 'Директор ничего не понял, но не стал переспрашивать. Момент для демонстрации ценности упущен.' }
+    A: {
+      ok: false,
+      reply: 'Ну, понятно.',
+      note: 'Директор услышал объяснение, но ценность работы бухгалтерии осталась неочевидной.'
+    },
+    B: {
+      ok: true,
+      reply: '',
+      note: 'Марина объяснила ситуацию — и этим переключила внимание директора с раздражения на интерес.'
+    },
+    C: {
+      ok: false,
+      reply: 'Понял, спасибо.',
+      note: 'Директор ничего не понял, но не стал переспрашивать. Момент для демонстрации ценности упущен.'
+    }
   },
   2: {
-    A: { ok: false, reply: 'Ладно, понял.', note: 'Технически верно, но ценность работы бухгалтерии осталась неочевидной.' },
-    B: { ok: false, reply: 'А, ну понятно.', note: 'Формально верно, но директор не узнал ничего конкретного.' },
-    C: { ok: true,  reply: 'Понял. Спасибо за хорошую работу.', note: null }
+    A: {
+      ok: false,
+      reply: 'Ладно, понял.',
+      note: 'Технически верно, но ценность работы бухгалтерии осталась неочевидной.'
+    },
+    B: {
+      ok: false,
+      reply: 'А, ну понятно.',
+      note: 'Формально верно, но директор не узнал ничего конкретного.'
+    },
+    C: {
+      ok: true,
+      reply: 'Понял. Спасибо за хорошую работу.',
+      note: null
+    }
   }
 };
 
 const map = {
   1: { A: 'o1a', B: 'o1b', C: 'o1c' },
   2: { A: 'o2a', B: 'o2b', C: 'o2c' }
+};
+
+const originalBubbleTexts = {
+  1: 'Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?',
+  2: 'Можете подробнее?'
 };
 
 function setScene(step, mood) {
@@ -810,22 +889,32 @@ function pick(step, opt) {
   const bubbleWrap = bubbleEl ? bubbleEl.closest('.bubble-wrap') : null;
 
   if (bubbleEl) bubbleEl.textContent = d.reply;
-  if (step === 1 && d.ok && bubbleWrap) bubbleWrap.style.display = 'none';
+
+  if (step === 1 && d.ok && bubbleWrap) {
+    bubbleWrap.style.display = 'none';
+  }
 
   if (d.ok) {
     fb.className = 'feedback-bar right';
     fb.innerHTML = d.note || '';
     fb.style.display = d.note ? 'block' : 'none';
+
+    document.getElementById(`r${step}`).style.display = 'none';
     document.getElementById(`n${step}`).style.display = 'block';
+
     setScene(step, step === 1 ? 'interested' : 'happy');
   } else {
     fb.className = 'feedback-bar wrong';
     fb.innerHTML = d.note || '';
     fb.style.display = 'block';
+
     document.getElementById(`r${step}`).style.display = 'block';
+    document.getElementById(`n${step}`).style.display = 'none';
+
     setScene(step, 'angry');
   }
 
+  fitOptions();
   sendHeight();
 }
 
@@ -842,19 +931,15 @@ function reset(step) {
 
   setScene(step, step === 1 ? 'neutral' : 'interested');
 
-  const origTexts = {
-    1: 'Налог на прибыль за квартал — 4,2 миллиона. В прошлом было 2,8. Почти в полтора раза больше. Что происходит?',
-    2: 'Можете подробнее?'
-  };
-
   const bEl = document.getElementById(`bubble${step}-text`);
 
   if (bEl) {
-    bEl.textContent = origTexts[step];
+    bEl.textContent = originalBubbleTexts[step];
     const bubbleWrap = bEl.closest('.bubble-wrap');
     if (bubbleWrap) bubbleWrap.style.display = 'block';
   }
 
+  fitOptions();
   sendHeight();
 }
 
@@ -862,13 +947,73 @@ function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
-  sendHeight();
+
+  requestAnimationFrame(() => {
+    fitOptions();
+    sendHeight();
+  });
 }
 
 function restart() {
   reset(1);
   reset(2);
   go('screen-case');
+}
+
+function fitOptions() {
+  const active = document.querySelector('.screen.active');
+  if (!active) return;
+
+  const wrap = active.querySelector('.options-wrap');
+  if (!wrap) return;
+
+  const isMobile = window.matchMedia('(max-width: 520px)').matches;
+
+  /*
+    На мобильных высота блока может расширяться через sendHeight,
+    поэтому не заставляем текст становиться слишком мелким.
+  */
+  if (isMobile) {
+    resetOptionVisuals(wrap, 12.6, 1.14, 5, 9);
+    return;
+  }
+
+  let fontSize = 13.05;
+  let lineHeight = 1.13;
+  let padY = 5;
+  let padX = 11;
+
+  resetOptionVisuals(wrap, fontSize, lineHeight, padY, padX);
+
+  const minFontSize = 12.25;
+  const minPadY = 4;
+
+  let guard = 0;
+
+  while (wrap.scrollHeight > wrap.clientHeight + 1 && fontSize > minFontSize && guard < 12) {
+    fontSize -= 0.15;
+    resetOptionVisuals(wrap, fontSize, lineHeight, padY, padX);
+    guard++;
+  }
+
+  guard = 0;
+
+  while (wrap.scrollHeight > wrap.clientHeight + 1 && padY > minPadY && guard < 4) {
+    padY -= 0.25;
+    resetOptionVisuals(wrap, fontSize, lineHeight, padY, padX);
+    guard++;
+  }
+}
+
+function resetOptionVisuals(wrap, fontSize, lineHeight, padY, padX) {
+  wrap.querySelectorAll('.option-btn').forEach(btn => {
+    btn.style.fontSize = `${fontSize}px`;
+    btn.style.lineHeight = lineHeight;
+    btn.style.paddingTop = `${padY}px`;
+    btn.style.paddingBottom = `${padY}px`;
+    btn.style.paddingLeft = `${padX}px`;
+    btn.style.paddingRight = `${padX}px`;
+  });
 }
 
 function sendHeight() {
@@ -883,11 +1028,19 @@ function sendHeight() {
   window.parent.postMessage('[iFrameSizer]' + h + ':0:0:bodyOffset', '*');
 }
 
-window.addEventListener('load', sendHeight);
-window.addEventListener('resize', sendHeight);
+window.addEventListener('load', () => {
+  fitOptions();
+  sendHeight();
+});
+
+window.addEventListener('resize', () => {
+  fitOptions();
+  sendHeight();
+});
 
 let count = 0;
 const interval = setInterval(() => {
+  fitOptions();
   sendHeight();
   count++;
   if (count > 10) clearInterval(interval);
