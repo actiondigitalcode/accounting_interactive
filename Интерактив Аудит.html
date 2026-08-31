@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Организационный аудит бухгалтерии</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #F5F3EE;
+  --card: #FFFFFF;
+  --accent: #D00005;
+  --accent-dark: #9F0004;
+  --text: #172033;
+  --muted: #5B6472;
+  --line: rgba(208, 0, 5, 0.20);
+
+  --right: #064E3B;
+  --right-bg: #ECFDF5;
+  --right-border: #10B981;
+
+  --wrong: #7F1D1D;
+  --wrong-bg: #FEF2F2;
+  --wrong-border: #EF4444;
+
+  --shadow: 0 12px 28px rgba(31, 41, 55, 0.11);
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, serif;
+  padding: 10px;
+}
+
+button {
+  font-family: Georgia, serif;
+}
+
+.app {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+  animation: fadeIn 0.28s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  width: 100%;
+  min-height: 420px;
+  background: var(--card);
+  border-radius: 17px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* INTRO */
+
+.intro-card,
+.final-card {
+  padding: 30px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-inner,
+.final-inner {
+  width: min(100%, 680px);
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.intro-card h1 {
+  margin-bottom: 14px;
+  font-size: 23px;
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.intro-card p,
+.final-card p {
+  margin: 0 auto 10px;
+  max-width: 650px;
+  font-size: 15px;
+  line-height: 1.48;
+}
+
+.intro-question {
+  margin-top: 16px !important;
+  font-style: italic;
+}
+
+/* PROGRESS */
+
+.progress-area {
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid #EEEAE4;
+}
+
+.progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.progress-name {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.progress-count {
+  color: var(--accent);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.progress-track {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto 1fr auto 1fr auto;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(208, 0, 5, 0.16);
+}
+
+.dot.active {
+  background: var(--accent);
+}
+
+.dot.done {
+  background: var(--right);
+}
+
+.line {
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(208, 0, 5, 0.10);
+}
+
+.line.done {
+  background: rgba(6, 78, 59, 0.48);
+}
+
+/* CONTENT */
+
+.content {
+  padding: 18px 18px 16px;
+}
+
+.block-label {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.situation {
+  padding: 13px 14px;
+  margin-bottom: 15px;
+  border-radius: 11px;
+  background: #FAF9F6;
+  border: 1px solid #ECE8E1;
+}
+
+.situation p {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.situation p:last-child {
+  margin-bottom: 0;
+}
+
+.quote {
+  padding-left: 12px;
+  border-left: 3px solid var(--accent);
+  font-style: italic;
+}
+
+.question {
+  margin: 0 0 5px;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.instruction {
+  margin: 0 0 9px;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.3;
+}
+
+.options {
+  display: grid;
+  gap: 6px;
+}
+
+.option {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #FFFFFF;
+  color: var(--text);
+  text-align: left;
+  font-size: 12.8px;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: #FFFDFD;
+}
+
+.option.selected {
+  border-color: var(--accent);
+  background: #FFF8F8;
+}
+
+.option.right {
+  border-color: var(--right-border);
+  background: var(--right-bg);
+  color: var(--right);
+}
+
+.option.wrong {
+  border-color: var(--wrong-border);
+  background: var(--wrong-bg);
+  color: var(--wrong);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.feedback {
+  display: none;
+  margin-top: 9px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  line-height: 1.35;
+}
+
+.feedback.right {
+  display: block;
+  color: var(--right);
+  background: var(--right-bg);
+  border: 1px solid var(--right-border);
+}
+
+.feedback.wrong {
+  display: block;
+  color: var(--wrong);
+  background: var(--wrong-bg);
+  border: 1px solid var(--wrong-border);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  min-height: 40px;
+  padding: 9px 18px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s;
+}
+
+.btn-primary {
+  border: none;
+  background: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 6px 15px rgba(208, 0, 5, 0.20);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  color: var(--accent-dark);
+}
+
+/* TABLE */
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 8px;
+  border: 1px solid #ECE8E1;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  font-size: 11.8px;
+}
+
+th,
+td {
+  padding: 8px 9px;
+  border-bottom: 1px solid #ECE8E1;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.3;
+}
+
+th {
+  background: #FAF9F6;
+  color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.note {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 9px 9px 0;
+  background: #FAF9F6;
+  font-size: 12.4px;
+  line-height: 1.4;
+}
+
+/* STAGE 5 SUBPROGRESS */
+
+.subprogress {
+  margin-bottom: 13px;
+}
+
+.subprogress-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.subprogress-meta strong {
+  color: var(--accent);
+}
+
+.subprogress-bar {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #EEEAE4;
+}
+
+.subprogress-fill {
+  height: 100%;
+  width: 16.666%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width 0.22s ease;
+}
+
+/* FINAL */
+
+.final-card h2 {
+  margin-bottom: 13px;
+  font-size: 21px;
+  line-height: 1.28;
+  font-weight: 400;
+}
+
+.final-highlight {
+  margin: 15px auto 16px;
+  padding: 11px 13px;
+  max-width: 650px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 9px 9px 0;
+  background: #FAF9F6;
+  text-align: left;
+  font-size: 13.5px;
+  line-height: 1.42;
+}
+
+.pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 13px 0;
+}
+
+.pill {
+  padding: 5px 8px;
+  border: 1px solid #E7E2DA;
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--muted);
+  font-size: 10.5px;
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 5px;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .intro-card,
+  .final-card {
+    padding: 22px 15px;
+  }
+
+  .intro-card h1 {
+    font-size: 19px;
+  }
+
+  .intro-card p,
+  .final-card p {
+    font-size: 13.5px;
+  }
+
+  .content {
+    padding: 14px 11px 13px;
+  }
+
+  .option {
+    font-size: 12.2px;
+  }
+
+  .situation p {
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<section class="screen active" id="intro">
+  <div class="card intro-card">
+    <div class="intro-inner">
+      <div class="tag">Кейс</div>
+      <h1>Проведите организационный аудит бухгалтерии</h1>
+      <p>Кондитерская фабрика «Шоколадный актив» увеличила объем производства и поставок. Главный бухгалтер запросила еще одну штатную единицу. Генеральный директор попросил сначала обосновать текущую численность бухгалтерии.</p>
+      <p class="intro-question">Как понять, действительно ли бухгалтерии нужен еще один сотрудник?</p>
+      <button class="btn btn-primary" id="start">Начать</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="step1">
+  <div class="card">
+    <div class="progress-area">
+      <div class="progress-meta">
+        <div class="progress-name">Сбор информации</div>
+        <div class="progress-count">1 / 5</div>
+      </div>
+      <div class="progress-track">
+        <span class="dot active"></span><span class="line"></span>
+        <span class="dot"></span><span class="line"></span>
+        <span class="dot"></span><span class="line"></span>
+        <span class="dot"></span><span class="line"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="block-label">Ситуация</div>
+      <div class="situation">
+        <p>Марина, бухгалтер по первичным документам:</p>
+        <p class="quote">«Я постоянно перегружена. Практически весь день занимаюсь первичкой».</p>
+      </div>
+
+      <div class="question">Какие вопросы помогут получить данные для организационного аудита?</div>
+      <div class="instruction">Выберите все подходящие варианты.</div>
+
+      <div class="options" id="options1">
+        <button class="option multi" data-correct="1" data-note="Правильно. Для аудита нужен полный перечень функций с учетом их периодичности.">Какие функции вы выполняете ежедневно, еженедельно, ежемесячно, ежеквартально и ежегодно?</button>
+        <button class="option multi" data-correct="1" data-note="Правильно. Трудозатраты нужны, чтобы затем рассчитать загрузку сотрудника.">Сколько времени занимает каждая функция?</button>
+        <button class="option multi" data-correct="0" data-note="Неправильно. Это мнение сотрудника о решении проблемы, а не данные о фактической организации работы.">Сколько дополнительных сотрудников вам нужно?</button>
+        <button class="option multi" data-correct="0" data-note="Недостаточно. Субъективная оценка сама по себе не позволяет определить реальную загрузку.">Считаете ли вы свою загрузку высокой?</button>
+      </div>
+
+      <div class="feedback" id="feedback1"></div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="check1">Проверить</button>
+        <button class="btn btn-primary" id="next1" style="display:none">Продолжить</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="step2">
+  <div class="card">
+    <div class="progress-area">
+      <div class="progress-meta">
+        <div class="progress-name">Расчет загрузки</div>
+        <div class="progress-count">2 / 5</div>
+      </div>
+      <div class="progress-track">
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot active"></span><span class="line"></span>
+        <span class="dot"></span><span class="line"></span>
+        <span class="dot"></span><span class="line"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="block-label">Ситуация</div>
+      <div class="situation">
+        <p>После интервью у вас появился перечень функций. Но сотрудники называют трудозатраты по-разному.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Функция</th>
+              <th>Периодичность</th>
+              <th>Время</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Обработка первичных документов</td>
+              <td>ежедневно</td>
+              <td>2,5 часа в день</td>
+            </tr>
+            <tr>
+              <td>Подготовка реестра</td>
+              <td>еженедельно</td>
+              <td>2 часа в неделю</td>
+            </tr>
+            <tr>
+              <td>Закрытие участка</td>
+              <td>ежемесячно</td>
+              <td>18 часов в месяц</td>
+            </tr>
+            <tr>
+              <td>Участие в инвентаризации</td>
+              <td>ежеквартально</td>
+              <td>12 часов в квартал</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="question" style="margin-top:12px">Что нужно сделать, чтобы определить общую загрузку сотрудника?</div>
+      <div class="instruction">Выберите один вариант.</div>
+
+      <div class="options" id="options2">
+        <button class="option single" data-correct="0" data-note="Неправильно. Значения относятся к разным периодам, поэтому такая сумма ничего не покажет.">Сложить все указанные часы.</button>
+        <button class="option single" data-correct="1" data-note="Правильно. После пересчета можно получить месячную загрузку сотрудника.">Привести все трудозатраты к единому периоду - часам в месяц.</button>
+        <button class="option single" data-correct="0" data-note="Неправильно. Так из расчета выпадут еженедельные, квартальные и годовые функции.">Оставить только ежедневные и ежемесячные функции.</button>
+      </div>
+
+      <div class="feedback" id="feedback2"></div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="check2">Проверить</button>
+        <button class="btn btn-primary" id="next2" style="display:none">Продолжить</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="step3">
+  <div class="card">
+    <div class="progress-area">
+      <div class="progress-meta">
+        <div class="progress-name">Проверка данных</div>
+        <div class="progress-count">3 / 5</div>
+      </div>
+      <div class="progress-track">
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot active"></span><span class="line"></span>
+        <span class="dot"></span><span class="line"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="block-label">Ситуация</div>
+      <div class="situation">
+        <p>После пересчета загрузка одного из сотрудников составила 285 часов в месяц.</p>
+        <p>Елена говорит, что на передачу информации Ольге уходит около 3 часов в неделю. Ольга оценивает ту же работу примерно в 15 минут.</p>
+      </div>
+
+      <div class="question">Что нужно сделать, прежде чем делать выводы?</div>
+      <div class="instruction">Выберите все подходящие варианты.</div>
+
+      <div class="options" id="options3">
+        <button class="option multi" data-correct="1" data-note="Правильно. Особенно важно проверять показатели, которые существенно влияют на общую загрузку.">Проверить наиболее трудоемкие функции по учетной системе, документам и другим доступным источникам.</button>
+        <button class="option multi" data-correct="1" data-note="Правильно. Расхождение в оценках показывает, что данные требуют дополнительной проверки.">Сопоставить данные сотрудников, которые участвуют в одном процессе.</button>
+        <button class="option multi" data-correct="1" data-note="Правильно. Спорные данные нужно уточнять в несколько итераций.">Повторно уточнить спорные функции и трудозатраты на интервью.</button>
+        <button class="option multi" data-correct="0" data-note="Неправильно. Первая расчетная цифра еще не является окончательным результатом аудита.">Принять 285 часов как доказательство того, что нужен еще один бухгалтер.</button>
+      </div>
+
+      <div class="feedback" id="feedback3"></div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="check3">Проверить</button>
+        <button class="btn btn-primary" id="next3" style="display:none">Посмотреть итоговые данные</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="step4">
+  <div class="card">
+    <div class="progress-area">
+      <div class="progress-meta">
+        <div class="progress-name">Единая база и своды</div>
+        <div class="progress-count">4 / 5</div>
+      </div>
+      <div class="progress-track">
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot active"></span><span class="line"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="block-label">Итог после проверки</div>
+      <div class="situation">
+        <p>После нескольких итераций спорные показатели уточнены. Данные собраны в единую базу.</p>
+      </div>
+
+      <div class="note"><strong>В единой базе:</strong> сотрудник, функция, периодичность, количество времени, уровень квалификации, при необходимости юридическое лицо.</div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Сотрудник</th>
+              <th>Результат аудита</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Марина</td>
+              <td>Загрузка - 205 часов. Около 30 часов в месяц уходит на повторные запросы недостающих и неверно оформленных документов у отдела закупок.</td>
+            </tr>
+            <tr>
+              <td>Ольга</td>
+              <td>Загрузка - 112 часов. Выполняет в основном простые операции. Текущие компетенции давно не оценивались.</td>
+            </tr>
+            <tr>
+              <td>Елена</td>
+              <td>Загрузка - 178 часов. Около 50 часов занимает ручная сверка данных.</td>
+            </tr>
+            <tr>
+              <td>Наталья</td>
+              <td>Загрузка - 158 часов. Несколько раз повторялась одна и та же существенная ошибка.</td>
+            </tr>
+            <tr>
+              <td>Еще 3 сотрудника</td>
+              <td>Существенных вопросов не выявлено. Загрузка и выполняемые функции не требуют отдельного управленческого решения.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note"><strong>Дополнительно:</strong> часть трудоемких действий можно автоматизировать. Официальное название подразделения - Блок учета, бухгалтерской аналитики и налогообложения, сокращенно БУБАН.</div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="next4">Перейти к выводам</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="step5">
+  <div class="card">
+    <div class="progress-area">
+      <div class="progress-meta">
+        <div class="progress-name">Рекомендации</div>
+        <div class="progress-count">5 / 5</div>
+      </div>
+      <div class="progress-track">
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot done"></span><span class="line done"></span>
+        <span class="dot active"></span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="subprogress">
+        <div class="subprogress-meta">
+          <span>Ситуации внутри этапа</span>
+          <strong>Ситуация <span id="caseNumber">1</span> из 6</strong>
+        </div>
+        <div class="subprogress-bar">
+          <div class="subprogress-fill" id="subprogressFill"></div>
+        </div>
+      </div>
+
+      <div class="block-label">Ситуация</div>
+      <div class="situation" id="caseSituation"></div>
+
+      <div class="question" id="caseQuestion"></div>
+      <div class="instruction">Выберите один вариант.</div>
+
+      <div class="options" id="caseOptions"></div>
+
+      <div class="feedback" id="caseFeedback"></div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="caseCheck">Проверить решение</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="final">
+  <div class="card final-card">
+    <div class="final-inner">
+      <div class="tag">Аудит завершен</div>
+      <h2>Теперь у главного бухгалтера есть объективная картина работы подразделения</h2>
+
+      <div class="pills">
+        <span class="pill">интервью</span>
+        <span class="pill">пересчет</span>
+        <span class="pill">проверка</span>
+        <span class="pill">единая база</span>
+        <span class="pill">своды</span>
+        <span class="pill">рекомендации</span>
+      </div>
+
+      <div class="final-highlight">Организационный аудит помогает понять, кто и чем занят, насколько сотрудники загружены, где есть квалификационные перекосы, трудоемкие участки и какие изменения стоит рекомендовать.</div>
+
+      <button class="btn btn-secondary" id="restart">Пройти еще раз</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(() => {
+  const screens = Array.from(document.querySelectorAll('.screen'));
+
+  function show(id) {
+    screens.forEach(screen => screen.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  document.getElementById('start').addEventListener('click', () => show('step1'));
+
+  function setupMulti(stepId, correctCount, successText) {
+    const container = document.getElementById('options' + stepId);
+    const buttons = Array.from(container.querySelectorAll('.option'));
+    const feedback = document.getElementById('feedback' + stepId);
+    const check = document.getElementById('check' + stepId);
+    const next = document.getElementById('next' + stepId);
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (button.disabled) return;
+        button.classList.toggle('selected');
+        feedback.className = 'feedback';
+        feedback.textContent = '';
+      });
+    });
+
+    check.addEventListener('click', () => {
+      const selected = buttons.filter(button => button.classList.contains('selected'));
+
+      if (!selected.length) {
+        feedback.className = 'feedback wrong';
+        feedback.textContent = 'Сначала выберите варианты.';
+        return;
+      }
+
+      const incorrectSelected = selected.filter(button => button.dataset.correct !== '1');
+      const correctSelected = selected.filter(button => button.dataset.correct === '1');
+
+      if (incorrectSelected.length) {
+        incorrectSelected.forEach(button => button.classList.add('wrong'));
+        feedback.className = 'feedback wrong';
+        feedback.textContent = incorrectSelected[0].dataset.note;
+        return;
+      }
+
+      if (correctSelected.length !== correctCount) {
+        feedback.className = 'feedback wrong';
+        feedback.textContent = 'Вы выбрали не все подходящие варианты.';
+        return;
+      }
+
+      buttons.forEach(button => {
+        button.disabled = true;
+        if (button.dataset.correct === '1') {
+          button.classList.add('right');
+        }
+      });
+
+      feedback.className = 'feedback right';
+      feedback.textContent = successText;
+      check.style.display = 'none';
+      next.style.display = 'inline-block';
+    });
+  }
+
+  setupMulti(
+    '1',
+    2,
+    'Верно. На интервью нужно собрать перечень функций, периодичность их выполнения и трудозатраты.'
+  );
+
+  setupMulti(
+    '3',
+    3,
+    'Верно. Интервью - важный источник информации, но не окончательная истина. Объективная картина появляется после сопоставления нескольких источников и повторных уточнений.'
+  );
+
+  document.getElementById('next1').addEventListener('click', () => show('step2'));
+  document.getElementById('next3').addEventListener('click', () => show('step4'));
+
+  const options2 = Array.from(document.querySelectorAll('#options2 .option'));
+  const feedback2 = document.getElementById('feedback2');
+  const check2 = document.getElementById('check2');
+  const next2 = document.getElementById('next2');
+
+  options2.forEach(button => {
+    button.addEventListener('click', () => {
+      if (button.disabled) return;
+
+      options2.forEach(item => {
+        item.classList.remove('selected', 'wrong');
+      });
+
+      button.classList.add('selected');
+      feedback2.className = 'feedback';
+      feedback2.textContent = '';
+    });
+  });
+
+  check2.addEventListener('click', () => {
+    const selected = options2.find(button => button.classList.contains('selected'));
+
+    if (!selected) {
+      feedback2.className = 'feedback wrong';
+      feedback2.textContent = 'Сначала выберите вариант.';
+      return;
+    }
+
+    if (selected.dataset.correct === '1') {
+      selected.classList.add('right');
+      options2.forEach(button => button.disabled = true);
+      feedback2.className = 'feedback right';
+      feedback2.textContent = selected.dataset.note;
+      check2.style.display = 'none';
+      next2.style.display = 'inline-block';
+    } else {
+      selected.classList.add('wrong');
+      feedback2.className = 'feedback wrong';
+      feedback2.textContent = selected.dataset.note;
+    }
+  });
+
+  next2.addEventListener('click', () => show('step3'));
+  document.getElementById('next4').addEventListener('click', () => {
+    caseIndex = 0;
+    renderCase();
+    show('step5');
+  });
+
+  const cases = [
+    {
+      situation: '<p><strong>Марина, бухгалтер по первичным документам.</strong></p><p>Загрузка - 205 часов. Около 30 часов уходит на повторные запросы недостающих и неверно оформленных документов у отдела закупок. Объем документов действительно вырос.</p>',
+      question: 'Какое решение лучше всего подтверждается результатами аудита?',
+      options: [
+        {
+          text: 'Сразу согласовать еще одну штатную единицу.',
+          correct: false,
+          note: 'Не спешите с выводом. Аудит показал не только высокую загрузку, но и значительный объем повторной работы. Сначала стоит разобраться с ее причиной.'
+        },
+        {
+          text: 'Установить с отделом закупок порядок и сроки передачи документов, требования к комплектности и контроль их соблюдения. После изменений повторно оценить загрузку Марины.',
+          correct: true,
+          note: 'Правильно. Сначала нужно устранить выявленную причину повторной работы, а уже затем оценивать необходимость дополнительной численности.'
+        },
+        {
+          text: 'Передать часть работы Марины Ольге.',
+          correct: false,
+          note: 'Пока рано. У Ольги действительно есть резерв времени, но сначала нужно устранить причину лишних трудозатрат Марины и отдельно оценить компетенции Ольги.'
+        }
+      ]
+    },
+    {
+      situation: '<p><strong>Ольга, бухгалтер по банковским операциям.</strong></p><p>Загрузка - 112 часов. Выполняет в основном простые и привычные операции. Ранее допускала ошибки при выполнении более сложных задач. Последние 10 месяцев работает стабильно, но ее текущие компетенции повторно не оценивались.</p>',
+      question: 'Какое решение лучше всего подтверждается результатами аудита?',
+      options: [
+        {
+          text: 'Сократить Ольгу, поскольку ее загрузка значительно ниже остальных.',
+          correct: false,
+          note: 'Неправильно. Недогрузка показывает резерв рабочего времени, но сама по себе не является основанием для сокращения.'
+        },
+        {
+          text: 'Проверить актуальные компетенции Ольги и рассмотреть расширение зоны ответственности.',
+          correct: true,
+          note: 'Правильно. Сначала нужно понять, какие функции сотрудник способен выполнять на текущем уровне квалификации.'
+        },
+        {
+          text: 'Ничего не менять, поскольку последние месяцы Ольга работает без ошибок.',
+          correct: false,
+          note: 'Неправильно. Аудит уже показал недоиспользованный ресурс сотрудника, поэтому эту ситуацию стоит проанализировать.'
+        }
+      ]
+    },
+    {
+      situation: '<p><strong>Елена, старший бухгалтер.</strong></p><p>Загрузка - 178 часов. Около 50 часов в месяц занимает ручная сверка данных производственной и бухгалтерской систем. Часть операции можно автоматизировать.</p>',
+      question: 'Какое решение лучше всего подтверждается результатами аудита?',
+      options: [
+        {
+          text: 'Оставить процесс без изменений, поскольку Елена привыкла к ручной сверке.',
+          correct: false,
+          note: 'Неправильно. Привычный способ работы не означает, что он эффективен. Аудит как раз позволил увидеть значительные трудозатраты.'
+        },
+        {
+          text: 'Передать ручную сверку менее загруженному бухгалтеру.',
+          correct: false,
+          note: 'Не лучшее решение. В этом случае трудоемкая ручная операция сохранится, просто ее будет выполнять другой человек.'
+        },
+        {
+          text: 'Настроить автоматизацию сверки и использовать высвободившееся время Елены для более квалифицированных задач.',
+          correct: true,
+          note: 'Правильно. Аудит выявил трудоемкий участок, который можно автоматизировать и высвободить время квалифицированного сотрудника.'
+        }
+      ]
+    },
+    {
+      situation: '<p><strong>Наталья, бухгалтер по учету материалов.</strong></p><p>Загрузка - 158 часов. Одна и та же существенная ошибка повторялась несколько раз. Сотруднику уже дали инструкцию, провели обучение и дополнительное сопровождение.</p>',
+      question: 'Какое решение лучше всего подтверждается результатами аудита?',
+      options: [
+        {
+          text: 'Не предпринимать никаких действий, поскольку загрузка Натальи находится в нормальном диапазоне.',
+          correct: false,
+          note: 'Неправильно. Нормальная загрузка не означает, что работа сотрудника не требует внимания.'
+        },
+        {
+          text: 'Проанализировать причину повторяющейся ошибки и определить, соответствует ли выполняемая функция квалификации Натальи. По результату сформировать кадровую рекомендацию.',
+          correct: true,
+          note: 'Правильно. Аудит оценивает не только количество часов, но и соответствие функций уровню квалификации сотрудника.'
+        },
+        {
+          text: 'Передать Наталье дополнительные задачи, чтобы повысить эффективность ее рабочего времени.',
+          correct: false,
+          note: 'Неправильно. По данным аудита проблема не в недостаточной загрузке, а в качестве выполнения текущей функции.'
+        }
+      ]
+    },
+    {
+      situation: '<p><strong>Трудоемкая ручная операция.</strong></p><p>В ходе интервью выяснилось, что сотрудник ежедневно тратит несколько часов на ручную операцию. При дополнительной проверке оказалось, что ее можно настроить автоматически.</p>',
+      question: 'Какой вывод стоит сделать по итогам аудита?',
+      options: [
+        {
+          text: 'Оставить процесс без изменений, если сотрудника устраивает текущий способ работы.',
+          correct: false,
+          note: 'Неправильно. Организационный аудит нужен в том числе для выявления трудоемких и неэффективных участков.'
+        },
+        {
+          text: 'Рассмотреть автоматизацию операции и оценить, сколько рабочего времени она позволит высвободить.',
+          correct: true,
+          note: 'Правильно. Возможности автоматизации трудоемких операций - один из вопросов, которые позволяет выявить организационный аудит.'
+        },
+        {
+          text: 'Добавить еще одного сотрудника, чтобы разделить ручную работу между двумя людьми.',
+          correct: false,
+          note: 'Неправильно. Сначала необходимо проверить возможность устранить саму трудоемкую ручную операцию.'
+        }
+      ]
+    },
+    {
+      situation: '<p><strong>Название подразделения.</strong></p><p>Официальное название - Блок учета, бухгалтерской аналитики и налогообложения. Сокращенно - БУБАН. Название используется во внутренней коммуникации и регулярно становится поводом для шуток.</p>',
+      question: 'Нужно ли что-то менять по результатам аудита?',
+      options: [
+        {
+          text: 'Нет. Название не связано с загрузкой сотрудников, поэтому к организационному аудиту отношения не имеет.',
+          correct: false,
+          note: 'Не совсем. Организационный аудит позволяет посмотреть на подразделение шире, в том числе на то, как бухгалтерия воспринимается внутри компании.'
+        },
+        {
+          text: 'Да. Предложить более нейтральное название подразделения.',
+          correct: true,
+          note: 'Правильно. Даже название может влиять на восприятие бухгалтерии внутри компании.'
+        },
+        {
+          text: 'Сохранить БУБАН, но изменить набор функций подразделения.',
+          correct: false,
+          note: 'Неправильно. Проблема связана с самим названием, а не с составом функций бухгалтерии.'
+        }
+      ]
+    }
+  ];
+
+  let caseIndex = 0;
+  let caseLocked = false;
+
+  const caseNumber = document.getElementById('caseNumber');
+  const caseSituation = document.getElementById('caseSituation');
+  const caseQuestion = document.getElementById('caseQuestion');
+  const caseOptions = document.getElementById('caseOptions');
+  const caseFeedback = document.getElementById('caseFeedback');
+  const caseCheck = document.getElementById('caseCheck');
+  const subprogressFill = document.getElementById('subprogressFill');
+
+  function renderCase() {
+    caseLocked = false;
+
+    const current = cases[caseIndex];
+
+    caseNumber.textContent = String(caseIndex + 1);
+    subprogressFill.style.width = (((caseIndex + 1) / cases.length) * 100) + '%';
+
+    caseSituation.innerHTML = current.situation;
+    caseQuestion.textContent = current.question;
+
+    caseOptions.innerHTML = '';
+    caseFeedback.className = 'feedback';
+    caseFeedback.textContent = '';
+    caseCheck.textContent = 'Проверить решение';
+
+    current.options.forEach((option, optionIndex) => {
+      const button = document.createElement('button');
+      button.className = 'option';
+      button.textContent = option.text;
+      button.dataset.index = String(optionIndex);
+
+      button.addEventListener('click', () => {
+        if (caseLocked) return;
+
+        Array.from(caseOptions.querySelectorAll('.option')).forEach(item => {
+          item.classList.remove('selected', 'wrong');
+        });
+
+        button.classList.add('selected');
+        caseFeedback.className = 'feedback';
+        caseFeedback.textContent = '';
+      });
+
+      caseOptions.appendChild(button);
+    });
+  }
+
+  caseCheck.addEventListener('click', () => {
+    if (caseLocked) {
+      caseIndex += 1;
+
+      if (caseIndex >= cases.length) {
+        show('final');
+        return;
+      }
+
+      renderCase();
+      return;
+    }
+
+    const selected = caseOptions.querySelector('.option.selected');
+
+    if (!selected) {
+      caseFeedback.className = 'feedback wrong';
+      caseFeedback.textContent = 'Сначала выберите решение.';
+      return;
+    }
+
+    const current = cases[caseIndex];
+    const selectedIndex = Number(selected.dataset.index);
+    const selectedOption = current.options[selectedIndex];
+
+    if (selectedOption.correct) {
+      selected.classList.add('right');
+
+      Array.from(caseOptions.querySelectorAll('.option')).forEach(button => {
+        button.disabled = true;
+      });
+
+      caseFeedback.className = 'feedback right';
+      caseFeedback.textContent = selectedOption.note;
+
+      caseLocked = true;
+      caseCheck.textContent = caseIndex === cases.length - 1
+        ? 'Завершить аудит'
+        : 'Следующая ситуация';
+    } else {
+      selected.classList.add('wrong');
+      caseFeedback.className = 'feedback wrong';
+      caseFeedback.textContent = selectedOption.note;
+    }
+  });
+
+  document.getElementById('restart').addEventListener('click', () => {
+    window.location.reload();
+  });
+})();
+</script>
+</body>
+</html>
